@@ -1,0 +1,489 @@
+/* Responsive adjustments for King Motors Hero & Header */
+@media (max-width: 991px) {
+  .header {
+    .navbar {
+      min-height: 76px;
+    }
+    .navbar-brand img {
+      height: 44px;
+    }
+  }
+
+  .hero {
+    min-height: 680px;
+    height: auto;
+
+    .hero-slide {
+      min-height: 680px;
+      height: auto;
+      padding-top: 120px;
+      padding-bottom: 70px;
+    }
+
+    .hero-slide-bg {
+      background-position: 25% center;
+      background:
+        linear-gradient(
+          180deg,
+          rgba(0, 43, 34, 0.88) 0%,
+          rgba(0, 43, 34, 0.96) 60%,
+          rgba(0, 25, 20, 0.98) 100%
+        ),
+        var(--slide-bg, url("../images/hero.jpg"));
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero-content {
+      max-width: 100%;
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      justify-content: center;
+    }
+
+    .hero-copy {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-actions {
+      justify-content: center;
+    }
+
+    .hero-index,
+    .hero-slider-nav {
+      display: none !important;
+    }
+
+    .hero-mobile-nav {
+      display: flex;
+    }
+  }
+
+  .about-km {
+    background-image: none;
+    background-color: #f8f7f2;
+    padding: 60px 0 40px;
+    min-height: auto;
+
+    .about-content {
+      max-width: 100%;
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    .about-eyebrow {
+      justify-content: center;
+    }
+
+    .about-desc {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .about-action {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .hero {
+    min-height: 600px;
+    padding-top: 100px;
+    padding-bottom: 50px;
+
+    .hero-title {
+      font-size: 32px;
+      line-height: 1.25;
+    }
+
+    .hero-copy {
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .btn-hero-gold,
+    .btn-hero-video {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  .about-km {
+    padding: 45px 0 30px;
+
+    .about-title {
+      font-size: 28px;
+    }
+
+    .about-desc {
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .btn-about-gold {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}
+
+  .about {
+    .about-visual {
+      height: 470px;
+    }
+  }
+
+  .product-card {
+    min-height: 380px;
+  }
+
+  .service-tile:not(.service-main) {
+    min-height: 260px;
+
+    .service-overlay p {
+      max-height: 80px;
+      opacity: 1;
+    }
+  }
+
+  .project-intro {
+    position: static;
+  }
+
+  .cap-visual {
+    min-height: 340px;
+
+    &::before {
+      width: 400px;
+      height: 400px;
+    }
+  }
+
+  .bank-grid {
+    div {
+      min-height: 160px;
+      padding: 26px;
+    }
+
+    p {
+      margin-top: 30px;
+    }
+  }
+
+  .quote-section {
+    padding: 70px 0;
+  }
+
+  .quote-card {
+    margin-top: 40px;
+    padding: 34px 28px;
+    border-radius: 22px;
+  }
+
+  .quote-card-header h3 {
+    font-size: 26px;
+  }
+
+  .quote-bg-img {
+    width: 100%;
+    opacity: 0.28;
+  }
+
+  .quote-bg-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(6, 29, 23, 0.72) 0%,
+      rgba(6, 29, 23, 0.94) 40%,
+      #061d17 100%
+    );
+  }
+
+  .quote-dots-pattern {
+    width: 100%;
+    opacity: 0.35;
+  }
+
+  .footer {
+    padding-top: 60px;
+  }
+
+
+@media (max-width: 600px) {
+  .quote-card {
+    padding: 26px 18px;
+    border-radius: 18px;
+  }
+
+  .quote-contact-links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .quote-contact-sep {
+    display: none;
+  }
+
+  .loading .loader-container {
+    width: 170px;
+  }
+
+  .services-page .service-tile.service-card {
+    min-height: 380px;
+  }
+
+  .project-card .project-photo {
+    height: 220px;
+  }
+
+  .social-icon {
+    right: 16px;
+    left: auto;
+
+    a {
+      width: 44px;
+      height: 44px;
+    }
+  }
+
+  .section {
+    padding: 80px 0;
+  }
+
+  .header {
+    .navbar {
+      min-height: 76px;
+    }
+
+    .navbar > .container-fluid .navbar-brand {
+    img{
+        width: 120px;
+
+    }
+    }
+  }
+
+  .about .about-visual {
+    height: 340px;
+  }
+
+  .about .about-copy p {
+    font-size: 15px;
+  }
+
+  .product-card {
+    min-height: 340px;
+  }
+
+  .service-main {
+    min-height: 430px;
+
+    .service-overlay {
+      left: 26px;
+      right: 26px;
+      bottom: 30px;
+
+      h3 {
+        font-size: 32px;
+      }
+    }
+  }
+
+  .service-overlay {
+    left: 24px;
+    right: 65px;
+    bottom: 24px;
+  }
+
+  .service-tile:not(.service-main) {
+    min-height: 240px;
+  }
+
+  .project-list > a {
+    grid-template-columns: 50px 1fr;
+    gap: 18px;
+    padding: 28px 0;
+
+    b {
+      display: none;
+    }
+  }
+
+  .project-list h3 {
+    font-size: 23px;
+  }
+
+  .cap-visual {
+    min-height: 300px;
+
+    &::before {
+      width: 340px;
+      height: 340px;
+    }
+  }
+
+  .orb {
+    width: 170px;
+    height: 170px;
+
+    span {
+      font-size: 44px;
+    }
+
+    i {
+      width: 210px;
+    }
+  }
+
+  .cap-items {
+    > div {
+      padding: 26px;
+    }
+
+    .cap-head i {
+      width: 40px;
+      height: 40px;
+      font-size: 16px;
+    }
+
+    h3 {
+      margin: 22px 0 10px;
+    }
+  }
+
+  .bank-grid {
+    div {
+      min-height: 0;
+      padding: 22px 16px;
+    }
+
+    span {
+      font-size: 22px;
+    }
+
+    p {
+      margin: 20px 0 4px;
+      font-size: 13px;
+    }
+
+    small {
+      font-size: 12px;
+    }
+  }
+
+  .footer-top {
+    padding-bottom: 45px;
+  }
+
+  .footer-list {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-tile,
+  .service-tile img,
+  .service-overlay {
+    transition: none !important;
+  }
+
+  .social-whatsapp::before {
+    animation: none !important;
+  }
+}
+
+@media (max-width: 991px) {
+  .page-banner {
+    min-height: 460px;
+    padding: 130px 0 60px;
+  }
+
+  .cta-box {
+    padding: 44px 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .page-banner {
+    min-height: 400px;
+    padding: 110px 0 50px;
+
+    p {
+      font-size: 14px;
+    }
+  }
+
+  .stats > div {
+    padding: 24px 18px;
+  }
+
+  .product-range .range-row h3 {
+    font-size: 23px;
+  }
+
+  .cta-box {
+    padding: 36px 22px;
+
+    &::before {
+      font-size: 160px;
+      bottom: -45px;
+    }
+  }
+
+  .contact-form {
+    padding: 24px 18px;
+  }
+
+  .contact-map iframe {
+    height: 320px;
+  }
+}
+
+@media (max-width: 991px) {
+  .details-image {
+    min-height: 360px;
+  }
+
+  .details-sticky {
+    position: static;
+  }
+}
+
+@media (max-width: 600px) {
+  .details-image {
+    min-height: 260px;
+  }
+
+  .details-nav,
+  .details-box {
+    padding: 26px 20px;
+  }
+
+  .process-steps > div {
+    padding-right: 0;
+  }
+
+  .details-slider-nav button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .details-specs {
+    th,
+    td {
+      padding: 13px 14px;
+    }
+  }
+}
