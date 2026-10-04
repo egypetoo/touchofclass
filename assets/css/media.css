@@ -25,9 +25,9 @@
       background:
         linear-gradient(
           180deg,
-          rgba(0, 43, 34, 0.88) 0%,
-          rgba(0, 43, 34, 0.96) 60%,
-          rgba(0, 25, 20, 0.98) 100%
+          rgba(57, 107, 53, 0.88) 0%,
+          rgba(57, 107, 53, 0.96) 60%,
+          rgba(50, 94, 46, 0.98) 100%
         ),
         var(--slide-bg, url("../images/hero.jpg"));
       background-size: cover;
@@ -65,9 +65,30 @@
 
   .about-km {
     background-image: none;
-    background-color: #f8f7f2;
-    padding: 60px 0 40px;
+    padding: 60px 0 50px;
     min-height: auto;
+
+    .about-km-bg {
+      display: block;
+    }
+
+    .about-km-shape,
+    .about-km-frame {
+      display: none;
+    }
+
+    .about-km-panel-line {
+      clip-path: polygon(0 calc(55% - 2px), 100% calc(45% - 2px), 100% 100%, 0 100%);
+    }
+
+    .about-km-panel {
+      clip-path: polygon(0 55%, 100% 45%, 100% 100%, 0 100%);
+    }
+
+    .about-cards {
+      max-width: 540px;
+      margin: 70px auto 0;
+    }
 
     .about-content {
       max-width: 100%;
@@ -126,9 +147,22 @@
       line-height: 1.8;
     }
 
+    .btn-about-luxury,
     .btn-about-gold {
-      width: 100%;
+      width: auto;
       justify-content: center;
+    }
+
+    .about-cards {
+      margin-top: 50px;
+    }
+
+    .about-card .about-card-media {
+      border-radius: 12px;
+    }
+
+    .about-card-pivot::after {
+      display: none;
     }
   }
 }
@@ -198,9 +232,9 @@
   .quote-bg-overlay {
     background: linear-gradient(
       180deg,
-      rgba(6, 29, 23, 0.72) 0%,
-      rgba(6, 29, 23, 0.94) 40%,
-      #061d17 100%
+      rgba(53, 101, 50, 0.72) 0%,
+      rgba(53, 101, 50, 0.94) 40%,
+      #356532 100%
     );
   }
 
@@ -243,13 +277,18 @@
   }
 
   .social-icon {
-    right: 16px;
-    left: auto;
+    inset-inline-start: 16px;
+    inset-inline-end: auto;
+    bottom: 100px;
 
     a {
       width: 44px;
       height: 44px;
     }
+  }
+
+  .back-to-top {
+    inset-inline-start: 13px;
   }
 
   .section {
@@ -485,5 +524,226 @@
     td {
       padding: 13px 14px;
     }
+  }
+}
+
+
+/* ===== King Motors: products / why / brands / quote / footer ===== */
+@media (max-width: 1199px) {
+  .km-tab {
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .km-tab-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+  }
+
+  .km-tab-text strong {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 991px) {
+  .km-products-banner {
+    min-height: 0;
+    padding: 70px 0 110px;
+  }
+
+  .km-products-banner-img {
+    width: 100%;
+    clip-path: none;
+    opacity: 0.4;
+  }
+
+  .km-products-banner-lines {
+    display: none;
+  }
+
+  .km-products-banner-shade {
+    background: linear-gradient(90deg, rgba(0, 25, 20, 0.92) 0%, rgba(0, 25, 20, 0.55) 100%);
+  }
+
+  .km-products-tabs {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .km-tab {
+    min-height: 76px;
+
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+
+  .km-products-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .km-products-heading {
+    align-self: flex-start;
+  }
+
+  .km-products-tools {
+    justify-content: space-between;
+  }
+
+  .km-search {
+    flex: 1;
+
+    input {
+      width: 100%;
+    }
+  }
+
+  .km-products.is-list .swiper-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .km-why,
+  .km-quote,
+  .km-selector {
+    padding: 90px 0;
+  }
+
+  .km-selector-bg::after {
+    background:
+      linear-gradient(180deg, rgba(0, 43, 34, 0.88) 0%, rgba(0, 43, 34, 0.55) 45%, rgba(0, 25, 20, 0.85) 100%);
+  }
+
+  .km-selector-bg-img {
+    object-position: 75% 50%;
+  }
+
+  .km-selector-content {
+    min-height: 0;
+  }
+
+  .km-selector-desc {
+    margin-bottom: 40px;
+  }
+
+  .km-stats {
+    max-width: none;
+    margin: 20px 0 0;
+  }
+
+  .km-stat:nth-child(even) {
+    translate: none;
+  }
+}
+
+@media (max-width: 576px) {
+  .km-products {
+    padding-bottom: 70px;
+  }
+
+  .km-products-intro p {
+    font-size: 15px;
+  }
+
+  .km-tab {
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px 8px;
+    text-align: center;
+  }
+
+  .km-tab-text {
+    align-items: center;
+  }
+
+  .km-products-tools {
+    gap: 8px;
+  }
+
+  .km-search {
+    flex: 1 1 100%;
+  }
+
+  .km-sort {
+    flex: 1;
+
+    select {
+      width: 100%;
+    }
+  }
+
+  .km-products.is-list {
+    .km-product-card {
+      flex-direction: column;
+    }
+
+    .km-product-media {
+      aspect-ratio: 4 / 3;
+      min-height: 0;
+    }
+  }
+
+  .km-products-nav {
+    gap: 24px;
+  }
+
+  .km-why-features {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .km-feature {
+    padding: 18px;
+  }
+
+  .km-stats {
+    gap: 14px;
+  }
+
+  .km-stat {
+    padding: 26px 14px;
+  }
+
+  .km-brands {
+    padding: 70px 0 60px;
+  }
+
+  .km-marquee-list li {
+    padding: 24px 30px;
+  }
+
+  .km-quote-card,
+  .km-selector-card {
+    padding: 24px 18px;
+    border-radius: 18px;
+  }
+
+  .km-selector-features {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 22px;
+
+    li:nth-child(odd) {
+      border-inline-start: 0;
+    }
+  }
+
+  .km-selector-group .km-select {
+    flex-basis: 96px;
+  }
+
+  .km-selector-group-icon {
+    width: 46px;
+  }
+
+  .km-footer-inner {
+    padding-top: 60px;
+  }
+
+  .km-footer-bottom {
+    justify-content: center;
+    text-align: center;
   }
 }

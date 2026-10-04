@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 576" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="cream" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f6f5f1"/>
+      <stop offset="1" stop-color="#f2f0ea"/>
+    </linearGradient>
+    <linearGradient id="creamShade" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f3f1eb"/>
+      <stop offset="1" stop-color="#ebe8dd"/>
+    </linearGradient>
+    <linearGradient id="creamTop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#efede6"/>
+      <stop offset="1" stop-color="#f3f2ec"/>
+    </linearGradient>
+    <linearGradient id="green" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#468541"/>
+      <stop offset="0.45" stop-color="#417b3d"/>
+      <stop offset="1" stop-color="#376934"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.78" cy="0.7" r="0.35">
+      <stop offset="0" stop-color="#4a8b45" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#4a8b45" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="slab" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0" stop-color="#4c8f46"/>
+      <stop offset="0.5" stop-color="#437f3e"/>
+      <stop offset="1" stop-color="#3c7138"/>
+    </linearGradient>
+    <linearGradient id="stripeDark" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d7339"/>
+      <stop offset="1" stop-color="#3e763a"/>
+    </linearGradient>
+    <linearGradient id="stripeLight" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#417a3c"/>
+      <stop offset="0.5" stop-color="#458341"/>
+      <stop offset="1" stop-color="#3e763a"/>
+    </linearGradient>
+    <linearGradient id="gold" gradientUnits="userSpaceOnUse" x1="300" y1="0" x2="950" y2="576">
+      <stop offset="0" stop-color="#e3c27f"/>
+      <stop offset="0.5" stop-color="#c79a52"/>
+      <stop offset="1" stop-color="#ddb873"/>
+    </linearGradient>
+    <linearGradient id="goldFade" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="185">
+      <stop offset="0" stop-color="#d1aa66"/>
+      <stop offset="1" stop-color="#d1aa66" stop-opacity="0.15"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Cream side -->
+  <rect width="1024" height="576" fill="url(#cream)"/>
+  <polygon points="270,0 520,0 520,205 472,282" fill="url(#creamTop)"/>
+  <polygon points="472,282 520,205 385,576 300,576" fill="url(#creamShade)"/>
+  <polygon points="0,0 270,0 472,282 300,576 0,576" fill="#f6f5f1" opacity="0.6"/>
+  <polygon points="615,0 705,0 615,92" fill="#eceade"/>
+
+  <!-- Green panel -->
+  <polygon points="520,0 615,0 615,92 705,0 1024,0 1024,576 385,576 520,205" fill="url(#green)"/>
+  <polygon points="520,0 615,0 615,92 705,0 1024,0 1024,576 385,576 520,205" fill="url(#glow)"/>
+
+  <!-- Vertical stripes -->
+  <rect x="520" y="0" width="21" height="205" fill="url(#stripeDark)"/>
+  <rect x="541" y="0" width="47" height="228" fill="url(#stripeLight)"/>
+  <rect x="588" y="0" width="27" height="150" fill="url(#stripeDark)"/>
+  <line x1="541" y1="0" x2="541" y2="182" stroke="url(#goldFade)" stroke-width="1"/>
+  <line x1="588" y1="0" x2="588" y2="130" stroke="url(#goldFade)" stroke-width="1"/>
+
+  <!-- Raised slab -->
+  <path d="M487,242 Q487,228 497,218 L663,43 L663,252 L487,506 Z" fill="url(#slab)"/>
+  <polyline points="663,43 663,252 487,506" fill="none" stroke="url(#gold)" stroke-width="1"/>
+
+  <!-- Gold accent lines -->
+  <line x1="487" y1="310" x2="310" y2="576" stroke="url(#gold)" stroke-width="1"/>
+  <line x1="600" y1="475" x2="533" y2="576" stroke="url(#gold)" stroke-width="1" opacity="0.8"/>
+  <polyline points="858,0 858,46 828,92" fill="none" stroke="url(#gold)" stroke-width="1" opacity="0.85"/>
+  <line x1="878" y1="480" x2="940" y2="576" stroke="url(#gold)" stroke-width="1" opacity="0.7"/>
+
+  <!-- Crown -->
+  <g fill="none" stroke="url(#gold)" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M384,41 L420,74 Q425,79 432,75 L453.6,32"/>
+    <path d="M454,32 L459,58 Q462,71 483,71 Q504,71 507,58 L515.5,32"/>
+    <path d="M516,32 L521,72 Q523,80 530,79 L571.6,52 L539,121.5"/>
+    <path d="M384,41 L412.5,95 L417,115.7"/>
+    <path d="M412.5,95 Q480,88 545,106"/>
+    <path d="M417,115.7 Q480,106 539,121.5"/>
+    <circle cx="454.5" cy="23" r="8.8"/>
+    <circle cx="514" cy="23" r="8.8"/>
+  </g>
+</svg>
