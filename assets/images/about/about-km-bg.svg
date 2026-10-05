@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMin slice">
+  <defs>
+    <linearGradient id="cream" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f3eee6"/>
+      <stop offset="1" stop-color="#ebe7dd"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d2c24"/>
+      <stop offset="0.45" stop-color="#16382e"/>
+      <stop offset="1" stop-color="#0c2b23"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.6" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#1a4235" stop-opacity="0.7"/>
+      <stop offset="1" stop-color="#1a4235" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#06231e"/>
+      <stop offset="0.6" stop-color="#113529"/>
+      <stop offset="1" stop-color="#194538"/>
+    </linearGradient>
+    <linearGradient id="shade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#000" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000" stop-opacity="0.18"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1280" height="720" fill="url(#cream)"/>
+  <polygon points="0,0 345,0 583,358 330,720 0,720" fill="#f6f4f0"/>
+
+  <path id="greenShape" d="M652 0H768V120L878 0H1280V720H480L608 520V318Q608 300 620 288L652 256Z" fill="url(#green)"/>
+  <use href="#greenShape" fill="url(#glow)"/>
+  <path d="M652 0H768V385L608 632V318Q608 300 620 288L652 256Z" fill="url(#panel)"/>
+  <path d="M480 720L608 520V632L768 385V720Z" fill="url(#shade)"/>
+
+  <g fill="none" stroke="#c9a24a" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M607 385L382 720"/>
+    <path d="M829 60V305L608 632V388"/>
+    <path d="M676 0V228"/>
+    <path d="M736 0V160"/>
+    <path d="M1072 0V60L1035 112"/>
+    <path d="M1098 608L1173 720"/>
+    <path d="M742 605L665 720"/>
+
+    <path d="M522 144L481 51L530 96Q552 90 563 38"/>
+    <circle cx="569" cy="29" r="10"/>
+    <path d="M575 38Q583 88 605 90Q628 88 637 38"/>
+    <circle cx="642" cy="29" r="10"/>
+    <path d="M648 38Q655 98 667 102Q690 92 715 66L676 150Q600 136 522 144"/>
+    <path d="M517 122Q600 112 680 132"/>
+  </g>
+</svg>

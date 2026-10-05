@@ -1410,7 +1410,7 @@ h2 {
 /* King Motors Luxury About Section */
 .about-km {
   position: relative;
-  background: #f2f0ea url('../images/about/about-km-bg.webp') top / cover no-repeat;
+  background: #f2f0ea url('../images/about/about-km-bg.svg') top / cover no-repeat;
 
   color: #02271d;
   display: flex;
