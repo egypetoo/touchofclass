@@ -3571,12 +3571,14 @@ h2 {
 
   li {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     gap: 6px;
     font-size: 12.5px;
     color: #4f5c55;
   }
-
+  span{
+    display:inline-block !important;
+  }
 
 
   i {
