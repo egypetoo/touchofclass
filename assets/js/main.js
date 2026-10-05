@@ -773,7 +773,7 @@ function initProductsCatalog() {
     const items = currentItems(pane);
     destroySwiper(pane);
     pane.wrapper.replaceChildren.apply(pane.wrapper, items.map(function (item) { return item.el; }));
-    pane.empty.hidden = items.length > 0;
+    if (pane.empty) pane.empty.hidden = items.length > 0;
     section.classList.toggle("is-list", view === "list");
     buildSwiper(pane);
 
