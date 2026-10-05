@@ -4,10 +4,10 @@
 const hasGSAP = typeof gsap !== "undefined";
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const motionOn = hasGSAP && !reduceMotion;
-// direction comes from CSS (html:lang), so read the computed value; +1 = enter from the reading-start side
+// direction comes from <html dir>, so read the computed value; +1 = enter from the reading-start side
 const DIR = getComputedStyle(document.documentElement).direction === "rtl" ? 1 : -1;
 
-if (typeof Swiper !== "undefined" && Swiper.extendDefaults && document.documentElement.lang === "ar") {
+if (typeof Swiper !== "undefined" && Swiper.extendDefaults) {
   Swiper.extendDefaults({
     a11y: {
       prevSlideMessage: "الشريحة السابقة",
@@ -279,7 +279,7 @@ function startAnimations() {
 }
 
 // ----- Service cards -----
-// 3D rise on entrance, photo wipe, self-drawing gold lines, then copy and button; mouse-follow tilt + glare on hover.
+// 3D rise on entrance, photo wipe, then copy and button; mouse-follow tilt + glare on hover.
 function prepareServiceCards() {
   if (!motionOn) return;
 
@@ -288,8 +288,6 @@ function prepareServiceCards() {
     gsap.set(card, { autoAlpha: 0, y: 90, rotateX: -28, scale: 0.92, transformPerspective: 1100, transformOrigin: "50% 100%" });
     gsap.set(q(".service-card-media"), { clipPath: "inset(100% 0% 0% 0%)" });
     gsap.set(q(".service-card-img"), { scale: 1.45, transition: "none" });
-    gsap.set(q(".service-card-facets .facet"), { xPercent: 40, autoAlpha: 0 });
-    gsap.set(q(".service-card-facets polyline"), { attr: { pathLength: 1 }, strokeDasharray: 1, strokeDashoffset: 1 });
     gsap.set(q(".service-card-title, .service-card-desc"), { y: 24, autoAlpha: 0 });
     gsap.set(q(".service-card-btn"), { scale: 0, rotate: -180, transition: "none" });
   });
@@ -303,8 +301,6 @@ function playServiceCard(card, delay) {
     .to(card, { autoAlpha: 1, y: 0, rotateX: 0, scale: 1, duration: 1.2, ease: "expo.out", clearProps: "opacity,visibility" })
     .to(q(".service-card-media"), { clipPath: "inset(0% 0% 0% 0%)", duration: 1.1, ease: "expo.inOut", clearProps: "clipPath" }, 0.1)
     .to(q(".service-card-img"), { scale: 1.1, duration: 1.6, ease: "expo.out", clearProps: "transform,transition" }, 0.2)
-    .to(q(".service-card-facets .facet"), { xPercent: 0, autoAlpha: 1, duration: 0.9, stagger: 0.12, ease: "power3.out", clearProps: "all" }, 0.6)
-    .to(q(".service-card-facets polyline"), { strokeDashoffset: 0, duration: 0.9, stagger: 0.15, ease: "power2.inOut", clearProps: "strokeDasharray,strokeDashoffset" }, 0.75)
     .to(q(".service-card-title, .service-card-desc"), { y: 0, autoAlpha: 1, duration: 0.8, stagger: 0.1, ease: "power3.out", clearProps: "all" }, 0.65)
     .to(q(".service-card-btn"), { scale: 1, rotate: 0, duration: 0.8, ease: "back.out(2.2)", clearProps: "transform,transition" }, 0.95);
 }
@@ -384,7 +380,8 @@ function hideLoader() {
   loading.classList.add("loaded");
 
   if (!motionOn) {
-    $(loading).delay(200).fadeOut(400, startAnimations);
+    loading.style.display = "none";
+    startAnimations();
     return;
   }
 
@@ -436,16 +433,141 @@ function toggleHeader() {
   }
 }
 
-// Active nav link for the current page
-function setActiveLink() {
-  // details pages keep their parent section active (product-details.html -> products.html)
-  const page = (window.location.pathname.split("/").pop() || "index.html").replace(/-details\.html$/, "s.html");
+// ===== Header search =====
+// Its index is read from the header menu links, so products are only listed once (in header.html).
+let kmSearchIndex = null;
 
-  document.querySelectorAll(".header .nav-link, .header .header-cta").forEach(function (link) {
-    const href = link.getAttribute("href").replace("./", "");
-    link.classList.toggle("active", href === page);
+function escapeHTML(text) {
+  return text.replace(/[&<>"]/g, function (c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c];
   });
 }
+
+function markTerm(text, term) {
+  const i = term ? text.toLowerCase().indexOf(term) : -1;
+  if (i < 0) return escapeHTML(text);
+  return escapeHTML(text.slice(0, i)) + "<mark>" + escapeHTML(text.slice(i, i + term.length)) + "</mark>" + escapeHTML(text.slice(i + term.length));
+}
+
+function buildSearchIndex() {
+  const header = document.querySelector(".header");
+  const catName = function (link) { return link.querySelector(".km-dd-text").firstChild.textContent.trim(); };
+
+  const cats = Array.from(header.querySelectorAll(".km-dd-item > a")).map(function (a) {
+    const count = a.querySelector(".km-dd-text small");
+    return { name: catName(a), meta: count ? count.textContent : "", href: a.getAttribute("href"), cat: a.dataset.cat, icon: a.querySelector(".km-dd-icon i").className };
+  });
+  const products = Array.from(header.querySelectorAll(".km-dd-sub a")).map(function (a) {
+    return { name: a.textContent.trim(), meta: catName(a.closest(".km-dd-item").querySelector(":scope > a")), href: a.getAttribute("href"), img: a.dataset.img };
+  });
+  const pages = Array.from(header.querySelectorAll(".navbar-collapse .nav-link")).filter(function (a) {
+    return !a.closest(".km-nav-dd");
+  }).map(function (a) {
+    return { name: a.textContent.trim(), meta: "صفحة", href: a.getAttribute("href"), icon: "fa-solid fa-file-lines" };
+  });
+
+  return { cats: cats, products: products, pages: pages };
+}
+
+function searchItemHTML(item, term) {
+  const thumb = item.img
+    ? '<img class="km-search-thumb" src="' + item.img + '" alt="" width="48" height="48" loading="lazy" />'
+    : '<span class="km-search-thumb is-icon"><i class="' + item.icon + '"></i></span>';
+  return (
+    '<a class="km-search-item" href="' + item.href + '"' + (item.cat ? ' data-cat="' + item.cat + '"' : "") + ">" +
+    thumb +
+    '<span class="km-search-info"><strong>' + markTerm(item.name, term) + "</strong><small>" + escapeHTML(item.meta) + "</small></span>" +
+    '<i class="fa-solid fa-arrow-left km-search-go"></i></a>'
+  );
+}
+
+function renderSearch() {
+  const panel = document.getElementById("km-search-panel");
+  if (!panel) return;
+  if (!kmSearchIndex) kmSearchIndex = buildSearchIndex();
+
+  const results = panel.querySelector(".km-search-results");
+  const raw = panel.querySelector("#km-search-input").value.trim();
+  const term = raw.toLowerCase();
+  const allLink = '<a class="km-search-more" href="./products.html">عرض جميع المنتجات <i class="fa-solid fa-arrow-left"></i></a>';
+
+  if (!term) {
+    const chips = kmSearchIndex.cats.map(function (c) {
+      return '<a href="' + c.href + '" data-cat="' + c.cat + '"><i class="' + c.icon + '"></i>' + escapeHTML(c.name) + "</a>";
+    }).join("");
+    results.innerHTML =
+      '<p class="km-search-label">تصفح الفئات</p><div class="km-search-chips">' + chips + "</div>" +
+      '<p class="km-search-label">منتجات مقترحة</p>' +
+      kmSearchIndex.products.slice(0, 4).map(function (p) { return searchItemHTML(p, ""); }).join("") +
+      allLink;
+    return;
+  }
+
+  const match = function (item) { return item.name.toLowerCase().includes(term) || item.meta.toLowerCase().includes(term); };
+  const found = kmSearchIndex.cats.filter(match).concat(kmSearchIndex.products.filter(match), kmSearchIndex.pages.filter(match));
+
+  if (!found.length) {
+    results.innerHTML = '<p class="km-search-empty"><i class="fa-solid fa-magnifying-glass-minus"></i>لا توجد نتائج لـ «' + escapeHTML(raw) + "»</p>";
+    return;
+  }
+
+  results.innerHTML =
+    '<p class="km-search-label">' + found.length + " نتيجة</p>" +
+    found.slice(0, 8).map(function (item) { return searchItemHTML(item, term); }).join("") +
+    allLink;
+}
+
+// open/close is Bootstrap Collapse (data-bs-toggle on both header toggles + the close button)
+function hideSearch() {
+  const panel = document.getElementById("km-search-panel");
+  if (panel && panel.classList.contains("show")) bootstrap.Collapse.getOrCreateInstance(panel, { toggle: false }).hide();
+}
+
+document.addEventListener("show.bs.collapse", function (e) {
+  if (e.target.id === "km-search-panel") renderSearch();
+});
+
+document.addEventListener("shown.bs.collapse", function (e) {
+  if (e.target.id === "km-search-panel") e.target.querySelector("#km-search-input").focus();
+});
+
+let searchRenderTimer = null;
+document.addEventListener("input", function (e) {
+  if (e.target.id !== "km-search-input") return;
+  clearTimeout(searchRenderTimer);
+  searchRenderTimer = setTimeout(renderSearch, 120);
+});
+
+document.addEventListener("keydown", function (e) {
+  if (e.key !== "Escape") return;
+  const panel = document.getElementById("km-search-panel");
+  if (!panel || !panel.classList.contains("show")) return;
+  hideSearch();
+  const toggle = Array.from(document.querySelectorAll(".km-search-toggle")).find(function (btn) { return btn.offsetParent; });
+  if (toggle) toggle.focus();
+});
+
+document.addEventListener("click", function (e) {
+  const panel = document.getElementById("km-search-panel");
+  if (!panel || !panel.classList.contains("show")) return;
+  if (!panel.contains(e.target) && !e.target.closest(".km-search-toggle")) hideSearch();
+});
+
+// Category links (menu, search) switch the catalog tab in place when the page has one
+document.addEventListener("click", function (e) {
+  const link = e.target.closest(".header a[data-cat]");
+  if (!link) return;
+  const tab = document.querySelector('.km-tab[data-cat="' + link.dataset.cat + '"]');
+  if (!tab) return;
+
+  e.preventDefault();
+  hideSearch();
+  link.blur();
+  if (!tab.classList.contains("active")) tab.click();
+  const target = document.querySelector(".km-products-tabs");
+  if (lenis) lenis.scrollTo(target, { offset: -110, duration: 1.2 });
+  else target.scrollIntoView({ behavior: "smooth" });
+});
 
 let scrollTicking = false;
 
@@ -528,28 +650,15 @@ function initHeroSlider() {
 
 initHeroSlider();
 
-// ===== Hero Mobile Slider (Swiper) =====
-function initHeroMobileSlider() {
-  const slider = document.querySelector(".heroSwiperMobile");
-  if (!slider || typeof Swiper === "undefined") return;
-
-  new Swiper(slider, {
-    effect: "fade",
-    fadeEffect: { crossFade: true },
-    loop: true,
-    speed: 1000,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false,
-    },
-    pagination: {
-      el: slider.querySelector(".swiper-pagination"),
-      clickable: true,
-    },
+// only the first slide's photo is needed for the first paint; the rest load once the page is in
+function loadHeroBackgrounds() {
+  document.querySelectorAll(".hero-slide[data-bg]").forEach(function (slide) {
+    slide.style.setProperty("--slide-bg", 'url("' + new URL(slide.dataset.bg, document.baseURI).href + '")');
   });
 }
 
-initHeroMobileSlider();
+if (document.readyState === "complete") loadHeroBackgrounds();
+else window.addEventListener("load", loadHeroBackgrounds);
 
 // ===== Project Details Slider (Swiper + Fancybox) =====
 function initProjectSlider() {
@@ -586,102 +695,46 @@ function initProjectSlider() {
 
 initProjectSlider();
 
-// Quote form attachment filename feedback
-const quoteFileInput = document.getElementById("quote-file");
-if (quoteFileInput) {
-  quoteFileInput.addEventListener("change", function () {
-    const file = this.files?.[0];
-    const uploadLabel = this.closest(".quote-upload-box, .km-upload")?.querySelector(".upload-main");
-    if (uploadLabel && file) {
-      uploadLabel.textContent = file.name;
-    }
-  });
-}
-
-// ===== Products catalog (tabs + search + sort + slider) =====
-const KM_PRODUCTS = {
-  motors: {
-    title: "المواتير",
-    desc: "مواتير عالية الكفاءة لمختلف التطبيقات الصناعية.",
-    items: [
-      { name: "موتور كهربائي IE3", img: "motor-ie3", value: 7.5, specs: [["fa-bolt", "7.5 kW"], ["fa-gauge-high", "1450 RPM"], ["fa-gear", "3 فاز"]] },
-      { name: "موتور كهربائي IE2", img: "motor-ie2", value: 11, specs: [["fa-bolt", "11 kW"], ["fa-gauge-high", "3000 RPM"], ["fa-gear", "3 فاز"]] },
-      { name: "موتور كهربائي IE1", img: "motor-ie1", value: 5.5, specs: [["fa-bolt", "5.5 kW"], ["fa-gauge-high", "1450 RPM"], ["fa-gear", "3 فاز"]] },
-      { name: "موتور ضد الانفجار", img: "motor-exproof", value: 15, specs: [["fa-bolt", "15 kW"], ["fa-gauge-high", "3000 RPM"], ["fa-gear", "3 فاز"]] },
-      { name: "موتور IE3 بريميوم", img: "motor-ie2", value: 22, specs: [["fa-bolt", "22 kW"], ["fa-gauge-high", "1480 RPM"], ["fa-gear", "3 فاز"]] },
-      { name: "موتور سنجل فاز", img: "motor-ie1", value: 2.2, specs: [["fa-bolt", "2.2 kW"], ["fa-gauge-high", "2850 RPM"], ["fa-gear", "1 فاز"]] },
-    ],
-  },
-  pumps: {
-    title: "المضخات",
-    desc: "مضخات بأداء موثوق للمياه والري والتطبيقات الصناعية.",
-    items: [
-      { name: "مضخة طرد مركزي", img: "pump-centrifugal", value: 7.5, specs: [["fa-bolt", "7.5 kW"], ["fa-water", "60 m³/h"], ["fa-arrow-up", "45 m"]] },
-      { name: "مضخة غاطسة", img: "pump-submersible", value: 5.5, specs: [["fa-bolt", "5.5 kW"], ["fa-water", "18 m³/h"], ["fa-arrow-up", "120 m"]] },
-      { name: "مضخة رأسية متعددة المراحل", img: "pump-vertical", value: 11, specs: [["fa-bolt", "11 kW"], ["fa-water", "32 m³/h"], ["fa-arrow-up", "150 m"]] },
-      { name: "مضخة ذاتية التحضير", img: "pump-selfpriming", value: 2.2, specs: [["fa-bolt", "2.2 kW"], ["fa-water", "25 m³/h"], ["fa-arrow-up", "30 m"]] },
-      { name: "مضخة سحب طرفي", img: "pump-centrifugal", value: 15, specs: [["fa-bolt", "15 kW"], ["fa-water", "120 m³/h"], ["fa-arrow-up", "40 m"]] },
-    ],
-  },
-  pipes: {
-    title: "المواسير",
-    desc: "مواسير بمقاسات وضغوط متعددة لشبكات المياه والري والصرف.",
-    items: [
-      { name: "ماسورة HDPE PE100", img: "pipe-hdpe", value: 110, specs: [["fa-circle-notch", "Ø 110 mm"], ["fa-gauge-high", "PN 16"], ["fa-ruler-horizontal", "12 m"]] },
-      { name: "ماسورة uPVC ضغط", img: "pipe-pvc", value: 90, specs: [["fa-circle-notch", "Ø 90 mm"], ["fa-gauge-high", "PN 10"], ["fa-ruler-horizontal", "6 m"]] },
-      { name: "ماسورة صلب مجلفن", img: "pipe-steel", value: 4, specs: [["fa-circle-notch", "Ø 4 in"], ["fa-gauge-high", "SCH 40"], ["fa-ruler-horizontal", "6 m"]] },
-      { name: "ماسورة HDPE PE80", img: "pipe-hdpe", value: 63, specs: [["fa-circle-notch", "Ø 63 mm"], ["fa-gauge-high", "PN 10"], ["fa-ruler-horizontal", "100 m"]] },
-    ],
-  },
-  cables: {
-    title: "الكابلات",
-    desc: "كابلات كهربائية معتمدة للقوى والمضخات الغاطسة.",
-    items: [
-      { name: "كابل قوى XLPE", img: "cable-power", value: 16, specs: [["fa-circle-notch", "4×16 mm²"], ["fa-bolt", "0.6/1 kV"], ["fa-shield-halved", "مسلح"]] },
-      { name: "كابل مضخات غاطسة", img: "cable-submersible", value: 6, specs: [["fa-circle-notch", "3×6 mm²"], ["fa-bolt", "450/750 V"], ["fa-droplet", "ضد المياه"]] },
-      { name: "بكرة كابل 4 قلب", img: "cable-drum", value: 25, specs: [["fa-circle-notch", "4×25 mm²"], ["fa-bolt", "0.6/1 kV"], ["fa-ruler-horizontal", "500 m"]] },
-      { name: "كابل غاطس مبطط", img: "cable-submersible", value: 4, specs: [["fa-circle-notch", "3×4 mm²"], ["fa-bolt", "450/750 V"], ["fa-droplet", "ضد المياه"]] },
-    ],
-  },
-};
-
+// ===== Products catalog (Bootstrap tabs + search + sort + slider) =====
 function initProductsCatalog() {
   const section = document.querySelector(".km-products");
   if (!section) return;
 
-  const wrapper = section.querySelector("#km-products-wrapper");
-  const swiperEl = section.querySelector(".km-products-swiper");
-  const empty = section.querySelector("#km-products-empty");
   const titleEl = section.querySelector("#km-cat-title");
   const descEl = section.querySelector("#km-cat-desc");
   const search = section.querySelector("#km-product-search");
   const sort = section.querySelector("#km-product-sort");
   const tabs = section.querySelectorAll(".km-tab");
-  const viewButtons = section.querySelectorAll(".km-view-toggle button");
-  const state = { cat: "motors", view: "grid" };
-  let swiper = null;
+  const viewInputs = section.querySelectorAll('.km-view-toggle input[name="km-view"]');
+  const checkedView = section.querySelector('.km-view-toggle input[name="km-view"]:checked');
+  let view = checkedView ? checkedView.value : "grid";
 
-  function cardHTML(item) {
-    const specs = item.specs
-      .map(function (s) { return '<li><i class="fa-solid ' + s[0] + '"></i><span>' + s[1] + "</span></li>"; })
-      .join("");
-    return (
-      '<div class="swiper-slide"><article class="km-product-card">' +
-      '<div class="km-product-media">' +
-      '<img src="./assets/images/products/' + item.img + '.webp" alt="' + item.name + '" loading="lazy" decoding="async" width="720" height="540" />' +
-      '<button type="button" class="km-product-fav" aria-label="أضف للمفضلة" aria-pressed="false"><i class="fa-regular fa-heart"></i></button>' +
-      "</div>" +
-      '<div class="km-product-body">' +
-      '<h4 class="km-product-name">' + item.name + "</h4>" +
-      '<ul class="km-product-specs">' + specs + "</ul>" +
-      '<a href="./products.html" class="km-product-btn"><span>عرض التفاصيل</span><span class="km-product-btn-icon"><i class="fa-solid fa-arrow-left"></i></span></a>' +
-      "</div></article></div>"
-    );
+  // each tab pane keeps its own cards (written in the HTML) and its own slider
+  const panes = Array.from(section.querySelectorAll(".km-products-panes .tab-pane")).map(function (el) {
+    const wrapper = el.querySelector(".swiper-wrapper");
+    return {
+      el: el,
+      wrapper: wrapper,
+      swiperEl: el.querySelector(".km-products-swiper"),
+      empty: el.querySelector(".km-products-empty"),
+      swiper: null,
+      slides: Array.from(wrapper.querySelectorAll(".swiper-slide")).map(function (slide) {
+        return { el: slide, value: +slide.dataset.value || 0, name: slide.querySelector(".km-product-name").textContent.trim() };
+      }),
+    };
+  });
+
+  function paneOf(el) {
+    return panes.find(function (p) { return p.el === el; });
   }
 
-  function currentItems() {
+  function activePane() {
+    return panes.find(function (p) { return p.el.classList.contains("active"); }) || panes[0];
+  }
+
+  function currentItems(pane) {
     const term = search.value.trim().toLowerCase();
-    const items = KM_PRODUCTS[state.cat].items.filter(function (item) {
+    const items = pane.slides.filter(function (item) {
       return !term || item.name.toLowerCase().includes(term);
     });
     if (sort.value === "name") items.sort(function (a, b) { return a.name.localeCompare(b.name); });
@@ -690,21 +743,24 @@ function initProductsCatalog() {
     return items;
   }
 
-  function buildSwiper() {
-    if (swiper) {
-      swiper.destroy(true, true);
-      swiper = null;
-    }
-    if (state.view !== "grid" || typeof Swiper === "undefined") return;
+  function destroySwiper(pane) {
+    if (!pane.swiper) return;
+    pane.swiper.destroy(true, true);
+    pane.swiper = null;
+  }
 
-    swiper = new Swiper(swiperEl, {
+  function buildSwiper(pane) {
+    destroySwiper(pane);
+    if (view !== "grid" || typeof Swiper === "undefined") return;
+
+    pane.swiper = new Swiper(pane.swiperEl, {
       slidesPerView: 1.15,
       spaceBetween: 16,
       speed: 700,
       grabCursor: true,
       watchOverflow: true,
-      navigation: { prevEl: section.querySelector(".km-products-prev"), nextEl: section.querySelector(".km-products-next") },
-      pagination: { el: section.querySelector(".km-products-dots"), clickable: true },
+      navigation: { prevEl: pane.el.querySelector(".km-products-prev"), nextEl: pane.el.querySelector(".km-products-next") },
+      pagination: { el: pane.el.querySelector(".km-products-dots"), clickable: true },
       breakpoints: {
         576: { slidesPerView: 2, spaceBetween: 18 },
         992: { slidesPerView: 3, spaceBetween: 20 },
@@ -713,30 +769,46 @@ function initProductsCatalog() {
     });
   }
 
-  function render(animate) {
-    const items = currentItems();
-    const data = KM_PRODUCTS[state.cat];
-    titleEl.textContent = data.title;
-    descEl.textContent = data.desc;
-    wrapper.innerHTML = items.map(cardHTML).join("");
-    empty.hidden = items.length > 0;
-    section.classList.toggle("is-list", state.view === "list");
-    buildSwiper();
+  function render(pane, animate) {
+    const items = currentItems(pane);
+    destroySwiper(pane);
+    pane.wrapper.replaceChildren.apply(pane.wrapper, items.map(function (item) { return item.el; }));
+    pane.empty.hidden = items.length > 0;
+    section.classList.toggle("is-list", view === "list");
+    buildSwiper(pane);
 
-    if (animate) animateProductCards(wrapper.querySelectorAll(".km-product-card"));
+    if (animate) animateProductCards(pane.wrapper.querySelectorAll(".km-product-card"));
   }
 
-  // old cards fold away first, then the new set is built and flies in
-  let switchTween = null;
-  function switchTo(update) {
-    update();
-    if (!motionOn) return render(false);
+  function setHeading(tab, animate) {
+    const apply = function () {
+      titleEl.textContent = tab.querySelector(".km-tab-text strong").textContent;
+      descEl.textContent = tab.dataset.desc || "";
+    };
+    if (!animate || !motionOn) return apply();
+    gsap.to([titleEl, descEl], {
+      autoAlpha: 0,
+      y: -14,
+      duration: 0.2,
+      stagger: 0.04,
+      ease: "power2.in",
+      overwrite: true,
+      onComplete: function () {
+        apply();
+        gsap.fromTo([titleEl, descEl], { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.08, clearProps: "all" });
+      },
+    });
+  }
 
-    if (switchTween) switchTween.kill();
-    const oldCards = wrapper.querySelectorAll(".km-product-card");
-    gsap.to([titleEl, descEl], { autoAlpha: 0, y: -14, duration: 0.25, stagger: 0.04, ease: "power2.in", overwrite: true });
+  // old cards fold away, then the same pane is rebuilt and flies back in (sort / view changes)
+  let refreshTween = null;
+  function refresh() {
+    const pane = activePane();
+    if (!motionOn) return render(pane, false);
 
-    switchTween = gsap.to(oldCards, {
+    if (refreshTween) refreshTween.kill();
+    const oldCards = pane.wrapper.querySelectorAll(".km-product-card");
+    refreshTween = gsap.to(oldCards, {
       autoAlpha: 0,
       y: -40,
       rotateX: 22,
@@ -746,21 +818,18 @@ function initProductsCatalog() {
       stagger: 0.04,
       ease: "power2.in",
       overwrite: true,
-      onComplete: function () {
-        render(true);
-        gsap.fromTo([titleEl, descEl], { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 0.6, stagger: 0.08, clearProps: "all" });
-      },
+      onComplete: function () { render(pane, true); },
     });
-    if (!oldCards.length) switchTween.progress(1);
+    if (!oldCards.length) refreshTween.progress(1);
   }
 
   tabs.forEach(function (tab) {
-    tab.addEventListener("click", function () {
-      if (tab.classList.contains("active")) return;
-      tabs.forEach(function (t) {
-        t.classList.toggle("active", t === tab);
-        t.setAttribute("aria-selected", t === tab ? "true" : "false");
-      });
+    tab.addEventListener("show.bs.tab", function () {
+      const pane = paneOf(section.querySelector(tab.dataset.bsTarget));
+      search.value = "";
+      setHeading(tab, true);
+      // keep the incoming cards hidden through Bootstrap's fade so they can fly in once the pane is shown
+      if (motionOn && pane) gsap.set(pane.wrapper.querySelectorAll(".km-product-card"), { autoAlpha: 0 });
       if (motionOn) {
         gsap.fromTo(
           tab.querySelector(".km-tab-icon"),
@@ -768,39 +837,34 @@ function initProductsCatalog() {
           { rotate: 0, scale: 1, duration: 0.9, ease: "back.out(2.2)", clearProps: "transform" }
         );
       }
-      switchTo(function () {
-        state.cat = tab.dataset.cat;
-        search.value = "";
-      });
+    });
+
+    tab.addEventListener("shown.bs.tab", function (e) {
+      const pane = paneOf(section.querySelector(tab.dataset.bsTarget));
+      if (pane) render(pane, true);
+      const prev = e.relatedTarget && paneOf(section.querySelector(e.relatedTarget.dataset.bsTarget));
+      if (prev) destroySwiper(prev);
     });
   });
 
-  viewButtons.forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      if (btn.dataset.view === state.view) return;
-      viewButtons.forEach(function (b) { b.classList.toggle("active", b === btn); });
-      switchTo(function () {
-        state.view = btn.dataset.view;
-      });
+  viewInputs.forEach(function (input) {
+    input.addEventListener("change", function () {
+      if (!input.checked) return;
+      view = input.value;
+      refresh();
     });
   });
 
   let searchTimer = null;
   search.addEventListener("input", function () {
     clearTimeout(searchTimer);
-    searchTimer = setTimeout(function () { render(true); }, 200);
+    searchTimer = setTimeout(function () { render(activePane(), true); }, 200);
   });
-  sort.addEventListener("change", function () { switchTo(function () {}); });
+  sort.addEventListener("change", refresh);
 
-  wrapper.addEventListener("click", function (e) {
-    const fav = e.target.closest(".km-product-fav");
-    if (!fav) return;
-    const on = fav.classList.toggle("active");
-    fav.setAttribute("aria-pressed", on ? "true" : "false");
-    fav.querySelector("i").className = (on ? "fa-solid" : "fa-regular") + " fa-heart";
-  });
-
-  render(false);
+  const firstTab = section.querySelector(".km-tab.active") || tabs[0];
+  if (firstTab) setHeading(firstTab, false);
+  if (panes.length) render(activePane(), false);
 }
 
 function animateProductCards(cards, delay) {
@@ -828,7 +892,7 @@ function animateProductCards(cards, delay) {
       0.15
     )
     .fromTo(
-      pick(".km-product-fav"),
+      pick(".km-product-cart"),
       { scale: 0, rotate: -120 },
       { scale: 1, rotate: 0, duration: 0.7, stagger: 0.1, ease: "back.out(2.6)", clearProps: "transform" },
       0.5
@@ -840,7 +904,7 @@ function animateProductCards(cards, delay) {
       0.4
     )
     .fromTo(
-      pick(".km-product-btn-icon"),
+      pick(".km-btn-icon"),
       { scale: 0, rotate: 180 },
       { scale: 1, rotate: 0, duration: 0.6, stagger: 0.1, ease: "back.out(2.4)", clearProps: "transform" },
       0.75
@@ -850,47 +914,37 @@ function animateProductCards(cards, delay) {
 initProductsCatalog();
 
 // ===== Animated counters =====
-function initCounters() {
-  const counters = document.querySelectorAll(".km-counter");
-  if (!counters.length) return;
+// counting itself is played by the stats scene, in step with each card's entrance
+function formatCount(n) {
+  return Math.round(n).toLocaleString("en-US");
+}
 
-  const format = function (n) { return Math.round(n).toLocaleString("en-US"); };
+// reserve the final number's width so the digits don't push the "+" around while counting
+function lockCounterWidth(el) {
+  el.textContent = formatCount(+el.dataset.count);
+  el.style.minWidth = el.offsetWidth / parseFloat(getComputedStyle(el).fontSize) + "em";
+  el.textContent = "0";
+}
 
-  if (!motionOn) {
-    counters.forEach(function (el) { el.textContent = format(+el.dataset.count); });
-    return;
-  }
-
-  const observer = new IntersectionObserver(
-    function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        observer.unobserve(entry.target);
-        unwatchPassed(entry.target);
-        const el = entry.target;
-        const obj = { n: 0 };
-        gsap.to(obj, {
-          n: +el.dataset.count,
-          duration: 2.2,
-          delay: 0.3,
-          ease: "power2.out",
-          onUpdate: function () { el.textContent = format(obj.n); },
-        });
-      });
+function countUp(el) {
+  const obj = { n: 0 };
+  let shown = "0";
+  return gsap.to(obj, {
+    n: +el.dataset.count,
+    duration: 2,
+    ease: "power1.out",
+    onUpdate: function () {
+      const text = formatCount(obj.n);
+      if (text === shown) return;
+      shown = text;
+      el.textContent = text;
     },
-    { threshold: 0.6 }
-  );
-
-  counters.forEach(function (el) {
-    observer.observe(el);
-    watchPassed(el, function () {
-      observer.unobserve(el);
-      el.textContent = format(+el.dataset.count);
-    });
   });
 }
 
-initCounters();
+if (!motionOn) {
+  document.querySelectorAll(".km-counter").forEach(function (el) { el.textContent = formatCount(+el.dataset.count); });
+}
 
 // ===== Section scenes =====
 // Each scene hides its parts up front and plays one choreographed timeline the first time it scrolls into view.
@@ -1020,7 +1074,7 @@ function initSectionScenes() {
       prepLines(q(".about-title > span"));
       gsap.set(q(".about-desc"), { autoAlpha: 0, y: 40 });
       gsap.set(q(".about-action"), { autoAlpha: 0, x: 40 * DIR });
-      gsap.set(q(".btn-about-circle"), { scale: 0, rotate: -180 });
+      gsap.set(q(".km-btn-icon"), { scale: 0, rotate: -180 });
     },
     function (q, el) {
       const tl = gsap.timeline();
@@ -1029,35 +1083,23 @@ function initSectionScenes() {
       return tl
         .to(q(".about-desc"), Object.assign({ duration: 1 }, SHOW), 0.55)
         .to(q(".about-action"), Object.assign({ duration: 0.9 }, SHOW), 0.75)
-        .to(q(".btn-about-circle"), { scale: 1, rotate: 0, duration: 0.8, ease: "back.out(2.4)", clearProps: "transform" }, 0.95);
+        .to(q(".km-btn-icon"), { scale: 1, rotate: 0, duration: 0.8, ease: "back.out(2.4)", clearProps: "transform" }, 0.95);
     }
   );
 
-  // ----- Services header + crown -----
+  // ----- Services header -----
   kmScene(
     document.querySelector(".services-km-head"),
     function (q, el) {
       prepEyebrow(el);
       prepLines(q(".services-km-title > span"));
       gsap.set(q(".services-km-desc"), { autoAlpha: 0, y: 30 });
-      document.querySelectorAll(".services-km-crown path, .services-km-crown line, .services-km-crown circle").forEach(function (shape) {
-        const length = shape.getTotalLength();
-        gsap.set(shape, { strokeDasharray: length, strokeDashoffset: length });
-      });
     },
     function (q, el) {
       const tl = gsap.timeline();
       playEyebrow(tl, el, 0);
       playLines(tl, q(".services-km-title > span"), 0.2);
-      return tl
-        .to(q(".services-km-desc"), Object.assign({ duration: 1 }, SHOW), 0.5)
-        .to(".services-km-crown path, .services-km-crown line, .services-km-crown circle", {
-          strokeDashoffset: 0,
-          duration: 2.2,
-          stagger: 0.12,
-          ease: "power2.inOut",
-          clearProps: "strokeDasharray,strokeDashoffset",
-        }, 0.1);
+      return tl.to(q(".services-km-desc"), Object.assign({ duration: 1 }, SHOW), 0.5);
     }
   );
 
@@ -1069,7 +1111,8 @@ function initSectionScenes() {
       prepEyebrow(el);
       gsap.set(q(".km-products-banner-img"), { autoAlpha: 0, scale: 1.25, xPercent: -8 * DIR });
       gsap.set(q(".km-products-banner-lines"), { clipPath: "inset(0% 0% 100% 0%)" });
-      gsap.set(q(".km-products-intro p"), { autoAlpha: 0, y: 30 });
+      gsap.set(q(".km-products-intro p, .km-products-intro .km-btn"), { autoAlpha: 0, y: 30 });
+      gsap.set(q(".km-products-intro .km-btn-icon"), { scale: 0, rotate: -180 });
     },
     function (q, el) {
       const tl = gsap.timeline()
@@ -1077,7 +1120,10 @@ function initSectionScenes() {
         .to(q(".km-products-banner-lines"), { clipPath: "inset(0% 0% 0% 0%)", duration: 1.6, ease: "expo.inOut", clearProps: "clipPath" }, 0.2);
       playEyebrow(tl, el, 0.2);
       playWords(tl, el._words, 0.35);
-      return tl.to(q(".km-products-intro p"), Object.assign({ duration: 1 }, SHOW), 0.7);
+      return tl
+        .to(q(".km-products-intro p"), Object.assign({ duration: 1 }, SHOW), 0.7)
+        .to(q(".km-products-intro .km-btn"), Object.assign({ duration: 0.9 }, SHOW), 0.85)
+        .to(q(".km-products-intro .km-btn-icon"), { scale: 1, rotate: 0, duration: 0.8, ease: "back.out(2.4)", clearProps: "transform" }, 1.05);
     }
   );
 
@@ -1103,13 +1149,13 @@ function initSectionScenes() {
     function (q) {
       gsap.set(q(".km-products-heading"), { autoAlpha: 0, x: 50 * DIR });
       gsap.set(q(".km-products-tools > *"), { autoAlpha: 0, y: 24, scale: 0.9 });
-      gsap.set(".km-product-card, .km-products-nav", { autoAlpha: 0 });
+      gsap.set(".km-products-panes .active .km-product-card, .km-products-nav", { autoAlpha: 0 });
     },
     function (q) {
       const tl = gsap.timeline()
         .to(q(".km-products-heading"), Object.assign({ duration: 1 }, SHOW), 0)
         .to(q(".km-products-tools > *"), Object.assign({ duration: 0.8, stagger: 0.08, ease: "back.out(1.6)" }, SHOW), 0.1);
-      const cards = animateProductCards(document.querySelectorAll(".km-product-card"));
+      const cards = animateProductCards(document.querySelectorAll(".km-products-panes .active .km-product-card"));
       if (cards) tl.add(cards, 0.25);
       return tl.fromTo(".km-products-nav", { autoAlpha: 0, y: 20 }, Object.assign({ duration: 0.8 }, SHOW), 0.9);
     }
@@ -1123,8 +1169,6 @@ function initSectionScenes() {
       prepEyebrow(el);
       gsap.set(q(".km-selector-bg-img"), { scale: 1.18, xPercent: -4 * DIR });
       gsap.set(q(".km-selector-desc"), { autoAlpha: 0, y: 30 });
-      gsap.set(q(".km-selector-features li"), { autoAlpha: 0, y: 50 });
-      gsap.set(q(".km-selector-feature-icon"), { scale: 0, rotate: -180 });
       gsap.set(q(".km-selector-card"), { autoAlpha: 0, x: -90 * DIR, rotateY: 18 * DIR, transformPerspective: 1400 });
       gsap.set(q(".km-selector-card-title, .km-selector-field, .km-selector-submit, .km-selector-note"), { autoAlpha: 0, y: 26 });
     },
@@ -1139,42 +1183,88 @@ function initSectionScenes() {
           duration: 0.7,
           stagger: 0.08,
           onComplete: function () { q(".km-selector-submit")[0].classList.add("is-shine"); },
-        }, SHOW), 0.7)
-        .to(q(".km-selector-features li"), Object.assign({ duration: 0.9, stagger: 0.12, ease: "power3.out" }, SHOW), 0.9)
-        .to(q(".km-selector-feature-icon"), { scale: 1, rotate: 0, duration: 0.8, stagger: 0.12, ease: "back.out(2.4)", clearProps: "transform" }, 1.05);
+        }, SHOW), 0.7);
+    }
+  );
+
+  kmScene(
+    document.querySelector(".km-selector-features"),
+    function (q) {
+      gsap.set(q("li"), { autoAlpha: 0, y: 50, scale: 0.9 });
+      gsap.set(q(".km-selector-feature-icon"), { scale: 0, rotate: -180 });
+    },
+    function (q) {
+      return gsap.timeline()
+        .to(q("li"), Object.assign({ duration: 1, stagger: 0.12, ease: "back.out(1.6)" }, SHOW), 0)
+        .to(q(".km-selector-feature-icon"), { scale: 1, rotate: 0, duration: 0.8, stagger: 0.12, ease: "back.out(2.4)", clearProps: "transform" }, 0.2);
     }
   );
 
   // ----- Why King Motors -----
-  kmScene(
-    document.querySelector(".km-why"),
-    function (q, el) {
-      el._words = prepWords(q(".km-why-title")[0]);
-      prepEyebrow(el);
-      gsap.set(q(".km-why-bg"), { scale: 1.2 });
-      gsap.set(q(".km-why-desc"), { autoAlpha: 0, y: 30 });
-      gsap.set(q(".km-feature"), { autoAlpha: 0, x: 70 * DIR, rotateY: -25 * DIR, transformPerspective: 900 });
-      gsap.set(q(".km-feature-icon"), { scale: 0, rotate: -180 });
-      gsap.set(q(".km-stat"), { autoAlpha: 0, rotateY: 90, transformPerspective: 1000 });
-    },
-    function (q, el) {
-      const tl = gsap.timeline().to(q(".km-why-bg"), { scale: 1, duration: 2.6, ease: "power2.out", clearProps: "transform" }, 0);
-      playEyebrow(tl, el, 0.1);
-      playWords(tl, el._words, 0.25);
-      return tl
-        .to(q(".km-why-desc"), Object.assign({ duration: 1 }, SHOW), 0.55)
-        .to(q(".km-feature"), Object.assign({ duration: 1.1, stagger: 0.12, ease: "power4.out" }, SHOW), 0.7)
-        .to(q(".km-feature-icon"), { scale: 1, rotate: 0, duration: 0.8, stagger: 0.12, ease: "back.out(2.4)", clearProps: "transform" }, 0.95)
-        .to(q(".km-stat"), Object.assign({
-          duration: 1.2,
-          stagger: 0.15,
-          ease: "power3.out",
-          onComplete: function () {
-            q(".km-stat").forEach(function (stat) { stat.classList.add("is-shine"); });
-          },
-        }, SHOW), 0.5);
-    }
-  );
+  // split in three scenes (head, features, stats) so the lower blocks play when they are actually reached
+  const why = document.querySelector(".km-why");
+  if (why) {
+    kmScene(
+      why.querySelector(".km-why .col-lg-6"),
+      function (q, el) {
+        el._words = prepWords(q(".km-why-title")[0]);
+        prepEyebrow(el);
+        gsap.set(why.querySelector(".km-why-bg"), { autoAlpha: 0.3 });
+        gsap.set(q(".km-why-desc"), { autoAlpha: 0, y: 30, filter: "blur(6px)" });
+      },
+      function (q, el) {
+        const tl = gsap.timeline().to(why.querySelector(".km-why-bg"), { autoAlpha: 1, duration: 2.2, ease: "power2.out", clearProps: "opacity,visibility" }, 0);
+        playEyebrow(tl, el, 0.1);
+        playWords(tl, el._words, 0.25);
+        return tl.to(q(".km-why-desc"), Object.assign({}, SHOW, { filter: "blur(0px)", duration: 1.1, clearProps: "transform,opacity,visibility,filter" }), 0.55);
+      }
+    );
+
+    kmScene(
+      why.querySelector(".km-why-features"),
+      function (q) {
+        gsap.set(q(".km-feature"), { autoAlpha: 0, x: 80 * DIR, rotateY: -30 * DIR, transformPerspective: 900, transformOrigin: DIR > 0 ? "100% 50%" : "0% 50%" });
+        gsap.set(q(".km-feature-icon"), { scale: 0, rotate: -200 });
+        gsap.set(q(".km-feature h3, .km-feature p"), { autoAlpha: 0, y: 18 });
+      },
+      function (q) {
+        return gsap.timeline()
+          .to(q(".km-feature"), Object.assign({ duration: 1.2, stagger: 0.14, ease: "power4.out" }, SHOW), 0)
+          .to(q(".km-feature-icon"), { scale: 1, rotate: 0, duration: 0.9, stagger: 0.14, ease: "back.out(2.4)", clearProps: "transform" }, 0.25)
+          .fromTo(
+            q(".km-feature-icon"),
+            { boxShadow: "0 0 0 0 rgba(237, 164, 31, 0.55)" },
+            { boxShadow: "0 0 0 16px rgba(237, 164, 31, 0)", duration: 1.1, stagger: 0.14, ease: "power2.out", clearProps: "boxShadow" },
+            0.55
+          )
+          .to(q(".km-feature h3, .km-feature p"), Object.assign({ duration: 0.7, stagger: 0.06 }, SHOW), 0.35);
+      }
+    );
+
+    kmScene(
+      why.querySelector(".km-stats"),
+      function (q) {
+        gsap.set(q(".km-stat"), { autoAlpha: 0, y: 70, rotateX: -70, scale: 0.9, transformPerspective: 1000, transformOrigin: "50% 100%" });
+        gsap.set(q(".km-stat strong"), { scale: 0.5, autoAlpha: 0 });
+        gsap.set(q(".km-stat p"), { autoAlpha: 0, y: 14 });
+        q(".km-counter").forEach(lockCounterWidth);
+      },
+      function (q) {
+        const tl = gsap.timeline()
+          .to(q(".km-stat"), Object.assign({ duration: 1.3, stagger: 0.15, ease: "expo.out" }, SHOW), 0)
+          .to(q(".km-stat strong"), Object.assign({ duration: 0.9, stagger: 0.15, ease: "back.out(2.2)" }, SHOW), 0.3)
+          .to(q(".km-stat p"), Object.assign({
+            duration: 0.7,
+            stagger: 0.15,
+            onComplete: function () {
+              q(".km-stat").forEach(function (stat) { stat.classList.add("is-shine"); });
+            },
+          }, SHOW), 0.5);
+        q(".km-counter").forEach(function (el, i) { tl.add(countUp(el), 0.35 + i * 0.15); });
+        return tl;
+      }
+    );
+  }
 
   // ----- Brands -----
   kmScene(
@@ -1195,74 +1285,257 @@ function initSectionScenes() {
     }
   );
 
-  // ----- Quote -----
+  // ----- Articles -----
   kmScene(
-    document.querySelector(".km-quote"),
+    document.querySelector(".km-articles"),
     function (q, el) {
-      el._words = prepWords(q(".km-quote-title")[0]);
+      el._words = prepWords(q(".km-articles-title")[0]);
       prepEyebrow(el);
-      gsap.set(q(".km-quote-desc"), { autoAlpha: 0, y: 30 });
-      gsap.set(q(".km-quote-contact li"), { autoAlpha: 0, x: 60 * DIR });
-      gsap.set(q(".km-quote-contact-icon"), { scale: 0, rotate: -160 });
-      gsap.set(q(".km-quote-card"), { autoAlpha: 0, y: 110, rotateX: 16, transformPerspective: 1400, transformOrigin: "50% 100%" });
-      gsap.set(q("#quote-form > *"), { autoAlpha: 0, y: 28 });
+      gsap.set(q(".km-articles-desc"), { autoAlpha: 0, y: 30 });
     },
     function (q, el) {
       const tl = gsap.timeline();
       playEyebrow(tl, el, 0);
       playWords(tl, el._words, 0.15);
+      return tl.to(q(".km-articles-desc"), Object.assign({ duration: 1 }, SHOW), 0.45);
+    }
+  );
+
+  kmScene(
+    document.querySelector(".km-articles-grid"),
+    function (q) {
+      gsap.set(q(".km-article"), { autoAlpha: 0, y: 90, rotateX: 14, transformPerspective: 1200, transformOrigin: "50% 100%" });
+      gsap.set(q(".km-article-media img, .km-article-bg"), { scale: 1.25 });
+      gsap.set(q(".km-article-media"), { clipPath: "inset(100% 0% 0% 0%)" });
+      gsap.set(q(".km-article-date, .km-article-title, .km-article-excerpt"), { autoAlpha: 0, y: 20 });
+      gsap.set(q(".km-article-badge"), { autoAlpha: 0, scale: 0.6 });
+      gsap.set(q(".km-article-more-icon"), { scale: 0, rotate: -180 });
+    },
+    function (q) {
+      return gsap.timeline()
+        .to(q(".km-article"), Object.assign({ duration: 1.2, stagger: 0.12, ease: "power4.out" }, SHOW), 0)
+        .to(q(".km-article-media"), { clipPath: "inset(0% 0% 0% 0%)", duration: 1.2, stagger: 0.12, ease: "expo.inOut", clearProps: "clipPath" }, 0.1)
+        .to(q(".km-article-media img, .km-article-bg"), { scale: 1, duration: 1.8, stagger: 0.12, ease: "power2.out", clearProps: "transform" }, 0.1)
+        .to(q(".km-article-date, .km-article-title, .km-article-excerpt"), Object.assign({ duration: 0.7, stagger: 0.05 }, SHOW), 0.45)
+        .to(q(".km-article-badge"), Object.assign({ duration: 0.6, ease: "back.out(2.4)" }, SHOW), 0.7)
+        .to(q(".km-article-more-icon"), { scale: 1, rotate: 0, duration: 0.7, stagger: 0.1, ease: "back.out(2.4)", clearProps: "transform" }, 0.8);
+    }
+  );
+
+  // ----- Contact -----
+  kmScene(
+    document.querySelector(".km-contact"),
+    function (q, el) {
+      el._words = prepWords(q(".km-contact-title")[0]);
+      prepEyebrow(el);
+      gsap.set(q(".km-contact-visual"), { autoAlpha: 0, x: 120 * DIR });
+      gsap.set(q(".km-contact-visual img"), { scale: 1.2 });
+      gsap.set(q(".km-contact-desc"), { autoAlpha: 0, y: 30 });
+      gsap.set(q(".km-contact-item"), { autoAlpha: 0, x: -60 * DIR });
+      gsap.set(q(".km-contact-icon"), { scale: 0, rotate: -160 });
+      gsap.set(q(".km-contact-socials a"), { autoAlpha: 0, y: 24 });
+    },
+    function (q, el) {
+      const tl = gsap.timeline()
+        .to(q(".km-contact-visual"), Object.assign({ duration: 1.4, ease: "power4.out" }, SHOW), 0)
+        .to(q(".km-contact-visual img"), { scale: 1, duration: 2.4, ease: "power2.out", clearProps: "transform" }, 0);
+      playEyebrow(tl, el, 0.1);
+      playWords(tl, el._words, 0.25);
       return tl
-        .to(q(".km-quote-desc"), Object.assign({ duration: 1 }, SHOW), 0.45)
-        .to(q(".km-quote-contact li"), Object.assign({ duration: 0.9, stagger: 0.12 }, SHOW), 0.6)
-        .to(q(".km-quote-contact-icon"), { scale: 1, rotate: 0, duration: 0.8, stagger: 0.12, ease: "back.out(2.4)", clearProps: "transform" }, 0.75)
-        .to(q(".km-quote-card"), Object.assign({ duration: 1.3, ease: "power4.out" }, SHOW), 0.2)
-        .to(q("#quote-form > *"), Object.assign({
+        .to(q(".km-contact-desc"), Object.assign({ duration: 1 }, SHOW), 0.55)
+        .to(q(".km-contact-item"), Object.assign({ duration: 0.9, stagger: 0.1 }, SHOW), 0.65)
+        .to(q(".km-contact-icon"), { scale: 1, rotate: 0, duration: 0.8, stagger: 0.1, ease: "back.out(2.4)", clearProps: "transform" }, 0.8)
+        .to(q(".km-contact-socials a"), Object.assign({ duration: 0.6, stagger: 0.07, ease: "back.out(2)" }, SHOW), 1.15);
+    }
+  );
+
+  kmScene(
+    document.querySelector(".km-contact-card"),
+    function (q, el) {
+      gsap.set(el, { autoAlpha: 0, y: 110, rotateX: 16, transformPerspective: 1400, transformOrigin: "50% 100%" });
+      gsap.set(q(".km-contact-card-title, .km-contact-card-desc, #contact-form > *"), { autoAlpha: 0, y: 26 });
+    },
+    function (q, el) {
+      return gsap.timeline()
+        .to(el, Object.assign({ duration: 1.3, ease: "power4.out" }, SHOW), 0)
+        .to(q(".km-contact-card-title, .km-contact-card-desc, #contact-form > *"), Object.assign({
           duration: 0.7,
           stagger: 0.06,
-          onComplete: function () { q(".km-quote-submit")[0].classList.add("is-shine"); },
-        }, SHOW), 0.6);
+          onComplete: function () { q(".km-contact-submit")[0].classList.add("is-shine"); },
+        }, SHOW), 0.35);
+    }
+  );
+
+  kmScene(
+    document.querySelector(".km-contact-map"),
+    function (q, el) {
+      gsap.set(el, { autoAlpha: 0, y: 70, scale: 0.94, clipPath: "inset(0% 0% 100% 0% round 20px)" });
+    },
+    function (q, el) {
+      return gsap.timeline().to(el, Object.assign({}, SHOW, { clipPath: "inset(0% 0% 0% 0% round 20px)", duration: 1.3, ease: "expo.out", clearProps: "transform,opacity,visibility,clipPath" }), 0);
     }
   );
 }
 
 initSectionScenes();
 
-// ==================================================
-// Pump Selector
-// ==================================================
-(function initPumpSelector() {
-  const form = document.getElementById("pump-selector-form");
-  if (!form) return;
+// Bootstrap's button plugin (data-bs-toggle="button") flips .active / aria-pressed first, on its document listener
+document.addEventListener("click", function (e) {
+  const cart = e.target.closest(".km-product-cart");
+  if (!cart) return;
+  const on = cart.classList.contains("active");
+  cart.setAttribute("aria-label", on ? "إزالة من السلة" : "أضف للسلة");
+  cart.querySelector("i").className = "fa-solid " + (on ? "fa-check" : "fa-cart-plus");
+});
 
-  const fields = form.querySelectorAll('input[type="number"]');
-
-  fields.forEach(function (input) {
-    input.addEventListener("input", function () {
-      input.classList.remove("is-invalid");
-    });
+// ===== Shop page: grid / list view and instant sort =====
+document.querySelectorAll('input[name="km-shop-view"]').forEach(function (input) {
+  input.addEventListener("change", function () {
+    const shop = input.closest(".km-shop");
+    if (!input.checked || !shop) return;
+    shop.classList.toggle("is-list", input.value === "list");
+    animateProductCards(shop.querySelectorAll(".km-product-card"));
   });
+});
 
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
+document.querySelectorAll("select[data-autosubmit]").forEach(function (select) {
+  select.addEventListener("change", function () {
+    if (select.form) select.form.requestSubmit();
+  });
+});
 
-    const invalid = Array.from(fields).filter(function (input) {
-      const value = parseFloat(input.value);
-      const bad = !(value > 0);
-      input.classList.toggle("is-invalid", bad);
-      return bad;
+// ===== Cart page: quantity, remove, totals =====
+(function initCart() {
+  const list = document.querySelector("[data-cart-list]");
+  if (!list) return;
+
+  const empty = document.querySelector("[data-cart-empty]");
+  const submit = document.querySelector("[data-cart-submit]");
+
+  function clamp(input) {
+    const min = Number(input.min) || 1;
+    const max = Number(input.max) || 99;
+    const value = Math.min(max, Math.max(min, parseInt(input.value, 10) || min));
+    input.value = value;
+    const item = input.closest(".km-cart-item");
+    item.querySelector('[data-qty="-1"]').disabled = value <= min;
+    item.querySelector('[data-qty="1"]').disabled = value >= max;
+  }
+
+  function refresh() {
+    const items = list.querySelectorAll(".km-cart-item");
+    let units = 0;
+    items.forEach(function (item) {
+      units += parseInt(item.querySelector(".km-qty-input").value, 10) || 0;
     });
+    document.querySelectorAll("[data-cart-count]").forEach(function (el) { el.textContent = items.length; });
+    document.querySelectorAll("[data-cart-units]").forEach(function (el) { el.textContent = units; });
+    list.hidden = !items.length;
+    if (empty) empty.hidden = !!items.length;
+    if (submit) submit.disabled = !items.length;
+  }
 
-    if (invalid.length) {
-      invalid[0].focus();
-      gsap.fromTo(invalid[0].parentElement, { x: -8 }, { x: 0, duration: 0.5, ease: "elastic.out(1, 0.3)", clearProps: "transform" });
+  list.querySelectorAll(".km-qty-input").forEach(clamp);
+
+  list.addEventListener("click", function (e) {
+    const step = e.target.closest("[data-qty]");
+    if (step) {
+      const input = step.closest(".km-qty").querySelector(".km-qty-input");
+      input.value = (parseInt(input.value, 10) || 0) + Number(step.dataset.qty);
+      clamp(input);
+      refresh();
       return;
     }
 
-    const pumpsTab = document.querySelector('.km-tab[data-cat="pumps"]');
-    if (pumpsTab && !pumpsTab.classList.contains("active")) pumpsTab.click();
-
-    const target = document.getElementById("products");
-    if (lenis) lenis.scrollTo(target, { offset: -80 });
-    else target.scrollIntoView({ behavior: "smooth" });
+    const remove = e.target.closest("[data-cart-remove]");
+    if (remove) {
+      const item = remove.closest(".km-cart-item");
+      item.classList.add("is-removing");
+      setTimeout(function () {
+        item.remove();
+        refresh();
+      }, 300);
+    }
   });
+
+  list.addEventListener("change", function (e) {
+    if (!e.target.matches(".km-qty-input")) return;
+    clamp(e.target);
+    refresh();
+  });
+
+  refresh();
 })();
+
+// ===== Product details: gallery and quantity =====
+document.querySelectorAll("[data-pd-thumb]").forEach(function (thumb) {
+  thumb.addEventListener("click", function () {
+    const main = document.querySelector("[data-pd-main]");
+    if (!main || thumb.classList.contains("active")) return;
+    document.querySelectorAll("[data-pd-thumb]").forEach(function (t) {
+      t.classList.toggle("active", t === thumb);
+      t.setAttribute("aria-pressed", t === thumb);
+    });
+    main.classList.add("is-swapping");
+    setTimeout(function () {
+      main.src = thumb.dataset.pdThumb;
+      main.classList.remove("is-swapping");
+    }, 250);
+  });
+});
+
+document.querySelectorAll(".km-qty").forEach(function (qty) {
+  if (qty.closest("[data-cart-list]")) return;
+  const input = qty.querySelector(".km-qty-input");
+  const minus = qty.querySelector('[data-qty="-1"]');
+  const plus = qty.querySelector('[data-qty="1"]');
+
+  function set(value) {
+    const min = Number(input.min) || 1;
+    const max = Number(input.max) || 99;
+    input.value = Math.min(max, Math.max(min, value || min));
+    minus.disabled = Number(input.value) <= min;
+    plus.disabled = Number(input.value) >= max;
+  }
+
+  minus.addEventListener("click", function () { set(Number(input.value) - 1); });
+  plus.addEventListener("click", function () { set(Number(input.value) + 1); });
+  input.addEventListener("change", function () { set(parseInt(input.value, 10)); });
+  set(parseInt(input.value, 10));
+});
+
+// ===== News details: copy post link =====
+document.querySelectorAll("[data-copy-link]").forEach(function (btn) {
+  btn.addEventListener("click", function () {
+    if (!navigator.clipboard) return;
+    navigator.clipboard.writeText(window.location.href).then(function () {
+      const icon = btn.querySelector("i");
+      btn.classList.add("is-copied");
+      icon.className = "fa-solid fa-check";
+      setTimeout(function () {
+        btn.classList.remove("is-copied");
+        icon.className = "fa-solid fa-link";
+      }, 2000);
+    });
+  });
+});
+
+
+// ==================================================
+// Forms (Bootstrap validation only; valid forms submit to the server)
+// ==================================================
+document.querySelectorAll("form.needs-validation").forEach(function (form) {
+  form.addEventListener("submit", function (e) {
+    if (form.checkValidity()) return;
+
+    e.preventDefault();
+    form.classList.add("was-validated");
+    const first = form.querySelector(":invalid");
+    if (first) {
+      first.focus();
+      if (motionOn) gsap.fromTo(first.parentElement, { x: -8 }, { x: 0, duration: 0.5, ease: "elastic.out(1, 0.3)", clearProps: "transform" });
+    }
+  });
+});
+
+

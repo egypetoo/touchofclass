@@ -3,9 +3,9 @@
     
     <!-- Logo (Right in RTL) -->
     <a class="navbar-brand py-0 me-0" href="./index.html" aria-label="كينج موتورز - الرئيسية">
-      <img src="./assets/images/logo/logo-transparent.png" alt="كينج موتورز" class="header-logo" height="58" />
+      <img src="./assets/images/logo/logo-transparent.webp" alt="كينج موتورز" class="header-logo" width="131" height="58" />
     </a>
-
+    
     <!-- Desktop Menu (Center) -->
     <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
       <ul class="navbar-nav mx-auto text-center align-items-center gap-xl-4 gap-3">
@@ -13,19 +13,78 @@
           <a class="nav-link active" href="./index.html">الرئيسية</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="./products.html">المنتجات</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./products.html#brands">الماركات</a>
+          <a class="nav-link" href="./about.html">من نحن</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="./services.html">الخدمات</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./about.html">من نحن</a>
+        <li class="nav-item km-nav-dd">
+          <a class="nav-link" href="./products.html" aria-haspopup="true">المنتجات <i class="fa-solid fa-angle-down km-nav-caret"></i></a>
+          <ul class="km-dd-menu">
+            <li class="km-dd-item">
+              <a href="./products.html" data-cat="motors">
+                <span class="km-dd-icon"><i class="fa-solid fa-gears"></i></span>
+                <span class="km-dd-text">المواتير<small>6 منتجات</small></span>
+                <i class="fa-solid fa-angle-left km-dd-arrow"></i>
+              </a>
+              <ul class="km-dd-sub">
+                <li><a href="./product-details.html" data-img="./assets/images/products/motor-ie3.webp">موتور كهربائي IE3</a></li>
+                <li><a href="./product-details.html" data-img="./assets/images/products/motor-ie2.webp">موتور كهربائي IE2</a></li>
+                <li><a href="./product-details.html" data-img="./assets/images/products/motor-ie1.webp">موتور كهربائي IE1</a></li>
+                <li><a href="./product-details.html" data-img="./assets/images/products/motor-exproof.webp">موتور ضد الانفجار</a></li>
+                <li><a href="./product-details.html" data-img="./assets/images/products/motor-ie2.webp">موتور IE3 بريميوم</a></li>
+                <li><a href="./product-details.html" data-img="./assets/images/products/motor-ie1.webp">موتور سنجل فاز</a></li>
+              </ul>
+            </li>
+            <li class="km-dd-item">
+              <a href="./products.html" data-cat="pumps">
+                <span class="km-dd-icon"><i class="fa-solid fa-fan"></i></span>
+                <span class="km-dd-text">المضخات<small>5 منتجات</small></span>
+                <i class="fa-solid fa-angle-left km-dd-arrow"></i>
+              </a>
+              <ul class="km-dd-sub">
+                <li><a href="./product-details.html" data-img="./assets/images/products/pump-centrifugal.webp">مضخة طرد مركزي</a></li>
+                <li><a href="./product-details.html" data-img="./assets/images/products/pump-submersible.webp">مضخة غاطسة</a></li>
+                <li><a href="./product-details.html" data-img="./assets/images/products/pump-vertical.webp">مضخة رأسية متعددة المراحل</a></li>
+                <li><a href="./product-details.html" data-img="./assets/images/products/pump-selfpriming.webp">مضخة ذاتية التحضير</a></li>
+                <li><a href="./product-details.html" data-img="./assets/images/products/pump-centrifugal.webp">مضخة سحب طرفي</a></li>
+              </ul>
+            </li>
+            <li class="km-dd-item">
+              <a href="./products.html" data-cat="pipes">
+                <span class="km-dd-icon"><i class="fa-solid fa-grip-lines-vertical"></i></span>
+                <span class="km-dd-text">المواسير<small>4 منتجات</small></span>
+                <i class="fa-solid fa-angle-left km-dd-arrow"></i>
+              </a>
+              <ul class="km-dd-sub">
+                <li><a href="./product-details.html" data-img="./assets/images/products/pipe-hdpe.webp">ماسورة HDPE PE100</a></li>
+                <li><a href="./product-details.html" data-img="./assets/images/products/pipe-pvc.webp">ماسورة uPVC ضغط</a></li>
+                <li><a href="./product-details.html" data-img="./assets/images/products/pipe-steel.webp">ماسورة صلب مجلفن</a></li>
+                <li><a href="./product-details.html" data-img="./assets/images/products/pipe-hdpe.webp">ماسورة HDPE PE80</a></li>
+              </ul>
+            </li>
+            <li class="km-dd-item">
+              <a href="./products.html" data-cat="cables">
+                <span class="km-dd-icon"><i class="fa-solid fa-plug-circle-bolt"></i></span>
+                <span class="km-dd-text">الكابلات<small>4 منتجات</small></span>
+                <i class="fa-solid fa-angle-left km-dd-arrow"></i>
+              </a>
+              <ul class="km-dd-sub">
+                <li><a href="./product-details.html" data-img="./assets/images/products/cable-power.webp">كابل قوى XLPE</a></li>
+                <li><a href="./product-details.html" data-img="./assets/images/products/cable-submersible.webp">كابل مضخات غاطسة</a></li>
+                <li><a href="./product-details.html" data-img="./assets/images/products/cable-drum.webp">بكرة كابل 4 قلب</a></li>
+                <li><a href="./product-details.html" data-img="./assets/images/products/cable-submersible.webp">كابل غاطس مبطط</a></li>
+              </ul>
+            </li>
+           
+          </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="./projects.html">أخبار</a>
+          <a class="nav-link" href="./pump-selector.html">اختيار الطلمبة</a>
+        </li>
+      
+        <li class="nav-item">
+          <a class="nav-link" href="./news.html">أخبار</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="./contact.html">تواصل معنا</a>
@@ -36,12 +95,12 @@
     <!-- Left Side Actions (Left in RTL) -->
     <div class="header-actions d-none d-lg-flex align-items-center gap-3">
       <!-- Search Button -->
-      <button class="header-circle-btn" type="button" aria-label="بحث" title="بحث">
+      <button class="header-circle-btn km-search-toggle collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#km-search-panel" aria-label="بحث" title="بحث" aria-expanded="false" aria-controls="km-search-panel">
         <i class="fa-solid fa-magnifying-glass"></i>
       </button>
 
       <!-- Cart Button -->
-      <a href="./contact.html#quote" class="header-circle-btn cart-btn" aria-label="سلة المشتريات" title="سلة المشتريات">
+      <a href="./cart.html" class="header-circle-btn cart-btn" aria-label="سلة المشتريات" title="سلة المشتريات">
         <i class="fa-solid fa-cart-shopping"></i>
         <span class="cart-badge">0</span>
       </a>
@@ -59,8 +118,12 @@
 
     <!-- Mobile Header Controls -->
     <div class="d-lg-none d-flex align-items-center gap-2">
+      <button class="header-circle-btn km-search-toggle collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#km-search-panel" aria-label="بحث" aria-expanded="false" aria-controls="km-search-panel">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+
       <!-- Cart Icon -->
-      <a href="./contact.html#quote" class="header-circle-btn cart-btn" aria-label="سلة المشتريات">
+      <a href="./cart.html" class="header-circle-btn cart-btn" aria-label="سلة المشتريات">
         <i class="fa-solid fa-cart-shopping"></i>
         <span class="cart-badge">0</span>
       </a>
@@ -80,11 +143,22 @@
 
   </div>
 
+  <!-- Search Panel -->
+  <div class="km-search-panel collapse" id="km-search-panel" role="dialog" aria-label="البحث في الموقع">
+    <form class="km-search-form" role="search" action="./products.html" method="get">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <label class="visually-hidden" for="km-search-input">ابحث في الموقع</label>
+      <input type="search" id="km-search-input" name="q" placeholder="ابحث عن منتج أو فئة أو خدمة..." autocomplete="off" />
+      <button type="button" class="km-search-close" data-bs-toggle="collapse" data-bs-target="#km-search-panel" aria-label="إغلاق البحث"><i class="fa-solid fa-xmark"></i></button>
+    </form>
+    <div class="km-search-results" aria-live="polite" data-lenis-prevent></div>
+  </div>
+
   <!-- Mobile Offcanvas Menu -->
   <div class="offcanvas offcanvas-start d-lg-none pb-5" id="mobileMenu" tabindex="-1" aria-labelledby="mobileMenuLabel" data-lenis-prevent>
     <div class="offcanvas-header border-bottom border-light border-opacity-10">
       <a class="navbar-brand" href="./index.html" id="mobileMenuLabel">
-        <img src="./assets/images/logo/logo-transparent.png" alt="كينج موتورز" height="48" />
+        <img src="./assets/images/logo/logo-transparent.webp" alt="كينج موتورز" width="108" height="48" loading="lazy" />
       </a>
       <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="إغلاق"></button>
     </div>
@@ -94,11 +168,65 @@
         <li class="nav-item">
           <a class="nav-link active d-flex align-items-center justify-content-between" href="./index.html">الرئيسية <i class="fa-solid fa-angle-left"></i></a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link d-flex align-items-center justify-content-between" href="./products.html">المنتجات <i class="fa-solid fa-angle-left"></i></a>
+        <li class="nav-item km-m-dd">
+          <button class="nav-link km-m-toggle collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m-products" aria-expanded="false" aria-controls="m-products">
+            المنتجات <i class="fa-solid fa-angle-down"></i>
+          </button>
+          <div class="collapse" id="m-products">
+            <ul class="km-m-menu">
+              <li>
+                <button class="km-m-cat collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m-cat-motors" aria-expanded="false" aria-controls="m-cat-motors">
+                  <span><i class="fa-solid fa-gears"></i> المواتير</span><i class="fa-solid fa-plus"></i>
+                </button>
+                <ul class="collapse km-m-sub" id="m-cat-motors">
+                  <li><a href="./product-details.html" data-img="./assets/images/products/motor-ie3.webp">موتور كهربائي IE3</a></li>
+                  <li><a href="./product-details.html" data-img="./assets/images/products/motor-ie2.webp">موتور كهربائي IE2</a></li>
+                  <li><a href="./product-details.html" data-img="./assets/images/products/motor-ie1.webp">موتور كهربائي IE1</a></li>
+                  <li><a href="./product-details.html" data-img="./assets/images/products/motor-exproof.webp">موتور ضد الانفجار</a></li>
+                  <li><a href="./product-details.html" data-img="./assets/images/products/motor-ie2.webp">موتور IE3 بريميوم</a></li>
+                  <li><a href="./product-details.html" data-img="./assets/images/products/motor-ie1.webp">موتور سنجل فاز</a></li>
+                </ul>
+              </li>
+              <li>
+                <button class="km-m-cat collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m-cat-pumps" aria-expanded="false" aria-controls="m-cat-pumps">
+                  <span><i class="fa-solid fa-fan"></i> المضخات</span><i class="fa-solid fa-plus"></i>
+                </button>
+                <ul class="collapse km-m-sub" id="m-cat-pumps">
+                  <li><a href="./product-details.html" data-img="./assets/images/products/pump-centrifugal.webp">مضخة طرد مركزي</a></li>
+                  <li><a href="./product-details.html" data-img="./assets/images/products/pump-submersible.webp">مضخة غاطسة</a></li>
+                  <li><a href="./product-details.html" data-img="./assets/images/products/pump-vertical.webp">مضخة رأسية متعددة المراحل</a></li>
+                  <li><a href="./product-details.html" data-img="./assets/images/products/pump-selfpriming.webp">مضخة ذاتية التحضير</a></li>
+                  <li><a href="./product-details.html" data-img="./assets/images/products/pump-centrifugal.webp">مضخة سحب طرفي</a></li>
+                </ul>
+              </li>
+              <li>
+                <button class="km-m-cat collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m-cat-pipes" aria-expanded="false" aria-controls="m-cat-pipes">
+                  <span><i class="fa-solid fa-grip-lines-vertical"></i> المواسير</span><i class="fa-solid fa-plus"></i>
+                </button>
+                <ul class="collapse km-m-sub" id="m-cat-pipes">
+                  <li><a href="./product-details.html" data-img="./assets/images/products/pipe-hdpe.webp">ماسورة HDPE PE100</a></li>
+                  <li><a href="./product-details.html" data-img="./assets/images/products/pipe-pvc.webp">ماسورة uPVC ضغط</a></li>
+                  <li><a href="./product-details.html" data-img="./assets/images/products/pipe-steel.webp">ماسورة صلب مجلفن</a></li>
+                  <li><a href="./product-details.html" data-img="./assets/images/products/pipe-hdpe.webp">ماسورة HDPE PE80</a></li>
+                </ul>
+              </li>
+              <li>
+                <button class="km-m-cat collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#m-cat-cables" aria-expanded="false" aria-controls="m-cat-cables">
+                  <span><i class="fa-solid fa-plug-circle-bolt"></i> الكابلات</span><i class="fa-solid fa-plus"></i>
+                </button>
+                <ul class="collapse km-m-sub" id="m-cat-cables">
+                  <li><a href="./product-details.html" data-img="./assets/images/products/cable-power.webp">كابل قوى XLPE</a></li>
+                  <li><a href="./product-details.html" data-img="./assets/images/products/cable-submersible.webp">كابل مضخات غاطسة</a></li>
+                  <li><a href="./product-details.html" data-img="./assets/images/products/cable-drum.webp">بكرة كابل 4 قلب</a></li>
+                  <li><a href="./product-details.html" data-img="./assets/images/products/cable-submersible.webp">كابل غاطس مبطط</a></li>
+                </ul>
+              </li>
+       
+            </ul>
+          </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link d-flex align-items-center justify-content-between" href="./products.html#brands">الماركات <i class="fa-solid fa-angle-left"></i></a>
+          <a class="nav-link d-flex align-items-center justify-content-between" href="./pump-selector.html">اختيار الطلمبة <i class="fa-solid fa-angle-left"></i></a>
         </li>
         <li class="nav-item">
           <a class="nav-link d-flex align-items-center justify-content-between" href="./services.html">الخدمات <i class="fa-solid fa-angle-left"></i></a>
@@ -107,7 +235,7 @@
           <a class="nav-link d-flex align-items-center justify-content-between" href="./about.html">من نحن <i class="fa-solid fa-angle-left"></i></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link d-flex align-items-center justify-content-between" href="./projects.html">أخبار <i class="fa-solid fa-angle-left"></i></a>
+          <a class="nav-link d-flex align-items-center justify-content-between" href="./news.html">أخبار <i class="fa-solid fa-angle-left"></i></a>
         </li>
         <li class="nav-item">
           <a class="nav-link d-flex align-items-center justify-content-between" href="./contact.html">تواصل معنا <i class="fa-solid fa-angle-left"></i></a>

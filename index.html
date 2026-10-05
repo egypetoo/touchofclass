@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 
 <head>
   <meta charset="UTF-8" />
@@ -21,8 +21,10 @@
   <!-- fonts & critical images -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400..700&amp;display=swap" />
  
   <link rel="preload" as="image" href="./assets/images/logo/logo-transparent.webp" />
+  <link rel="preload" as="image" href="./assets/images/hero/hero-1.webp" fetchpriority="high" />
 
   <!-- files css -->
   <link rel="stylesheet" href="./assets/css/all.min.css" />
@@ -38,14 +40,6 @@
 </head>
 
 <body>
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
-    <defs>
-      <linearGradient id="km-gradient-stroke" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" style="stop-color: var(--main-color)" />
-        <stop offset="1" style="stop-color: var(--km-gold)" />
-      </linearGradient>
-    </defs>
-  </svg>
   <!--
   ##################################################
   #                   Loading                      #
@@ -73,7 +67,7 @@
         <div class="swiper-wrapper">
 
           <!-- Slide 1 -->
-          <div class="swiper-slide hero-slide" style="--slide-bg: url('../images/hero.jpg');">
+          <div class="swiper-slide hero-slide">
             <div class="hero-slide-bg"></div>
             <div class="container-fluid px-3 px-md-5 h-100">
               <div class="row min-vh-100 align-items-center">
@@ -121,7 +115,7 @@
           </div>
 
           <!-- Slide 2 -->
-          <div class="swiper-slide hero-slide" style="--slide-bg: url('../images/hero/hero-2.jpg');">
+          <div class="swiper-slide hero-slide" data-bg="./assets/images/hero/hero-2.webp">
             <div class="hero-slide-bg"></div>
             <div class="container-fluid px-3 px-md-5 h-100">
               <div class="row min-vh-100 align-items-center">
@@ -169,7 +163,7 @@
           </div>
 
           <!-- Slide 3 -->
-          <div class="swiper-slide hero-slide" style="--slide-bg: url('../images/hero/hero-3.jpg');">
+          <div class="swiper-slide hero-slide" data-bg="./assets/images/hero/hero-3.webp">
             <div class="hero-slide-bg"></div>
             <div class="container-fluid px-3 px-md-5 h-100">
               <div class="row min-vh-100 align-items-center">
@@ -200,7 +194,7 @@
                     </p>
 
                     <div class="hero-actions d-flex align-items-center justify-content-start gap-3 flex-wrap">
-                      <a class="btn btn-hero-gold" href="./capabilities.html">
+                      <a class="btn btn-hero-gold" href="./services.html">
                         <i class="fa-solid fa-arrow-left"></i>
                         <span>خدماتنا وقدراتنا</span>
                       </a>
@@ -290,11 +284,9 @@
 
               <!-- Action Button -->
               <div class="about-action">
-                <a href="./about.html" class="btn btn-about-luxury">
-                  <span class="btn-about-circle">
-                    <i class="fa-solid fa-arrow-left"></i>
-                  </span>
-                  <span class="btn-about-text">تعرف أكثر عنا</span>
+                <a href="./about.html" class="km-btn">
+                  <span>تعرف أكثر عنا</span>
+                  <span class="km-btn-icon"><i class="fa-solid fa-arrow-left"></i></span>
                 </a>
               </div>
 
@@ -306,13 +298,19 @@
             <div class="about-cards">
               <figure class="about-card about-card-pivot">
                 <div class="about-card-media" data-anim="reveal" data-anim-delay="0.25">
-                  <img src="./assets/images/about/about-card-pivot.jpg" alt="نظام ري محوري في حقل زراعي" loading="lazy" decoding="async">
+                  <img src="./assets/images/about/about-card-pivot.webp"
+                    srcset="./assets/images/about/about-card-pivot-420.webp 420w, ./assets/images/about/about-card-pivot.webp 800w"
+                    sizes="(max-width: 991px) 45vw, 380px" width="800" height="1067"
+                    alt="نظام ري محوري في حقل زراعي" loading="lazy" decoding="async">
                 </div>
               </figure>
 
               <figure class="about-card about-card-pump">
                 <div class="about-card-media" data-anim="reveal">
-                  <img src="./assets/images/about/about-card-pump.jpg" alt="طلمبة كينج موتورز لضخ المياه" loading="lazy" decoding="async">
+                  <img src="./assets/images/about/about-card-pump.webp"
+                    srcset="./assets/images/about/about-card-pump-420.webp 420w, ./assets/images/about/about-card-pump.webp 800w"
+                    sizes="(max-width: 991px) 45vw, 380px" width="800" height="1067"
+                    alt="طلمبة كينج موتورز لضخ المياه" loading="lazy" decoding="async">
                 </div>
               </figure>
             </div>
@@ -360,21 +358,16 @@
           <div class="col-12 col-sm-6 col-lg-3">
             <article class="service-card">
               <div class="service-card-media">
-                <img src="./assets/images/services/service-consulting-photo.png" alt="استشارات - كينج موتورز" class="service-card-img" loading="lazy" decoding="async">
+                <img src="./assets/images/services/service-consulting.webp" srcset="./assets/images/services/service-consulting-480.webp 480w, ./assets/images/services/service-consulting.webp 864w" sizes="(max-width: 575px) 92vw, (max-width: 991px) 46vw, 440px" width="864" height="1152" alt="استشارات - كينج موتورز" class="service-card-img" loading="lazy" decoding="async">
               </div>
-              <svg class="service-card-facets" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-                <polygon class="facet" points="100,53 77,66 77,82 100,82" />
-                <polygon class="facet facet-low" points="86,82 100,82 100,100 67,100" />
-                <polyline points="100,53 77,66" />
-                <polyline points="100,82 86,82 67,100" />
-              </svg>
+          
               <div class="service-card-body">
                 <h3 class="service-card-title">استشارات</h3>
                 <p class="service-card-desc">
                   نقدم استشارات فنية لمساعدتك في اختيار الحل والمعدات الأنسب وفقاً لاحتياجات مشروعك.
                 </p>
                 <div class="service-card-action">
-                  <a href="./capabilities.html" class="service-card-btn" aria-label="تعرف على تفاصيل خدمة استشارات">
+                  <a href="./service-details.html" class="service-card-btn" aria-label="تعرف على تفاصيل خدمة استشارات">
                     <i class="fa-solid fa-arrow-left"></i>
                   </a>
                 </div>
@@ -386,21 +379,16 @@
           <div class="col-12 col-sm-6 col-lg-3">
             <article class="service-card">
               <div class="service-card-media">
-                <img src="./assets/images/services/service-spareparts-photo.png" alt="قطع غيار - كينج موتورز" class="service-card-img" loading="lazy" decoding="async">
+                <img src="./assets/images/services/service-spareparts.webp" srcset="./assets/images/services/service-spareparts-480.webp 480w, ./assets/images/services/service-spareparts.webp 864w" sizes="(max-width: 575px) 92vw, (max-width: 991px) 46vw, 440px" width="864" height="1152" alt="قطع غيار - كينج موتورز" class="service-card-img" loading="lazy" decoding="async">
               </div>
-              <svg class="service-card-facets" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-                <polygon class="facet" points="100,53 77,66 77,82 100,82" />
-                <polygon class="facet facet-low" points="86,82 100,82 100,100 67,100" />
-                <polyline points="100,53 77,66" />
-                <polyline points="100,82 86,82 67,100" />
-              </svg>
+           
               <div class="service-card-body">
                 <h3 class="service-card-title">قطع غيار</h3>
                 <p class="service-card-desc">
                   نوفر قطع غيار موثوقة لمختلف أنظمة الضخ والمعدات لضمان الأداء والاستمرارية.
                 </p>
                 <div class="service-card-action">
-                  <a href="./capabilities.html" class="service-card-btn" aria-label="تعرف على تفاصيل خدمة قطع غيار">
+                  <a href="./service-details.html" class="service-card-btn" aria-label="تعرف على تفاصيل خدمة قطع غيار">
                     <i class="fa-solid fa-arrow-left"></i>
                   </a>
                 </div>
@@ -412,7 +400,7 @@
           <div class="col-12 col-sm-6 col-lg-3">
             <article class="service-card">
               <div class="service-card-media">
-                <img src="./assets/images/services/service-maintenance-photo.png" alt="صيانة بالضمان - كينج موتورز" class="service-card-img" loading="lazy" decoding="async">
+                <img src="./assets/images/services/service-maintenance.webp" srcset="./assets/images/services/service-maintenance-480.webp 480w, ./assets/images/services/service-maintenance.webp 864w" sizes="(max-width: 575px) 92vw, (max-width: 991px) 46vw, 440px" width="864" height="1152" alt="صيانة بالضمان - كينج موتورز" class="service-card-img" loading="lazy" decoding="async">
               </div>
            
               <div class="service-card-body">
@@ -421,7 +409,7 @@
                   خدمات صيانة متخصصة ودعم فني موثوق للحفاظ على كفاءة المعدات واستمرارية التشغيل.
                 </p>
                 <div class="service-card-action">
-                  <a href="./capabilities.html" class="service-card-btn" aria-label="تعرف على تفاصيل خدمة صيانة بالضمان">
+                  <a href="./service-details.html" class="service-card-btn" aria-label="تعرف على تفاصيل خدمة صيانة بالضمان">
                     <i class="fa-solid fa-arrow-left"></i>
                   </a>
                 </div>
@@ -433,21 +421,16 @@
           <div class="col-12 col-sm-6 col-lg-3">
             <article class="service-card">
               <div class="service-card-media">
-                <img src="./assets/images/services/service-supply-photo.png" alt="توريد وتركيب - كينج موتورز" class="service-card-img" loading="lazy" decoding="async">
+                <img src="./assets/images/services/service-supply.webp" srcset="./assets/images/services/service-supply-480.webp 480w, ./assets/images/services/service-supply.webp 864w" sizes="(max-width: 575px) 92vw, (max-width: 991px) 46vw, 440px" width="864" height="1152" alt="توريد وتركيب - كينج موتورز" class="service-card-img" loading="lazy" decoding="async">
               </div>
-              <svg class="service-card-facets" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
-                <polygon class="facet" points="100,53 77,66 77,82 100,82" />
-                <polygon class="facet facet-low" points="86,82 100,82 100,100 67,100" />
-                <polyline points="100,53 77,66" />
-                <polyline points="100,82 86,82 67,100" />
-              </svg>
+           
               <div class="service-card-body">
                 <h3 class="service-card-title">توريد وتركيب</h3>
                 <p class="service-card-desc">
                   نوفر حلول متكاملة لتوريد وتركيب أنظمة الضخ والمعدات، بما يضمن التشغيل بكفاءة واعتمادية عالية.
                 </p>
                 <div class="service-card-action">
-                  <a href="./capabilities.html" class="service-card-btn" aria-label="تعرف على تفاصيل خدمة توريد وتركيب">
+                  <a href="./service-details.html" class="service-card-btn" aria-label="تعرف على تفاصيل خدمة توريد وتركيب">
                     <i class="fa-solid fa-arrow-left"></i>
                   </a>
                 </div>
@@ -457,6 +440,12 @@
 
         </div>
 
+        <div class="km-section-more" data-anim="up">
+          <a href="./services.html" class="km-btn">
+            <span>عرض جميع الخدمات</span>
+            <span class="km-btn-icon"><i class="fa-solid fa-arrow-left"></i></span>
+          </a>
+        </div>
       </div>
     </section>
     <!--
@@ -466,7 +455,7 @@
 -->
     <section class="km-products" id="products">
       <div class="km-products-banner">
-        <img src="./assets/images/products/products-banner.webp" alt="مضخة صناعية من كينج موتورز" class="km-products-banner-img" loading="lazy" decoding="async" />
+        <img src="./assets/images/products/products-banner.webp" srcset="./assets/images/products/products-banner-960.webp 960w, ./assets/images/products/products-banner.webp 1600w" sizes="(max-width: 991px) 185vw, 66vw" alt="مضخة صناعية من كينج موتورز" class="km-products-banner-img" width="1600" height="900" loading="lazy" decoding="async" />
         <div class="km-products-banner-shade" aria-hidden="true"></div>
         <svg class="km-products-banner-lines" viewBox="0 0 1000 340" preserveAspectRatio="none" aria-hidden="true">
           <path d="M516 0 L430 340" />
@@ -482,28 +471,45 @@
             </div>
             <h2 class="km-products-title"><span class="text-km-gradient">فئات</span> منتجاتنا</h2>
             <p>مجموعة متكاملة من منتجات أنظمة الضخ والمعدات الصناعية لتلبية احتياجات مختلف المشروعات بكفاءة وجودة عالية.</p>
+            <a href="./products.html" class="km-btn mt-3">
+              <span>عرض جميع المنتجات</span>
+              <span class="km-btn-icon"><i class="fa-solid fa-arrow-left"></i></span>
+            </a>
           </div>
+      
+         
+         
         </div>
       </div>
 
       <div class="container position-relative">
         <div class="km-products-tabs" role="tablist" aria-label="فئات المنتجات">
-          <button type="button" class="km-tab active" role="tab" aria-selected="true" data-cat="motors">
-            <span class="km-tab-icon"><i class="fa-solid fa-gears"></i></span>
-            <span class="km-tab-text"><strong>المواتير</strong><small>(28 منتج)</small></span>
-          </button>
-          <button type="button" class="km-tab" role="tab" aria-selected="false" data-cat="pumps">
-            <span class="km-tab-icon"><i class="fa-solid fa-fan"></i></span>
-            <span class="km-tab-text"><strong>المضخات</strong><small>(42 منتج)</small></span>
-          </button>
-          <button type="button" class="km-tab" role="tab" aria-selected="false" data-cat="pipes">
-            <span class="km-tab-icon"><i class="fa-solid fa-grip-lines-vertical"></i></span>
-            <span class="km-tab-text"><strong>المواسير</strong><small>(36 منتج)</small></span>
-          </button>
-          <button type="button" class="km-tab" role="tab" aria-selected="false" data-cat="cables">
-            <span class="km-tab-icon"><i class="fa-solid fa-plug-circle-bolt"></i></span>
-            <span class="km-tab-text"><strong>الكابلات</strong><small>(24 منتج)</small></span>
-          </button>
+          <div class="row g-2 g-lg-0">
+            <div class="col-6 col-lg-3">
+              <button type="button" class="km-tab w-100 h-100 active" id="km-tab-motors" role="tab" data-bs-toggle="tab" data-bs-target="#km-pane-motors" aria-controls="km-pane-motors" aria-selected="true" data-cat="motors" data-desc="مواتير عالية الكفاءة لمختلف التطبيقات الصناعية.">
+                <span class="km-tab-icon"><i class="fa-solid fa-gears"></i></span>
+                <span class="km-tab-text"><strong>المواتير</strong><small>(28 منتج)</small></span>
+              </button>
+            </div>
+            <div class="col-6 col-lg-3">
+              <button type="button" class="km-tab w-100 h-100" id="km-tab-pumps" role="tab" data-bs-toggle="tab" data-bs-target="#km-pane-pumps" aria-controls="km-pane-pumps" aria-selected="false" data-cat="pumps" data-desc="مضخات بأداء موثوق للمياه والري والتطبيقات الصناعية.">
+                <span class="km-tab-icon"><i class="fa-solid fa-fan"></i></span>
+                <span class="km-tab-text"><strong>المضخات</strong><small>(42 منتج)</small></span>
+              </button>
+            </div>
+            <div class="col-6 col-lg-3">
+              <button type="button" class="km-tab w-100 h-100" id="km-tab-pipes" role="tab" data-bs-toggle="tab" data-bs-target="#km-pane-pipes" aria-controls="km-pane-pipes" aria-selected="false" data-cat="pipes" data-desc="مواسير بمقاسات وضغوط متعددة لشبكات المياه والري والصرف.">
+                <span class="km-tab-icon"><i class="fa-solid fa-grip-lines-vertical"></i></span>
+                <span class="km-tab-text"><strong>المواسير</strong><small>(36 منتج)</small></span>
+              </button>
+            </div>
+            <div class="col-6 col-lg-3">
+              <button type="button" class="km-tab w-100 h-100" id="km-tab-cables" role="tab" data-bs-toggle="tab" data-bs-target="#km-pane-cables" aria-controls="km-pane-cables" aria-selected="false" data-cat="cables" data-desc="كابلات كهربائية معتمدة للقوى والمضخات الغاطسة.">
+                <span class="km-tab-icon"><i class="fa-solid fa-plug-circle-bolt"></i></span>
+                <span class="km-tab-text"><strong>الكابلات</strong><small>(24 منتج)</small></span>
+              </button>
+            </div>
+          </div>
         </div>
 
         <div class="km-products-toolbar">
@@ -527,25 +533,401 @@
                 <option value="value-desc">القدرة: من الأعلى</option>
               </select>
             </label>
-            <div class="km-view-toggle" role="group" aria-label="طريقة العرض">
-              <button type="button" class="active" data-view="grid" aria-label="عرض شبكي"><i class="fa-solid fa-table-cells-large"></i></button>
-              <button type="button" data-view="list" aria-label="عرض قائمة"><i class="fa-solid fa-list"></i></button>
+            <div class="km-view-toggle" role="radiogroup" aria-label="طريقة العرض">
+              <input type="radio" class="btn-check" name="km-view" id="km-view-grid" value="grid" autocomplete="off" aria-label="عرض شبكي" checked />
+              <label for="km-view-grid" title="عرض شبكي"><i class="fa-solid fa-table-cells-large"></i></label>
+              <input type="radio" class="btn-check" name="km-view" id="km-view-list" value="list" autocomplete="off" aria-label="عرض قائمة" />
+              <label for="km-view-list" title="عرض قائمة"><i class="fa-solid fa-list"></i></label>
             </div>
           </div>
         </div>
 
-        <div class="km-products-stage">
-          <div class="swiper km-products-swiper">
-            <div class="swiper-wrapper" id="km-products-wrapper"></div>
+        <div class="tab-content km-products-panes">
+          <div class="tab-pane fade show active" id="km-pane-motors" role="tabpanel" aria-labelledby="km-tab-motors" tabindex="0">
+            <div class="km-products-stage">
+              <div class="swiper km-products-swiper" aria-label="المواتير">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide" data-value="7.5">
+                    <article class="km-product-card">
+                      <div class="km-product-media">
+                        <img src="./assets/images/products/motor-ie3.webp" alt="موتور كهربائي IE3" loading="lazy" decoding="async" width="600" height="450" />
+                        <button type="button" class="km-product-cart" data-bs-toggle="button" aria-label="أضف للسلة" aria-pressed="false"><i class="fa-solid fa-cart-plus"></i></button>
+                      </div>
+                      <div class="km-product-body">
+                        <h4 class="km-product-name">موتور كهربائي IE3</h4>
+                        <ul class="km-product-specs">
+                          <li><i class="fa-solid fa-bolt"></i><span>7.5 kW</span></li>
+                          <li><i class="fa-solid fa-gauge-high"></i><span>1450 RPM</span></li>
+                          <li><i class="fa-solid fa-gear"></i><span>3 فاز</span></li>
+                        </ul>
+                        <a href="./product-details.html" class="km-btn km-btn-block km-product-btn"><span>عرض التفاصيل</span><span class="km-btn-icon"><i class="fa-solid fa-arrow-left"></i></span></a>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="swiper-slide" data-value="11">
+                    <article class="km-product-card">
+                      <div class="km-product-media">
+                        <img src="./assets/images/products/motor-ie2.webp" alt="موتور كهربائي IE2" loading="lazy" decoding="async" width="600" height="450" />
+                        <button type="button" class="km-product-cart" data-bs-toggle="button" aria-label="أضف للسلة" aria-pressed="false"><i class="fa-solid fa-cart-plus"></i></button>
+                      </div>
+                      <div class="km-product-body">
+                        <h4 class="km-product-name">موتور كهربائي IE2</h4>
+                        <ul class="km-product-specs">
+                          <li><i class="fa-solid fa-bolt"></i><span>11 kW</span></li>
+                          <li><i class="fa-solid fa-gauge-high"></i><span>3000 RPM</span></li>
+                          <li><i class="fa-solid fa-gear"></i><span>3 فاز</span></li>
+                        </ul>
+                        <a href="./product-details.html" class="km-btn km-btn-block km-product-btn"><span>عرض التفاصيل</span><span class="km-btn-icon"><i class="fa-solid fa-arrow-left"></i></span></a>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="swiper-slide" data-value="5.5">
+                    <article class="km-product-card">
+                      <div class="km-product-media">
+                        <img src="./assets/images/products/motor-ie1.webp" alt="موتور كهربائي IE1" loading="lazy" decoding="async" width="600" height="450" />
+                        <button type="button" class="km-product-cart" data-bs-toggle="button" aria-label="أضف للسلة" aria-pressed="false"><i class="fa-solid fa-cart-plus"></i></button>
+                      </div>
+                      <div class="km-product-body">
+                        <h4 class="km-product-name">موتور كهربائي IE1</h4>
+                        <ul class="km-product-specs">
+                          <li><i class="fa-solid fa-bolt"></i><span>5.5 kW</span></li>
+                          <li><i class="fa-solid fa-gauge-high"></i><span>1450 RPM</span></li>
+                          <li><i class="fa-solid fa-gear"></i><span>3 فاز</span></li>
+                        </ul>
+                        <a href="./product-details.html" class="km-btn km-btn-block km-product-btn"><span>عرض التفاصيل</span><span class="km-btn-icon"><i class="fa-solid fa-arrow-left"></i></span></a>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="swiper-slide" data-value="15">
+                    <article class="km-product-card">
+                      <div class="km-product-media">
+                        <img src="./assets/images/products/motor-exproof.webp" alt="موتور ضد الانفجار" loading="lazy" decoding="async" width="600" height="450" />
+                        <button type="button" class="km-product-cart" data-bs-toggle="button" aria-label="أضف للسلة" aria-pressed="false"><i class="fa-solid fa-cart-plus"></i></button>
+                      </div>
+                      <div class="km-product-body">
+                        <h4 class="km-product-name">موتور ضد الانفجار</h4>
+                        <ul class="km-product-specs">
+                          <li><i class="fa-solid fa-bolt"></i><span>15 kW</span></li>
+                          <li><i class="fa-solid fa-gauge-high"></i><span>3000 RPM</span></li>
+                          <li><i class="fa-solid fa-gear"></i><span>3 فاز</span></li>
+                        </ul>
+                        <a href="./product-details.html" class="km-btn km-btn-block km-product-btn"><span>عرض التفاصيل</span><span class="km-btn-icon"><i class="fa-solid fa-arrow-left"></i></span></a>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="swiper-slide" data-value="22">
+                    <article class="km-product-card">
+                      <div class="km-product-media">
+                        <img src="./assets/images/products/motor-ie2.webp" alt="موتور IE3 بريميوم" loading="lazy" decoding="async" width="600" height="450" />
+                        <button type="button" class="km-product-cart" data-bs-toggle="button" aria-label="أضف للسلة" aria-pressed="false"><i class="fa-solid fa-cart-plus"></i></button>
+                      </div>
+                      <div class="km-product-body">
+                        <h4 class="km-product-name">موتور IE3 بريميوم</h4>
+                        <ul class="km-product-specs">
+                          <li><i class="fa-solid fa-bolt"></i><span>22 kW</span></li>
+                          <li><i class="fa-solid fa-gauge-high"></i><span>1480 RPM</span></li>
+                          <li><i class="fa-solid fa-gear"></i><span>3 فاز</span></li>
+                        </ul>
+                        <a href="./product-details.html" class="km-btn km-btn-block km-product-btn"><span>عرض التفاصيل</span><span class="km-btn-icon"><i class="fa-solid fa-arrow-left"></i></span></a>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="swiper-slide" data-value="2.2">
+                    <article class="km-product-card">
+                      <div class="km-product-media">
+                        <img src="./assets/images/products/motor-ie1.webp" alt="موتور سنجل فاز" loading="lazy" decoding="async" width="600" height="450" />
+                        <button type="button" class="km-product-cart" data-bs-toggle="button" aria-label="أضف للسلة" aria-pressed="false"><i class="fa-solid fa-cart-plus"></i></button>
+                      </div>
+                      <div class="km-product-body">
+                        <h4 class="km-product-name">موتور سنجل فاز</h4>
+                        <ul class="km-product-specs">
+                          <li><i class="fa-solid fa-bolt"></i><span>2.2 kW</span></li>
+                          <li><i class="fa-solid fa-gauge-high"></i><span>2850 RPM</span></li>
+                          <li><i class="fa-solid fa-gear"></i><span>1 فاز</span></li>
+                        </ul>
+                        <a href="./product-details.html" class="km-btn km-btn-block km-product-btn"><span>عرض التفاصيل</span><span class="km-btn-icon"><i class="fa-solid fa-arrow-left"></i></span></a>
+                      </div>
+                    </article>
+                  </div>
+                </div>
+              </div>
+              <p class="km-products-empty" hidden>لا توجد منتجات مطابقة للبحث.</p>
+            </div>
+
+            <div class="km-products-nav">
+              <button type="button" class="km-products-arrow km-products-prev" aria-label="السابق"><i class="fa-solid fa-arrow-right"></i></button>
+              <div class="km-products-dots"></div>
+              <button type="button" class="km-products-arrow km-products-next" aria-label="التالي"><i class="fa-solid fa-arrow-left"></i></button>
+            </div>
           </div>
-          <p class="km-products-empty" id="km-products-empty" hidden>لا توجد منتجات مطابقة للبحث.</p>
+          <div class="tab-pane fade" id="km-pane-pumps" role="tabpanel" aria-labelledby="km-tab-pumps" tabindex="0">
+            <div class="km-products-stage">
+              <div class="swiper km-products-swiper" aria-label="المضخات">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide" data-value="7.5">
+                    <article class="km-product-card">
+                      <div class="km-product-media">
+                        <img src="./assets/images/products/pump-centrifugal.webp" alt="مضخة طرد مركزي" loading="lazy" decoding="async" width="600" height="450" />
+                        <button type="button" class="km-product-cart" data-bs-toggle="button" aria-label="أضف للسلة" aria-pressed="false"><i class="fa-solid fa-cart-plus"></i></button>
+                      </div>
+                      <div class="km-product-body">
+                        <h4 class="km-product-name">مضخة طرد مركزي</h4>
+                        <ul class="km-product-specs">
+                          <li><i class="fa-solid fa-bolt"></i><span>7.5 kW</span></li>
+                          <li><i class="fa-solid fa-water"></i><span>60 m³/h</span></li>
+                          <li><i class="fa-solid fa-arrow-up"></i><span>45 m</span></li>
+                        </ul>
+                        <a href="./product-details.html" class="km-btn km-btn-block km-product-btn"><span>عرض التفاصيل</span><span class="km-btn-icon"><i class="fa-solid fa-arrow-left"></i></span></a>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="swiper-slide" data-value="5.5">
+                    <article class="km-product-card">
+                      <div class="km-product-media">
+                        <img src="./assets/images/products/pump-submersible.webp" alt="مضخة غاطسة" loading="lazy" decoding="async" width="600" height="450" />
+                        <button type="button" class="km-product-cart" data-bs-toggle="button" aria-label="أضف للسلة" aria-pressed="false"><i class="fa-solid fa-cart-plus"></i></button>
+                      </div>
+                      <div class="km-product-body">
+                        <h4 class="km-product-name">مضخة غاطسة</h4>
+                        <ul class="km-product-specs">
+                          <li><i class="fa-solid fa-bolt"></i><span>5.5 kW</span></li>
+                          <li><i class="fa-solid fa-water"></i><span>18 m³/h</span></li>
+                          <li><i class="fa-solid fa-arrow-up"></i><span>120 m</span></li>
+                        </ul>
+                        <a href="./product-details.html" class="km-btn km-btn-block km-product-btn"><span>عرض التفاصيل</span><span class="km-btn-icon"><i class="fa-solid fa-arrow-left"></i></span></a>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="swiper-slide" data-value="11">
+                    <article class="km-product-card">
+                      <div class="km-product-media">
+                        <img src="./assets/images/products/pump-vertical.webp" alt="مضخة رأسية متعددة المراحل" loading="lazy" decoding="async" width="600" height="450" />
+                        <button type="button" class="km-product-cart" data-bs-toggle="button" aria-label="أضف للسلة" aria-pressed="false"><i class="fa-solid fa-cart-plus"></i></button>
+                      </div>
+                      <div class="km-product-body">
+                        <h4 class="km-product-name">مضخة رأسية متعددة المراحل</h4>
+                        <ul class="km-product-specs">
+                          <li><i class="fa-solid fa-bolt"></i><span>11 kW</span></li>
+                          <li><i class="fa-solid fa-water"></i><span>32 m³/h</span></li>
+                          <li><i class="fa-solid fa-arrow-up"></i><span>150 m</span></li>
+                        </ul>
+                        <a href="./product-details.html" class="km-btn km-btn-block km-product-btn"><span>عرض التفاصيل</span><span class="km-btn-icon"><i class="fa-solid fa-arrow-left"></i></span></a>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="swiper-slide" data-value="2.2">
+                    <article class="km-product-card">
+                      <div class="km-product-media">
+                        <img src="./assets/images/products/pump-selfpriming.webp" alt="مضخة ذاتية التحضير" loading="lazy" decoding="async" width="600" height="450" />
+                        <button type="button" class="km-product-cart" data-bs-toggle="button" aria-label="أضف للسلة" aria-pressed="false"><i class="fa-solid fa-cart-plus"></i></button>
+                      </div>
+                      <div class="km-product-body">
+                        <h4 class="km-product-name">مضخة ذاتية التحضير</h4>
+                        <ul class="km-product-specs">
+                          <li><i class="fa-solid fa-bolt"></i><span>2.2 kW</span></li>
+                          <li><i class="fa-solid fa-water"></i><span>25 m³/h</span></li>
+                          <li><i class="fa-solid fa-arrow-up"></i><span>30 m</span></li>
+                        </ul>
+                        <a href="./product-details.html" class="km-btn km-btn-block km-product-btn"><span>عرض التفاصيل</span><span class="km-btn-icon"><i class="fa-solid fa-arrow-left"></i></span></a>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="swiper-slide" data-value="15">
+                    <article class="km-product-card">
+                      <div class="km-product-media">
+                        <img src="./assets/images/products/pump-centrifugal.webp" alt="مضخة سحب طرفي" loading="lazy" decoding="async" width="600" height="450" />
+                        <button type="button" class="km-product-cart" data-bs-toggle="button" aria-label="أضف للسلة" aria-pressed="false"><i class="fa-solid fa-cart-plus"></i></button>
+                      </div>
+                      <div class="km-product-body">
+                        <h4 class="km-product-name">مضخة سحب طرفي</h4>
+                        <ul class="km-product-specs">
+                          <li><i class="fa-solid fa-bolt"></i><span>15 kW</span></li>
+                          <li><i class="fa-solid fa-water"></i><span>120 m³/h</span></li>
+                          <li><i class="fa-solid fa-arrow-up"></i><span>40 m</span></li>
+                        </ul>
+                        <a href="./product-details.html" class="km-btn km-btn-block km-product-btn"><span>عرض التفاصيل</span><span class="km-btn-icon"><i class="fa-solid fa-arrow-left"></i></span></a>
+                      </div>
+                    </article>
+                  </div>
+                </div>
+              </div>
+              <p class="km-products-empty" hidden>لا توجد منتجات مطابقة للبحث.</p>
+            </div>
+
+            <div class="km-products-nav">
+              <button type="button" class="km-products-arrow km-products-prev" aria-label="السابق"><i class="fa-solid fa-arrow-right"></i></button>
+              <div class="km-products-dots"></div>
+              <button type="button" class="km-products-arrow km-products-next" aria-label="التالي"><i class="fa-solid fa-arrow-left"></i></button>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="km-pane-pipes" role="tabpanel" aria-labelledby="km-tab-pipes" tabindex="0">
+            <div class="km-products-stage">
+              <div class="swiper km-products-swiper" aria-label="المواسير">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide" data-value="110">
+                    <article class="km-product-card">
+                      <div class="km-product-media">
+                        <img src="./assets/images/products/pipe-hdpe.webp" alt="ماسورة HDPE PE100" loading="lazy" decoding="async" width="600" height="450" />
+                        <button type="button" class="km-product-cart" data-bs-toggle="button" aria-label="أضف للسلة" aria-pressed="false"><i class="fa-solid fa-cart-plus"></i></button>
+                      </div>
+                      <div class="km-product-body">
+                        <h4 class="km-product-name">ماسورة HDPE PE100</h4>
+                        <ul class="km-product-specs">
+                          <li><i class="fa-solid fa-circle-notch"></i><span>Ø 110 mm</span></li>
+                          <li><i class="fa-solid fa-gauge-high"></i><span>PN 16</span></li>
+                          <li><i class="fa-solid fa-ruler-horizontal"></i><span>12 m</span></li>
+                        </ul>
+                        <a href="./product-details.html" class="km-btn km-btn-block km-product-btn"><span>عرض التفاصيل</span><span class="km-btn-icon"><i class="fa-solid fa-arrow-left"></i></span></a>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="swiper-slide" data-value="90">
+                    <article class="km-product-card">
+                      <div class="km-product-media">
+                        <img src="./assets/images/products/pipe-pvc.webp" alt="ماسورة uPVC ضغط" loading="lazy" decoding="async" width="600" height="450" />
+                        <button type="button" class="km-product-cart" data-bs-toggle="button" aria-label="أضف للسلة" aria-pressed="false"><i class="fa-solid fa-cart-plus"></i></button>
+                      </div>
+                      <div class="km-product-body">
+                        <h4 class="km-product-name">ماسورة uPVC ضغط</h4>
+                        <ul class="km-product-specs">
+                          <li><i class="fa-solid fa-circle-notch"></i><span>Ø 90 mm</span></li>
+                          <li><i class="fa-solid fa-gauge-high"></i><span>PN 10</span></li>
+                          <li><i class="fa-solid fa-ruler-horizontal"></i><span>6 m</span></li>
+                        </ul>
+                        <a href="./product-details.html" class="km-btn km-btn-block km-product-btn"><span>عرض التفاصيل</span><span class="km-btn-icon"><i class="fa-solid fa-arrow-left"></i></span></a>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="swiper-slide" data-value="4">
+                    <article class="km-product-card">
+                      <div class="km-product-media">
+                        <img src="./assets/images/products/pipe-steel.webp" alt="ماسورة صلب مجلفن" loading="lazy" decoding="async" width="600" height="450" />
+                        <button type="button" class="km-product-cart" data-bs-toggle="button" aria-label="أضف للسلة" aria-pressed="false"><i class="fa-solid fa-cart-plus"></i></button>
+                      </div>
+                      <div class="km-product-body">
+                        <h4 class="km-product-name">ماسورة صلب مجلفن</h4>
+                        <ul class="km-product-specs">
+                          <li><i class="fa-solid fa-circle-notch"></i><span>Ø 4 in</span></li>
+                          <li><i class="fa-solid fa-gauge-high"></i><span>SCH 40</span></li>
+                          <li><i class="fa-solid fa-ruler-horizontal"></i><span>6 m</span></li>
+                        </ul>
+                        <a href="./product-details.html" class="km-btn km-btn-block km-product-btn"><span>عرض التفاصيل</span><span class="km-btn-icon"><i class="fa-solid fa-arrow-left"></i></span></a>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="swiper-slide" data-value="63">
+                    <article class="km-product-card">
+                      <div class="km-product-media">
+                        <img src="./assets/images/products/pipe-hdpe.webp" alt="ماسورة HDPE PE80" loading="lazy" decoding="async" width="600" height="450" />
+                        <button type="button" class="km-product-cart" data-bs-toggle="button" aria-label="أضف للسلة" aria-pressed="false"><i class="fa-solid fa-cart-plus"></i></button>
+                      </div>
+                      <div class="km-product-body">
+                        <h4 class="km-product-name">ماسورة HDPE PE80</h4>
+                        <ul class="km-product-specs">
+                          <li><i class="fa-solid fa-circle-notch"></i><span>Ø 63 mm</span></li>
+                          <li><i class="fa-solid fa-gauge-high"></i><span>PN 10</span></li>
+                          <li><i class="fa-solid fa-ruler-horizontal"></i><span>100 m</span></li>
+                        </ul>
+                        <a href="./product-details.html" class="km-btn km-btn-block km-product-btn"><span>عرض التفاصيل</span><span class="km-btn-icon"><i class="fa-solid fa-arrow-left"></i></span></a>
+                      </div>
+                    </article>
+                  </div>
+                </div>
+              </div>
+              <p class="km-products-empty" hidden>لا توجد منتجات مطابقة للبحث.</p>
+            </div>
+
+            <div class="km-products-nav">
+              <button type="button" class="km-products-arrow km-products-prev" aria-label="السابق"><i class="fa-solid fa-arrow-right"></i></button>
+              <div class="km-products-dots"></div>
+              <button type="button" class="km-products-arrow km-products-next" aria-label="التالي"><i class="fa-solid fa-arrow-left"></i></button>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="km-pane-cables" role="tabpanel" aria-labelledby="km-tab-cables" tabindex="0">
+            <div class="km-products-stage">
+              <div class="swiper km-products-swiper" aria-label="الكابلات">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide" data-value="16">
+                    <article class="km-product-card">
+                      <div class="km-product-media">
+                        <img src="./assets/images/products/cable-power.webp" alt="كابل قوى XLPE" loading="lazy" decoding="async" width="600" height="450" />
+                        <button type="button" class="km-product-cart" data-bs-toggle="button" aria-label="أضف للسلة" aria-pressed="false"><i class="fa-solid fa-cart-plus"></i></button>
+                      </div>
+                      <div class="km-product-body">
+                        <h4 class="km-product-name">كابل قوى XLPE</h4>
+                        <ul class="km-product-specs">
+                          <li><i class="fa-solid fa-circle-notch"></i><span>4×16 mm²</span></li>
+                          <li><i class="fa-solid fa-bolt"></i><span>0.6/1 kV</span></li>
+                          <li><i class="fa-solid fa-shield-halved"></i><span>مسلح</span></li>
+                        </ul>
+                        <a href="./product-details.html" class="km-btn km-btn-block km-product-btn"><span>عرض التفاصيل</span><span class="km-btn-icon"><i class="fa-solid fa-arrow-left"></i></span></a>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="swiper-slide" data-value="6">
+                    <article class="km-product-card">
+                      <div class="km-product-media">
+                        <img src="./assets/images/products/cable-submersible.webp" alt="كابل مضخات غاطسة" loading="lazy" decoding="async" width="600" height="450" />
+                        <button type="button" class="km-product-cart" data-bs-toggle="button" aria-label="أضف للسلة" aria-pressed="false"><i class="fa-solid fa-cart-plus"></i></button>
+                      </div>
+                      <div class="km-product-body">
+                        <h4 class="km-product-name">كابل مضخات غاطسة</h4>
+                        <ul class="km-product-specs">
+                          <li><i class="fa-solid fa-circle-notch"></i><span>3×6 mm²</span></li>
+                          <li><i class="fa-solid fa-bolt"></i><span>450/750 V</span></li>
+                          <li><i class="fa-solid fa-droplet"></i><span>ضد المياه</span></li>
+                        </ul>
+                        <a href="./product-details.html" class="km-btn km-btn-block km-product-btn"><span>عرض التفاصيل</span><span class="km-btn-icon"><i class="fa-solid fa-arrow-left"></i></span></a>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="swiper-slide" data-value="25">
+                    <article class="km-product-card">
+                      <div class="km-product-media">
+                        <img src="./assets/images/products/cable-drum.webp" alt="بكرة كابل 4 قلب" loading="lazy" decoding="async" width="600" height="450" />
+                        <button type="button" class="km-product-cart" data-bs-toggle="button" aria-label="أضف للسلة" aria-pressed="false"><i class="fa-solid fa-cart-plus"></i></button>
+                      </div>
+                      <div class="km-product-body">
+                        <h4 class="km-product-name">بكرة كابل 4 قلب</h4>
+                        <ul class="km-product-specs">
+                          <li><i class="fa-solid fa-circle-notch"></i><span>4×25 mm²</span></li>
+                          <li><i class="fa-solid fa-bolt"></i><span>0.6/1 kV</span></li>
+                          <li><i class="fa-solid fa-ruler-horizontal"></i><span>500 m</span></li>
+                        </ul>
+                        <a href="./product-details.html" class="km-btn km-btn-block km-product-btn"><span>عرض التفاصيل</span><span class="km-btn-icon"><i class="fa-solid fa-arrow-left"></i></span></a>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="swiper-slide" data-value="4">
+                    <article class="km-product-card">
+                      <div class="km-product-media">
+                        <img src="./assets/images/products/cable-submersible.webp" alt="كابل غاطس مبطط" loading="lazy" decoding="async" width="600" height="450" />
+                        <button type="button" class="km-product-cart" data-bs-toggle="button" aria-label="أضف للسلة" aria-pressed="false"><i class="fa-solid fa-cart-plus"></i></button>
+                      </div>
+                      <div class="km-product-body">
+                        <h4 class="km-product-name">كابل غاطس مبطط</h4>
+                        <ul class="km-product-specs">
+                          <li><i class="fa-solid fa-circle-notch"></i><span>3×4 mm²</span></li>
+                          <li><i class="fa-solid fa-bolt"></i><span>450/750 V</span></li>
+                          <li><i class="fa-solid fa-droplet"></i><span>ضد المياه</span></li>
+                        </ul>
+                        <a href="./product-details.html" class="km-btn km-btn-block km-product-btn"><span>عرض التفاصيل</span><span class="km-btn-icon"><i class="fa-solid fa-arrow-left"></i></span></a>
+                      </div>
+                    </article>
+                  </div>
+                </div>
+              </div>
+           
+            </div>
+
+            <div class="km-products-nav">
+              <button type="button" class="km-products-arrow km-products-prev" aria-label="السابق"><i class="fa-solid fa-arrow-right"></i></button>
+              <div class="km-products-dots"></div>
+              <button type="button" class="km-products-arrow km-products-next" aria-label="التالي"><i class="fa-solid fa-arrow-left"></i></button>
+            </div>
+          </div>
         </div>
 
-        <div class="km-products-nav">
-          <button type="button" class="km-products-arrow km-products-prev" aria-label="السابق"><i class="fa-solid fa-arrow-right"></i></button>
-          <div class="km-products-dots"></div>
-          <button type="button" class="km-products-arrow km-products-next" aria-label="التالي"><i class="fa-solid fa-arrow-left"></i></button>
-        </div>
       </div>
     </section>
 
@@ -556,7 +938,7 @@
 -->
 <section class="km-selector" id="pump-selector">
   <div class="km-selector-bg" aria-hidden="true">
-    <img src="./assets/images/pump-selector-bg.webp" alt="" class="km-selector-bg-img" loading="lazy" decoding="async" />
+    <img src="./assets/images/pump-selector-bg.webp" alt="" class="km-selector-bg-img" width="1920" height="1080" loading="lazy" decoding="async" />
   </div>
 
   <div class="container position-relative">
@@ -572,20 +954,20 @@
             أدخل معدل التصرف والضغط الكلي المطلوب، لنساعدك في تحديد الطلمبة الأنسب من مجموعة منتجاتنا بسرعة وسهولة.
           </p>
 
-          <ul class="km-selector-features">
-            <li>
+          <ul class="km-selector-features row g-0">
+            <li class="col-6 col-sm-3">
               <span class="km-selector-feature-icon"><i class="fa-solid fa-headset"></i></span>
               <span>دعم فني متخصص</span>
             </li>
-            <li>
+            <li class="col-6 col-sm-3">
               <span class="km-selector-feature-icon"><i class="fa-solid fa-cubes"></i></span>
               <span>مجموعة واسعة من المنتجات</span>
             </li>
-            <li>
+            <li class="col-6 col-sm-3">
               <span class="km-selector-feature-icon"><i class="fa-regular fa-clock"></i></span>
               <span>يوفر الوقت والجهد</span>
             </li>
-            <li>
+            <li class="col-6 col-sm-3">
               <span class="km-selector-feature-icon"><i class="fa-solid fa-bullseye"></i></span>
               <span>دقة في الاختيار</span>
             </li>
@@ -602,12 +984,12 @@
           </div>
           <h3 class="km-selector-card-title">نقطة التشغيل المطلوبة</h3>
 
-          <form id="pump-selector-form" action="#" novalidate>
+          <form class="needs-validation" id="pump-selector-form" action="./pump-selector.html#results" method="get" novalidate>
             <div class="km-selector-field">
               <label for="selector-flow" class="km-label">معدل التصرف (Q) <span>*</span></label>
               <div class="km-selector-group">
-                <input type="number" id="selector-flow" class="km-input" placeholder="مثال: 60" min="0" step="any" inputmode="decimal" required />
-                <select id="selector-flow-unit" class="km-input km-select" aria-label="وحدة معدل التصرف">
+                <input type="number" id="selector-flow" name="flow" class="km-input" placeholder="مثال: 60" min="0.01" step="any" inputmode="decimal" required />
+                <select id="selector-flow-unit" name="flow_unit" class="km-input km-select" aria-label="وحدة معدل التصرف">
                   <option value="m3h">م³/س</option>
                   <option value="ls">لتر/ث</option>
                   <option value="gpm">جالون/د</option>
@@ -619,8 +1001,8 @@
             <div class="km-selector-field">
               <label for="selector-head" class="km-label">الضغط الكلي (H) <span>*</span></label>
               <div class="km-selector-group">
-                <input type="number" id="selector-head" class="km-input" placeholder="مثال: 120" min="0" step="any" inputmode="decimal" required />
-                <select id="selector-head-unit" class="km-input km-select" aria-label="وحدة الضغط الكلي">
+                <input type="number" id="selector-head" name="head" class="km-input" placeholder="مثال: 120" min="0.01" step="any" inputmode="decimal" required />
+                <select id="selector-head-unit" name="head_unit" class="km-input km-select" aria-label="وحدة الضغط الكلي">
                   <option value="m">م</option>
                   <option value="bar">بار</option>
                   <option value="ft">قدم</option>
@@ -629,9 +1011,9 @@
               </div>
             </div>
 
-            <button type="submit" class="km-selector-submit">
-              <i class="fa-solid fa-magnifying-glass"></i>
+            <button type="submit" class="km-btn km-btn-block km-selector-submit">
               <span>ابحث عن الطلمبة المناسبة</span>
+              <span class="km-btn-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
             </button>
           </form>
 
@@ -694,7 +1076,7 @@
   ##################################################
 -->
 <section class="km-why" id="why">
-  <div class="km-why-bg" aria-hidden="true"></div>
+  <div class="km-why-bg" data-parallax aria-hidden="true"></div>
 
   <div class="container position-relative">
     <div class="row g-4 g-xl-5 align-items-center">
@@ -708,33 +1090,41 @@
           شريكك الموثوق في توريد المواتير والمضخات والمواسير والكابلات، بخبرة فنية تضمن لك الحل المناسب لكل مشروع وبأفضل قيمة.
         </p>
 
-        <div class="km-why-features">
-          <div class="km-feature">
-            <span class="km-feature-icon"><i class="fa-solid fa-shield-halved"></i></span>
-            <div>
-              <h3>جودة مضمونة</h3>
-              <p>منتجات أصلية من أقوى الماركات العالمية بضمان معتمد.</p>
+        <div class="km-why-features row g-3 g-sm-4">
+          <div class="col-sm-6">
+            <div class="km-feature h-100">
+              <span class="km-feature-icon"><i class="fa-solid fa-shield-halved"></i></span>
+              <div>
+                <h3>جودة مضمونة</h3>
+                <p>منتجات أصلية من أقوى الماركات العالمية بضمان معتمد.</p>
+              </div>
             </div>
           </div>
-          <div class="km-feature">
-            <span class="km-feature-icon"><i class="fa-solid fa-user-gear"></i></span>
-            <div>
-              <h3>خبرة فنية</h3>
-              <p>فريق مهندسين يساعدك تختار المنتج الأنسب لاحتياجك.</p>
+          <div class="col-sm-6">
+            <div class="km-feature h-100">
+              <span class="km-feature-icon"><i class="fa-solid fa-user-gear"></i></span>
+              <div>
+                <h3>خبرة فنية</h3>
+                <p>فريق مهندسين يساعدك تختار المنتج الأنسب لاحتياجك.</p>
+              </div>
             </div>
           </div>
-          <div class="km-feature">
-            <span class="km-feature-icon"><i class="fa-solid fa-truck-fast"></i></span>
-            <div>
-              <h3>توريد سريع</h3>
-              <p>مخزون جاهز وتوصيل سريع لكل محافظات الجمهورية.</p>
+          <div class="col-sm-6">
+            <div class="km-feature h-100">
+              <span class="km-feature-icon"><i class="fa-solid fa-truck-fast"></i></span>
+              <div>
+                <h3>توريد سريع</h3>
+                <p>مخزون جاهز وتوصيل سريع لكل محافظات الجمهورية.</p>
+              </div>
             </div>
           </div>
-          <div class="km-feature">
-            <span class="km-feature-icon"><i class="fa-solid fa-headset"></i></span>
-            <div>
-              <h3>دعم ما بعد البيع</h3>
-              <p>صيانة وقطع غيار ومتابعة مستمرة بعد التركيب.</p>
+          <div class="col-sm-6">
+            <div class="km-feature h-100">
+              <span class="km-feature-icon"><i class="fa-solid fa-headset"></i></span>
+              <div>
+                <h3>دعم ما بعد البيع</h3>
+                <p>صيانة وقطع غيار ومتابعة مستمرة بعد التركيب.</p>
+              </div>
             </div>
           </div>
         </div>
@@ -742,21 +1132,31 @@
 
       <div class="col-lg-6">
         <div class="km-stats">
-          <div class="km-stat">
-            <strong><span>+</span><span class="km-counter" data-count="15">0</span></strong>
-            <p>سنة خبرة في السوق</p>
-          </div>
-          <div class="km-stat">
-            <strong><span>+</span><span class="km-counter" data-count="2500">0</span></strong>
-            <p>عميل يثق فينا</p>
-          </div>
-          <div class="km-stat">
-            <strong><span>+</span><span class="km-counter" data-count="600">0</span></strong>
-            <p>مشروع تم تنفيذه</p>
-          </div>
-          <div class="km-stat">
-            <strong><span>+</span><span class="km-counter" data-count="1200">0</span></strong>
-            <p>منتج متاح</p>
+          <div class="row g-3 g-sm-4">
+            <div class="col-6">
+              <div class="km-stat">
+                <strong><span>+</span><span class="km-counter" data-count="15">0</span></strong>
+                <p>سنة خبرة في السوق</p>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="km-stat">
+                <strong><span>+</span><span class="km-counter" data-count="2500">0</span></strong>
+                <p>عميل يثق فينا</p>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="km-stat">
+                <strong><span>+</span><span class="km-counter" data-count="600">0</span></strong>
+                <p>مشروع تم تنفيذه</p>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="km-stat">
+                <strong><span>+</span><span class="km-counter" data-count="1200">0</span></strong>
+                <p>منتج متاح</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -764,92 +1164,244 @@
   </div>
 </section>
 
+    <!--
+  ##################################################
+  #                    Articles                    #
+  ##################################################
+-->
+    <section class="km-articles" id="articles">
+   
+
+      <div class="container position-relative">
+        <div class="km-articles-head">
+          <div class="km-articles-intro">
+            <div class="km-eyebrow justify-content-center">
+              <span class="km-eyebrow-line"></span>
+              <span class="km-eyebrow-text">مقالاتنا</span>
+              <span class="km-eyebrow-line"></span>
+            </div>
+            <h2 class="km-articles-title"><span class="text-km-gradient">أحدث</span> المقالات</h2>
+            <p class="km-articles-desc">مقالات ونصائح تقنية تساعدك في اختيار الطلمبة المناسبة وفهم أنظمة ضخ المياه والصناعات المختلفة.</p>
+          </div>
+       
+        </div>
+
+        <div class="km-articles-grid row g-3">
+          <div class="col-12 col-xl-4 order-xl-last">
+            <article class="km-article h-100 is-featured">
+              <img class="km-article-bg" src="./assets/images/articles/article-featured.webp" srcset="./assets/images/articles/article-featured-640.webp 640w, ./assets/images/articles/article-featured.webp 1024w" sizes="(max-width: 991px) 92vw, 520px" width="1024" height="576" alt="محطة ضخ مياه بطلمبات ومواتير صناعية" loading="lazy" decoding="async" />
+              <span class="km-article-badge">مقال مميز</span>
+              <div class="km-article-body">
+                <time class="km-article-date" datetime="2025-09-15"><i class="fa-regular fa-calendar-days"></i> 15 سبتمبر 2025</time>
+                <h3 class="km-article-title"><a href="./news-details.html">دليل شامل لاختيار الطلمبة المناسبة لمشروعك</a></h3>
+                <p class="km-article-excerpt">تعرف على أهم العوامل التي يجب مراعاتها عند اختيار الطلمبة المناسبة للاستخدام الصناعي أو الزراعي أو المنزلي.</p>
+                <a href="./news-details.html" class="km-article-more" aria-label="اقرأ المزيد: دليل شامل لاختيار الطلمبة المناسبة">
+                  <span class="km-article-more-icon"><i class="fa-solid fa-arrow-left"></i></span>
+                  <span>اقرأ المزيد</span>
+                </a>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-md-4 col-xl">
+            <article class="km-article h-100">
+              <a href="./news-details.html" class="km-article-media" tabindex="-1" aria-hidden="true">
+                <img src="./assets/images/articles/article-types.webp" width="640" height="480" alt="" loading="lazy" decoding="async" />
+              </a>
+              <div class="km-article-body">
+                <time class="km-article-date" datetime="2025-08-10"><i class="fa-regular fa-calendar-days"></i> 10 أغسطس 2025</time>
+                <h3 class="km-article-title"><a href="./news-details.html">أهم أنواع الطلمبات واستخداماتها</a></h3>
+                <p class="km-article-excerpt">استعرض أشهر أنواع الطلمبات الصناعية والزراعية والمنزلية ومجالات استخدامها.</p>
+                <a href="./news-details.html" class="km-article-more" aria-label="اقرأ المزيد: أهم أنواع الطلمبات واستخداماتها">
+                  <span class="km-article-more-icon"><i class="fa-solid fa-arrow-left"></i></span>
+                  <span>اقرأ المزيد</span>
+                </a>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-md-4 col-xl">
+            <article class="km-article h-100">
+              <a href="./news-details.html" class="km-article-media" tabindex="-1" aria-hidden="true">
+                <img src="./assets/images/articles/article-efficiency.webp" width="640" height="480" alt="" loading="lazy" decoding="async" />
+              </a>
+              <div class="km-article-body">
+                <time class="km-article-date" datetime="2025-08-28"><i class="fa-regular fa-calendar-days"></i> 28 أغسطس 2025</time>
+                <h3 class="km-article-title"><a href="./news-details.html">نصائح لزيادة كفاءة الطلمبات</a></h3>
+                <p class="km-article-excerpt">تعرف على أهم النصائح للحفاظ على كفاءة الطلمبات وإطالة عمرها التشغيلي.</p>
+                <a href="./news-details.html" class="km-article-more" aria-label="اقرأ المزيد: نصائح لزيادة كفاءة الطلمبات">
+                  <span class="km-article-more-icon"><i class="fa-solid fa-arrow-left"></i></span>
+                  <span>اقرأ المزيد</span>
+                </a>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-md-4 col-xl">
+            <article class="km-article h-100">
+              <a href="./news-details.html" class="km-article-media" tabindex="-1" aria-hidden="true">
+                <img src="./assets/images/articles/article-systems.webp" width="640" height="480" alt="" loading="lazy" decoding="async" />
+              </a>
+              <div class="km-article-body">
+                <time class="km-article-date" datetime="2025-09-02"><i class="fa-regular fa-calendar-days"></i> 2 سبتمبر 2025</time>
+                <h3 class="km-article-title"><a href="./news-details.html">أنظمة ضخ المياه في المنشآت الصناعية</a></h3>
+                <p class="km-article-excerpt">تعرف على مكونات أنظمة ضخ المياه وكيفية اختيار النظام المناسب لاحتياجات منشأتك.</p>
+                <a href="./news-details.html" class="km-article-more" aria-label="اقرأ المزيد: أنظمة ضخ المياه في المنشآت الصناعية">
+                  <span class="km-article-more-icon"><i class="fa-solid fa-arrow-left"></i></span>
+                  <span>اقرأ المزيد</span>
+                </a>
+              </div>
+            </article>
+          </div>
+        </div>
+      <div class="d-flex justify-content-center mt-5" data-anim="up">
+        <a href="./news.html" class="km-btn km-articles-all">
+          <span>عرض جميع المقالات</span>
+          <span class="km-btn-icon"><i class="fa-solid fa-arrow-left"></i></span>
+        </a>
+      </div>
+      </div>
+    </section>
 
     <!--
   ##################################################
-  #                     Quote                      #
+  #                    Contact                     #
   ##################################################
 -->
-    <section class="km-quote" id="quote">
+    <section class="km-contact" id="contact">
+      <div class="km-contact-bg" aria-hidden="true"></div>
+
+      <div class="km-contact-visual" aria-hidden="true">
+        <img src="./assets/images/contact/contact-pumps.webp"
+          srcset="./assets/images/contact/contact-pumps-640.webp 640w, ./assets/images/contact/contact-pumps.webp 1152w"
+          sizes="(max-width: 991px) 100vw, 60vw" width="1152" height="864"
+          alt="" loading="lazy" decoding="async" />
+      </div>
+
       <div class="container position-relative">
-        <div class="row g-4 g-xl-5 align-items-center">
-          <div class="col-lg-5">
-            <div class="km-eyebrow">
-              <span class="km-eyebrow-text">عرض سعر</span>
-              <span class="km-eyebrow-line"></span>
+        <div class="km-contact-grid">
+          <div class="row">
+            <div class="col-lg-4 me-lg-auto">
+              <div class="km-contact-head">
+                <div class="km-eyebrow">
+                  <span class="km-eyebrow-text">اتصل بنا</span>
+                  <span class="km-eyebrow-line"></span>
+                </div>
+                <h2 class="km-contact-title"><span class="text-km-gradient">تواصل</span> معـنا</h2>
+                <p class="km-contact-desc">
+                  فريقنا جاهز لمساعدتك في اختيار الطلمبة الأنسب وتقديم الحلول المناسبة لمتطلبات مشروعك.
+                </p>
+              </div>
             </div>
-            <h2 class="km-quote-title">اطلب <span class="text-km-gradient">عرض سعر</span> دلوقتي</h2>
-            <p class="km-quote-desc">
-              ابعتلنا تفاصيل احتياجك وفريق المبيعات هيتواصل معاك بأفضل عرض سعر خلال 24 ساعة.
-            </p>
-
-            <ul class="km-quote-contact">
-              <li>
-                <span class="km-quote-contact-icon"><i class="fa-solid fa-phone"></i></span>
-                <div><small>اتصل بنا</small><a href="tel:+20223960612">02 2396 0612</a></div>
-              </li>
-              <li>
-                <span class="km-quote-contact-icon"><i class="fa-solid fa-envelope"></i></span>
-                <div><small>البريد الإلكتروني</small><a href="mailto:info@kingmotors.com">info@kingmotors.com</a></div>
-              </li>
-              <li>
-                <span class="km-quote-contact-icon"><i class="fa-solid fa-clock"></i></span>
-                <div><small>مواعيد العمل</small><span>السبت - الخميس: 9 ص - 6 م</span></div>
-              </li>
-            </ul>
           </div>
-
-          <div class="col-lg-7">
-            <div class="km-quote-card">
-              <form class="row g-3" id="quote-form" action="#" onsubmit="return false;">
-                <div class="col-md-6">
-                  <label for="quote-name" class="km-label">الاسم بالكامل <span>*</span></label>
-                  <input type="text" id="quote-name" class="km-input" placeholder="اكتب اسمك" required />
+          <div class="row g-4 mt-0">
+            <div class="col-lg-3 order-lg-3">
+              <div class="km-contact-info">
+                <ul class="km-contact-cards">
+                  <li class="km-contact-item">
+                    <span class="km-contact-icon"><i class="fa-solid fa-phone-volume"></i></span>
+                    <div>
+                      <h3>اتصل بنا</h3>
+                      <a href="tel:+20223960612">02 2396 0612</a>
+                    </div>
+                  </li>
+                  <li class="km-contact-item">
+                    <span class="km-contact-icon"><i class="fa-regular fa-envelope"></i></span>
+                    <div>
+                      <h3>البريد الإلكتروني</h3>
+                      <a href="mailto:info@kingmotors.com">info@kingmotors.com</a>
+                    </div>
+                  </li>
+                  <li class="km-contact-item">
+                    <span class="km-contact-icon"><i class="fa-solid fa-location-dot"></i></span>
+                    <div>
+                      <h3>العنوان</h3>
+                      <p>القاهرة، جمهورية مصر العربية</p>
+                    </div>
+                  </li>
+                  <li class="km-contact-item">
+                    <span class="km-contact-icon"><i class="fa-regular fa-clock"></i></span>
+                    <div>
+                      <h3>مواعيد العمل</h3>
+                      <p>من السبت إلى الخميس<br />9:00 صباحًا – 6:00 مساءً</p>
+                    </div>
+                  </li>
+                </ul>
+    
+                <div class="km-contact-socials">
+                  <a href="#" aria-label="فيسبوك"><i class="fa-brands fa-facebook-f"></i></a>
+                  <a href="#" aria-label="لينكد إن"><i class="fa-brands fa-linkedin-in"></i></a>
+                  <a href="#" aria-label="يوتيوب"><i class="fa-brands fa-youtube"></i></a>
+                  <a href="#" aria-label="واتساب"><i class="fa-brands fa-whatsapp"></i></a>
                 </div>
-                <div class="col-md-6">
-                  <label for="quote-company" class="km-label">اسم الشركة</label>
-                  <input type="text" id="quote-company" class="km-input" placeholder="اسم الشركة (اختياري)" />
-                </div>
-                <div class="col-md-6">
-                  <label for="quote-email" class="km-label">البريد الإلكتروني <span>*</span></label>
-                  <input type="email" id="quote-email" class="km-input" placeholder="example@mail.com" required />
-                </div>
-                <div class="col-md-6">
-                  <label for="quote-phone" class="km-label">رقم الموبايل <span>*</span></label>
-                  <input type="tel" id="quote-phone" class="km-input" placeholder="01xxxxxxxxx" required />
-                </div>
-                <div class="col-12">
-                  <label for="quote-category" class="km-label">نوع المنتج <span>*</span></label>
-                  <select id="quote-category" class="km-input km-select" required>
-                    <option value="" selected disabled>اختار نوع المنتج</option>
-                    <option value="motors">مواتير</option>
-                    <option value="pumps">مضخات</option>
-                    <option value="pipes">مواسير</option>
-                    <option value="cables">كابلات</option>
-                    <option value="full">توريد متكامل لمشروع</option>
-                  </select>
-                </div>
-                <div class="col-12">
-                  <label for="quote-details" class="km-label">تفاصيل الطلب</label>
-                  <textarea id="quote-details" class="km-input" rows="4" placeholder="اكتب الكميات والمواصفات المطلوبة..."></textarea>
-                </div>
-                <div class="col-12">
-                  <label for="quote-file" class="km-upload">
-                    <input type="file" id="quote-file" class="visually-hidden" accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.png" />
-                    <span class="km-upload-icon"><i class="fa-solid fa-cloud-arrow-up"></i></span>
-                    <span class="km-upload-text">
-                      <strong class="upload-main">ارفع ملف المواصفات</strong>
-                      <small>ملفات PDF أو Word أو Excel أو صور - حتى 10 ميجا</small>
-                    </span>
-                  </label>
-                </div>
-                <div class="col-12">
-                  <button type="submit" class="km-quote-submit">
-                    <span>إرسال الطلب</span>
-                    <span class="km-quote-submit-icon"><i class="fa-solid fa-arrow-left"></i></span>
-                  </button>
-                </div>
-              </form>
+              </div>
+            </div>
+            <div class="col-lg-5 order-lg-2">
+              <div class="km-contact-card">
+                <h3 class="km-contact-card-title">
+                  <span class="km-contact-card-line"></span>
+                  <span><span class="text-km-gradient">أرسل</span> لنـا استفسـارك</span>
+                </h3>
+                <p class="km-contact-card-desc">قم بملء النموذج وسيتواصل معك فريقنا في أقرب وقت.</p>
+    
+                <form class="row g-3 needs-validation" id="contact-form" action="#" method="post" novalidate>
+                  <div class="col-md-6">
+                    <label for="contact-name" class="km-label">الاسم الكامل <span>*</span></label>
+                    <div class="km-contact-field">
+                      <input type="text" id="contact-name" name="name" class="km-input" placeholder="أدخل اسمك" autocomplete="name" required />
+                      <i class="fa-regular fa-user"></i>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="contact-email" class="km-label">البريد الإلكتروني <span>*</span></label>
+                    <div class="km-contact-field">
+                      <input type="email" id="contact-email" name="email" class="km-input" placeholder="أدخل بريدك الإلكتروني" autocomplete="email" required />
+                      <i class="fa-regular fa-envelope"></i>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="contact-phone" class="km-label">رقم الهاتف <span>*</span></label>
+                    <div class="km-contact-field">
+                      <input type="tel" id="contact-phone" name="phone" class="km-input" placeholder="أدخل رقم الهاتف" autocomplete="tel" required />
+                      <i class="fa-solid fa-phone"></i>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label for="contact-type" class="km-label">نوع الطلب</label>
+                    <select id="contact-type" name="type" class="km-input km-select">
+                      <option value="" selected disabled>اختر نوع الطلب</option>
+                      <option value="quote">طلب عرض سعر</option>
+                      <option value="pump">اختيار طلمبة مناسبة</option>
+                      <option value="maintenance">صيانة وقطع غيار</option>
+                      <option value="other">استفسار عام</option>
+                    </select>
+                  </div>
+                  <div class="col-12">
+                    <label for="contact-message" class="km-label">الرسالة <span>*</span></label>
+                    <div class="km-contact-field is-textarea">
+                      <textarea id="contact-message" name="message" class="km-input" rows="3" placeholder="اكتب رسالتك هنا..." required></textarea>
+                      <i class="fa-regular fa-message"></i>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <button type="submit" class="km-btn km-btn-block km-contact-submit">
+                      <span>إرسال الرسالة</span>
+                      <span class="km-btn-icon"><i class="fa-regular fa-paper-plane"></i></span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="col-lg-4 order-lg-1 d-flex align-items-end">
+              <div class="km-contact-map w-100">
+                <iframe
+                  src="https://www.google.com/maps?q=Cairo,Egypt&z=13&output=embed"
+                  title="موقع كينج موتورز على الخريطة" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <a class="km-contact-map-link" href="https://www.google.com/maps?q=Cairo,Egypt" target="_blank" rel="noopener">
+                  <span>موقعنا على الخريطة</span>
+                  <i class="fa-solid fa-angle-left"></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -871,16 +1423,16 @@
   </div>
 
   <!-- js -->
-  <script src="./assets/js/jquery-3.7.1.min.js"></script>
   <script src="./assets/js/bootstrap.bundle.min.js"></script>
   <script src="./assets/js/gsap.min.js"></script>
   <script src="./assets/js/lenis.min.js"></script>
   <script src="./assets/js/swiper-bundle.min.js"></script>
+  <script src="./assets/js/partials.js"></script>
   <script src="./assets/js/main.js"></script>
   <script>
-    $("#header").load("app/header.html", setActiveLink);
-    $("#footer").load("app/footer.html");
-    $("#loader").load("app/loader.html");
+    loadPartial("#header", "app/header.html", setActiveLink);
+    loadPartial("#footer", "app/footer.html");
+    loadPartial("#loader", "app/loader.html");
   </script>
 </body>
 

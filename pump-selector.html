@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="اختار الطلمبة المناسبة لنقطة التشغيل من كينج موتورز - أدخل معدل التصرف والضغط الكلي واحصل على الطلمبة الأعلى كفاءة من منتجاتنا." />
+  <meta name="theme-color" content="#062e22" />
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%23073326'/%3E%3Cpath d='M47 17a21 21 0 1 0 1 28V31H30v9h8a12 12 0 1 1 0-16l9-7Z' fill='%23fff'/%3E%3Cpath d='M9 50 30 29l4 4-18 18Z' fill='%234fc46b'/%3E%3C/svg%3E" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="كينج موتورز" />
+  <meta property="og:title" content="اختيار الطلمبة | كينج موتورز" />
+  <meta property="og:description"
+    content="حدد معدل التصرف والضغط الكلي المطلوب، ونرشحلك الطلمبة الأعلى كفاءة عند نقطة التشغيل." />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- fonts & critical images -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400..700&amp;display=swap" />
+  <link rel="preload" as="image" href="./assets/images/logo/logo-transparent.webp" />
+
+  <!-- files css -->
+  <link rel="stylesheet" href="./assets/css/all.min.css" />
+  <link rel="stylesheet" href="./assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="./assets/css/lenis.css" />
+  <link rel="stylesheet" href="./assets/css/style.css" />
+  <link rel="stylesheet" href="./assets/css/media.css" />
+
+  <title>اختيار الطلمبة | كينج موتورز</title>
+</head>
+
+<body>
+  <!--
+  ##################################################
+  #                   Loading                      #
+  ##################################################
+-->
+  <div id="loader" class="loading"></div>
+
+  <!--
+  ##################################################
+  #                   header                       #
+  ##################################################
+-->
+  <header class="header fixed-top top-0 start-0 end-0 header-main px-md-5" id="header"></header>
+
+
+
+  <!--
+  ##################################################
+  #                 Pump Selector                  #
+  ##################################################
+-->
+  <section class="km-selector " id="pump-selector">
+    <div class="km-selector-bg" aria-hidden="true">
+      <img src="./assets/images/pump-selector-bg.webp" alt="" class="km-selector-bg-img" width="1920" height="1080" loading="lazy" decoding="async" />
+    </div>
+
+    <div class="container position-relative pt-5">
+      <div class="row g-5 align-items-center km-selector-row">
+        <div class="col-lg-7">
+          <div class="km-selector-content">
+            <div class="km-eyebrow">
+              <span class="km-eyebrow-text">اختيار الطلمبة</span>
+              <span class="km-eyebrow-line"></span>
+            </div>
+            <h2 class="km-selector-title">اختر <span class="text-km-gradient">الطلمبة المناسبة</span> لنقطة التشغيل</h2>
+            <p class="km-selector-desc">
+              أدخل معدل التصرف والضغط الكلي المطلوب، ونرشحلك الطلمبة الأعلى كفاءة عند نقطة تشغيلك — وهي الأقل تكلفة في التشغيل.
+            </p>
+
+            <ul class="km-selector-features row g-0">
+              <li class="col-6 col-sm-3">
+                <span class="km-selector-feature-icon"><i class="fa-solid fa-headset"></i></span>
+                <span>دعم فني متخصص</span>
+              </li>
+              <li class="col-6 col-sm-3">
+                <span class="km-selector-feature-icon"><i class="fa-solid fa-cubes"></i></span>
+                <span>مجموعة واسعة من المنتجات</span>
+              </li>
+              <li class="col-6 col-sm-3">
+                <span class="km-selector-feature-icon"><i class="fa-regular fa-clock"></i></span>
+                <span>يوفر الوقت والجهد</span>
+              </li>
+              <li class="col-6 col-sm-3">
+                <span class="km-selector-feature-icon"><i class="fa-solid fa-bullseye"></i></span>
+                <span>دقة في الاختيار</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="km-selector-card">
+            <div class="km-eyebrow justify-content-center">
+              <span class="km-eyebrow-line"></span>
+              <span class="km-eyebrow-text">محدد الطلمبات</span>
+              <span class="km-eyebrow-line"></span>
+            </div>
+            <h3 class="km-selector-card-title">نقطة التشغيل المطلوبة</h3>
+
+            <form class="needs-validation" id="pump-selector-form" action="./pump-selector.html#results" method="get" novalidate>
+              <div class="km-selector-field">
+                <label for="selector-flow" class="km-label">معدل التصرف (Q) <span>*</span></label>
+                <div class="km-selector-group">
+                  <input type="number" id="selector-flow" name="flow" class="km-input" value="60" placeholder="مثال: 60" min="0.01" step="any" inputmode="decimal" required />
+                  <select id="selector-flow-unit" name="flow_unit" class="km-input km-select" aria-label="وحدة معدل التصرف">
+                    <option value="m3h" selected>م³/س</option>
+                    <option value="ls">لتر/ث</option>
+                    <option value="gpm">جالون/د</option>
+                  </select>
+                  <span class="km-selector-group-icon"><i class="fa-solid fa-water"></i></span>
+                </div>
+              </div>
+
+              <div class="km-selector-field">
+                <label for="selector-head" class="km-label">الضغط الكلي (H) <span>*</span></label>
+                <div class="km-selector-group">
+                  <input type="number" id="selector-head" name="head" class="km-input" value="120" placeholder="مثال: 120" min="0.01" step="any" inputmode="decimal" required />
+                  <select id="selector-head-unit" name="head_unit" class="km-input km-select" aria-label="وحدة الضغط الكلي">
+                    <option value="m" selected>م</option>
+                    <option value="bar">بار</option>
+                    <option value="ft">قدم</option>
+                  </select>
+                  <span class="km-selector-group-icon"><i class="fa-solid fa-gauge-high"></i></span>
+                </div>
+              </div>
+
+              <button type="submit" class="km-btn km-btn-block km-selector-submit">
+                <span>ابحث عن الطلمبة المناسبة</span>
+                <span class="km-btn-icon"><i class="fa-solid fa-magnifying-glass"></i></span>
+              </button>
+            </form>
+
+            <p class="km-selector-note">هذا الاختيار مبدئي لتوجيه استفسارك، وليس مواصفة هندسية نهائية.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--
+  ##################################################
+  #                    Results                     #
+  ##################################################
+-->
+  <section class="km-result" id="results">
+    <div class="container">
+
+      <!-- Recommended pump -->
+      <div class="km-result-top">
+        <div class="row g-4">
+          <div class="col-lg-5">
+            <article class="km-result-pump">
+              <div class="km-result-pump-media">
+                <img src="./assets/images/products/pump-submersible.webp" alt="طلمبة غاطسة SP 60-17" loading="lazy" decoding="async" width="600" height="450" />
+              </div>
+              <div class="km-result-pump-body">
+                <ul class="km-result-tags">
+                  <li class="is-gold"><i class="fa-solid fa-leaf"></i> منطقة الكفاءة المثلى</li>
+                  <li>استانلس ستيل · 6"</li>
+                </ul>
+                <span class="km-result-label">الطلمبة المرشحة</span>
+                <h2 class="km-result-model">GRUNDFOS SP 60-17</h2>
+              </div>
+            </article>
+          </div>
+
+          <div class="col-lg-7">
+            <div class="km-result-stats">
+              <div class="km-result-stat">
+                <span class="km-result-stat-label"><i class="fa-solid fa-crosshairs"></i> نقطة التشغيل المطلوبة</span>
+                <strong>60 م³/س</strong>
+                <small>120 م</small>
+              </div>
+              <div class="km-result-stat">
+                <span class="km-result-stat-label"><i class="fa-solid fa-arrow-up-wide-short"></i> الضغط الفعلي عند تصرفك</span>
+                <strong>124 م</strong>
+                <small class="is-up">+3%</small>
+              </div>
+              <div class="km-result-stat">
+                <span class="km-result-stat-label"><i class="fa-solid fa-gauge-high"></i> كفاءة الطلمبة عند نقطة التشغيل</span>
+                <strong>79.8 %</strong>
+                <span class="km-result-meter" style="--p: 79.8"></span>
+              </div>
+              <div class="km-result-stat">
+                <span class="km-result-stat-label"><i class="fa-solid fa-bolt"></i> قدرة العمود عند نقطة التشغيل</span>
+                <strong dir="ltr">25.4 kW</strong>
+                <small>85% من قدرة الموتور</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Performance curves -->
+      <div class="km-result-card">
+        <div class="km-result-card-head">
+          <h3>منحنيات الأداء</h3>
+          <ul class="km-curve-legend">
+            <li><span style="--c: #4A8B43"></span> الضغط</li>
+            <li><span style="--c: #EDA41F"></span> كفاءة الطلمبة</li>
+            <li><span style="--c: #002b22"></span> قدرة العمود</li>
+          </ul>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-4">
+            <figure class="km-curve" style="--c: #4A8B43">
+              <figcaption>الضغط (م)</figcaption>
+              <svg viewBox="0 0 300 180" role="img" aria-label="منحنى الضغط ونقطة التشغيل عند 60 م³/س و124 م">
+                <g class="km-curve-grid"><path d="M40 105H290M40 60H290M40 15H290" /></g>
+                <path class="km-curve-axis" d="M40 15V150H290" />
+                <g class="km-curve-y"><text x="32" y="153">0</text><text x="32" y="108">80</text><text x="32" y="63">160</text><text x="32" y="18">240</text></g>
+                <g class="km-curve-x"><text x="40" y="166">0</text><text x="90" y="166">20</text><text x="140" y="166">40</text><text x="190" y="166">60</text><text x="240" y="166">80</text><text x="290" y="166">100</text></g>
+                <path class="km-curve-line" d="M40 32C120 35 200 90 290 128" />
+                <path class="km-curve-guide" d="M186 150V80H40" />
+                <circle class="km-curve-point" cx="186" cy="80" r="5" />
+                <text class="km-curve-unit" x="290" y="179">Q (m³/h)</text>
+              </svg>
+            </figure>
+          </div>
+          <div class="col-md-4">
+            <figure class="km-curve" style="--c: #EDA41F">
+              <figcaption>كفاءة الطلمبة (%)</figcaption>
+              <svg viewBox="0 0 300 180" role="img" aria-label="منحنى كفاءة الطلمبة ونقطة التشغيل عند 79.8%">
+                <g class="km-curve-grid"><path d="M40 105H290M40 60H290M40 15H290" /></g>
+                <path class="km-curve-axis" d="M40 15V150H290" />
+                <g class="km-curve-y"><text x="32" y="153">0</text><text x="32" y="108">30</text><text x="32" y="63">60</text><text x="32" y="18">90</text></g>
+                <g class="km-curve-x"><text x="40" y="166">0</text><text x="90" y="166">20</text><text x="140" y="166">40</text><text x="190" y="166">60</text><text x="240" y="166">80</text><text x="290" y="166">100</text></g>
+                <path class="km-curve-line" d="M40 150C110 0 220 2 290 90" />
+                <path class="km-curve-guide" d="M192 150V30H40" />
+                <circle class="km-curve-point" cx="192" cy="30" r="5" />
+                <text class="km-curve-unit" x="290" y="179">Q (m³/h)</text>
+              </svg>
+            </figure>
+          </div>
+          <div class="col-md-4">
+            <figure class="km-curve" style="--c: #002b22">
+              <figcaption>قدرة العمود (kW)</figcaption>
+              <svg viewBox="0 0 300 180" role="img" aria-label="منحنى قدرة العمود ونقطة التشغيل عند 25.4 kW">
+                <g class="km-curve-grid"><path d="M40 105H290M40 60H290M40 15H290" /></g>
+                <path class="km-curve-axis" d="M40 15V150H290" />
+                <g class="km-curve-y"><text x="32" y="153">0</text><text x="32" y="108">10</text><text x="32" y="63">20</text><text x="32" y="18">30</text></g>
+                <g class="km-curve-x"><text x="40" y="166">0</text><text x="90" y="166">20</text><text x="140" y="166">40</text><text x="190" y="166">60</text><text x="240" y="166">80</text><text x="290" y="166">100</text></g>
+                <path class="km-curve-line" d="M40 110C120 65 200 20 290 10" />
+                <path class="km-curve-guide" d="M186 150V37H40" />
+                <circle class="km-curve-point" cx="186" cy="37" r="5" />
+                <text class="km-curve-unit" x="290" y="179">Q (m³/h)</text>
+              </svg>
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data sheets -->
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="km-result-card h-100">
+            <div class="km-result-card-head">
+              <h3><i class="fa-solid fa-file-lines"></i> كارت بيانات اختيار الطلمبة</h3>
+            </div>
+            <dl class="km-spec-list">
+              <div><dt>السلسلة</dt><dd>استانلس ستيل مصبوب</dd></div>
+              <div><dt>عدد المراحل</dt><dd>17</dd></div>
+              <div><dt>أقل قطر بئر</dt><dd dir="ltr">6"</dd></div>
+              <div><dt>وصلة الطرد</dt><dd dir="ltr">BSP 3" + DN80</dd></div>
+              <div><dt>الضغط المطلوب</dt><dd>120 م</dd></div>
+              <div><dt>الضغط الفعلي عند تصرفك</dt><dd>124 م</dd></div>
+              <div><dt>الزيادة عن المطلوب</dt><dd class="is-up" dir="ltr">+3 %</dd></div>
+              <div><dt>كفاءة الطلمبة عند نقطة التشغيل</dt><dd>79.8 %</dd></div>
+              <div><dt>القدرة المائية عند نقطة التشغيل</dt><dd dir="ltr">20.3 kW</dd></div>
+              <div><dt>قدرة العمود عند نقطة التشغيل</dt><dd dir="ltr">25.4 kW</dd></div>
+              <div><dt>الضغط الصافي الموجب المطلوب (NPSH)</dt><dd>5.2 م</dd></div>
+              <div><dt>طول الطلمبة</dt><dd dir="ltr">2210 mm</dd></div>
+              <div><dt>وزن الطلمبة</dt><dd dir="ltr">57 kg</dd></div>
+            </dl>
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="km-result-card h-100">
+            <div class="km-result-card-head">
+              <h3><i class="fa-solid fa-gears"></i> الموتور</h3>
+              <span class="km-result-motor" dir="ltr">MS6000 · 40 HP</span>
+            </div>
+            <dl class="km-spec-list">
+              <div><dt>القدرة الموصى بها</dt><dd dir="ltr">40 HP (30 kW)</dd></div>
+              <div><dt>القدرة المختارة</dt><dd dir="ltr">40 HP (30 kW)</dd></div>
+              <div><dt>تحميل الموتور</dt><dd>85 %</dd></div>
+              <div><dt>الجهد</dt><dd dir="ltr">380 V</dd></div>
+              <div><dt>تيار الحمل الكامل</dt><dd dir="ltr">64.6 A</dd></div>
+              <div><dt>تيار البدء</dt><dd dir="ltr">250 A</dd></div>
+              <div><dt>معامل القدرة (cos φ)</dt><dd>0.85</dd></div>
+              <div><dt>كفاءة الموتور</dt><dd>83 %</dd></div>
+              <div><dt>السرعة الاسمية</dt><dd dir="ltr">2880 rpm</dd></div>
+            </dl>
+
+            <div class="km-motor-power">
+              <span class="km-label">تغيير قدرة الموتور</span>
+              <ul>
+                <li><a href="./pump-selector.html?flow=60&amp;flow_unit=m3h&amp;head=120&amp;head_unit=m&amp;motor=30#results" dir="ltr">30 HP</a></li>
+                <li><a href="./pump-selector.html?flow=60&amp;flow_unit=m3h&amp;head=120&amp;head_unit=m&amp;motor=35#results" dir="ltr">35 HP</a></li>
+                <li><a href="./pump-selector.html?flow=60&amp;flow_unit=m3h&amp;head=120&amp;head_unit=m&amp;motor=40#results" class="active" aria-current="true" dir="ltr">40 HP</a></li>
+                <li><a href="./pump-selector.html?flow=60&amp;flow_unit=m3h&amp;head=120&amp;head_unit=m&amp;motor=50#results" dir="ltr">50 HP</a></li>
+                <li><a href="./pump-selector.html?flow=60&amp;flow_unit=m3h&amp;head=120&amp;head_unit=m&amp;motor=60#results" dir="ltr">60 HP</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alternatives -->
+      <div class="km-result-card">
+        <div class="km-result-card-head">
+          <div>
+            <span class="km-result-label">بدائل</span>
+            <h3>6 طلمبات تحقق نقطة التشغيل دي، مرتبة حسب الكفاءة الفعلية عند تشغيلها</h3>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="km-alt-table">
+            <thead>
+              <tr>
+                <th scope="col">الموديل</th>
+                <th scope="col">الضغط عند تصرفك</th>
+                <th scope="col">هامش الضغط</th>
+                <th scope="col">الكفاءة</th>
+                <th scope="col">قدرة العمود</th>
+                <th scope="col">الموتور</th>
+                <th scope="col">قطر البئر</th>
+                <th scope="col" aria-label="إجراء"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="is-active">
+                <th scope="row" dir="ltr">SP 60-17</th>
+                <td dir="ltr">124 m</td>
+                <td class="is-up" dir="ltr">+3 %</td>
+                <td dir="ltr">79.8 %</td>
+                <td dir="ltr">25.4 kW</td>
+                <td dir="ltr">40 HP</td>
+                <td dir="ltr">6"</td>
+                <td><span class="km-alt-badge"><i class="fa-solid fa-star"></i> موصى به</span></td>
+              </tr>
+              <tr>
+                <th scope="row" dir="ltr">SP 60-16</th>
+                <td dir="ltr">125 m</td>
+                <td class="is-up" dir="ltr">+4 %</td>
+                <td dir="ltr">80.1 %</td>
+                <td dir="ltr">25.5 kW</td>
+                <td dir="ltr">40 HP</td>
+                <td dir="ltr">6"</td>
+                <td><a class="km-alt-link" href="./pump-selector.html?flow=60&amp;flow_unit=m3h&amp;head=120&amp;head_unit=m&amp;pick=SP-60-16#results">عرض كارت البيانات</a></td>
+              </tr>
+              <tr>
+                <th scope="row" dir="ltr">SP 60-18</th>
+                <td dir="ltr">132 m</td>
+                <td class="is-up" dir="ltr">+10 %</td>
+                <td dir="ltr">79.8 %</td>
+                <td dir="ltr">27 kW</td>
+                <td dir="ltr">40 HP</td>
+                <td dir="ltr">6"</td>
+                <td><a class="km-alt-link" href="./pump-selector.html?flow=60&amp;flow_unit=m3h&amp;head=120&amp;head_unit=m&amp;pick=SP-60-18#results">عرض كارت البيانات</a></td>
+              </tr>
+              <tr>
+                <th scope="row" dir="ltr">SP 77-9</th>
+                <td dir="ltr">128 m</td>
+                <td class="is-up" dir="ltr">+7 %</td>
+                <td dir="ltr">75.7 %</td>
+                <td dir="ltr">27.6 kW</td>
+                <td dir="ltr">40 HP</td>
+                <td dir="ltr">8"</td>
+                <td><a class="km-alt-link" href="./pump-selector.html?flow=60&amp;flow_unit=m3h&amp;head=120&amp;head_unit=m&amp;pick=SP-77-9#results">عرض كارت البيانات</a></td>
+              </tr>
+              <tr>
+                <th scope="row" dir="ltr">SP 72-13</th>
+                <td dir="ltr">121 m</td>
+                <td class="is-up" dir="ltr">+1 %</td>
+                <td dir="ltr">75.5 %</td>
+                <td dir="ltr">26.2 kW</td>
+                <td dir="ltr">40 HP</td>
+                <td dir="ltr">6"</td>
+                <td><a class="km-alt-link" href="./pump-selector.html?flow=60&amp;flow_unit=m3h&amp;head=120&amp;head_unit=m&amp;pick=SP-72-13#results">عرض كارت البيانات</a></td>
+              </tr>
+              <tr>
+                <th scope="row" dir="ltr">SP 48-21</th>
+                <td dir="ltr">124 m</td>
+                <td class="is-up" dir="ltr">+3 %</td>
+                <td dir="ltr">70.4 %</td>
+                <td dir="ltr">28.8 kW</td>
+                <td dir="ltr">50 HP</td>
+                <td dir="ltr">6"</td>
+                <td><a class="km-alt-link" href="./pump-selector.html?flow=60&amp;flow_unit=m3h&amp;head=120&amp;head_unit=m&amp;pick=SP-48-21#results">عرض كارت البيانات</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="km-result-actions">
+        <a href="./contact.html" class="km-btn"><span>تواصل مع المهندسين</span><span class="km-btn-icon"><i class="fa-solid fa-headset"></i></span></a>
+        <a href="./product-details.html" class="km-result-outline">عرض صفحة المنتج <i class="fa-solid fa-arrow-left"></i></a>
+      </div>
+
+      <p class="km-result-disclaimer">
+        <i class="fa-solid fa-circle-info"></i>
+        بيانات الأداء من كتالوجات الشركات المصنعة عند تردد 50 هرتز، مقاسة بمياه نظيفة عند 20 °م. يختلف الأداء الفعلي في الموقع
+        تبعًا لدرجة حرارة المياه ونسبة الرمال وفواقد المواسير. هذا اختيار مبدئي لتوجيه استفسارك، وليس مواصفة هندسية نهائية.
+      </p>
+    </div>
+  </section>
+
+  <!--
+  ##################################################
+  #                  Footer                        #
+  ##################################################
+-->
+  <footer id="footer" class="footer km-footer"></footer>
+
+  <!-- Back To Top start -->
+  <div class="back-to-top" id="back-top">
+    <button type="button" class="d-flex justify-content-center align-items-center" aria-label="العودة للأعلى">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+  </div>
+
+  <!-- js -->
+  <script src="./assets/js/bootstrap.bundle.min.js"></script>
+  <script src="./assets/js/gsap.min.js"></script>
+  <script src="./assets/js/lenis.min.js"></script>
+  <script src="./assets/js/partials.js"></script>
+  <script src="./assets/js/main.js"></script>
+  <script>
+    loadPartial("#header", "app/header.html", setActiveLink);
+    loadPartial("#footer", "app/footer.html");
+    loadPartial("#loader", "app/loader.html");
+  </script>
+</body>
+
+</html>
