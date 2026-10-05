@@ -19,7 +19,7 @@ if (typeof Swiper !== "undefined" && Swiper.extendDefaults) {
   });
 }
 let animationsStarted = false;
-let heroSwiper = null;
+const heroSwipers = [];
 let heroTimeline = null;
 let lenis = null;
 const kmScenes = [];
@@ -242,7 +242,7 @@ function animateHeroSlide(slide) {
 
   heroTimeline = gsap
     .timeline()
-    .fromTo(q(".hero-slide-bg"), { scale: 1.12 }, { scale: 1, duration: 7, ease: "power1.out" }, 0)
+    .fromTo(q(".hero-slide-bg, .hero-mobile-img"), { scale: 1.12 }, { scale: 1, duration: 7, ease: "power1.out" }, 0)
     .fromTo(
       q(".hero-crown-svg path"),
       { strokeDashoffset: function (i, el) { return el.getTotalLength(); } },
@@ -268,10 +268,10 @@ function startAnimations() {
 
   playIntro();
 
-  if (heroSwiper) {
-    animateHeroSlide(heroSwiper.slides[heroSwiper.activeIndex]);
-    heroSwiper.autoplay.start();
-  }
+  heroSwipers.forEach(function (swiper) {
+    animateHeroSlide(swiper.slides[swiper.activeIndex]);
+    swiper.autoplay.start();
+  });
 
   initScrollAnimations();
   initServiceCards();
@@ -589,9 +589,8 @@ window.addEventListener(
 );
 
 // ===== Hero Slider (Swiper) =====
-function initHeroSlider() {
-  const hero = document.querySelector("section.hero");
-  if (!hero || typeof Swiper === "undefined" || !hero.querySelector(".hero-slider")) return;
+function initHeroSlider(hero) {
+  if (typeof Swiper === "undefined" || !hero.querySelector(".hero-slider")) return;
 
   const numEl = hero.querySelector(".hero-index-num");
   const trackBar = hero.querySelector(".hero-index-bar");
@@ -611,7 +610,7 @@ function initHeroSlider() {
 
   prepareHeroSlides(hero);
 
-  heroSwiper = new Swiper(hero.querySelector(".hero-slider"), {
+  const heroSwiper = new Swiper(hero.querySelector(".hero-slider"), {
     effect: "fade",
     fadeEffect: { crossFade: true },
     loop: true,
@@ -640,6 +639,7 @@ function initHeroSlider() {
 
   // autoplay waits for the intro, so the first slide isn't cut short while the loader is up
   if (motionOn) heroSwiper.autoplay.stop();
+  heroSwipers.push(heroSwiper);
 
   dots.forEach(function (dot) {
     dot.addEventListener("click", function () {
@@ -648,7 +648,7 @@ function initHeroSlider() {
   });
 }
 
-initHeroSlider();
+document.querySelectorAll("section.hero").forEach(initHeroSlider);
 
 // only the first slide's photo is needed for the first paint; the rest load once the page is in
 function loadHeroBackgrounds() {

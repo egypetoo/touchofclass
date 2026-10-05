@@ -86,7 +86,24 @@
 
     .about-cards {
       max-width: 540px;
+      aspect-ratio: auto;
+      gap: 24px;
       margin: 70px auto 0;
+    }
+
+    .about-card {
+      position: relative;
+      inset: auto;
+      width: 100%;
+      height: auto;
+      min-height: 0;
+      aspect-ratio: 4 / 3;
+      transform: none;
+
+      &::before,
+      &::after {
+        display: none;
+      }
     }
 
     .about-content {
@@ -160,6 +177,109 @@
   }
 }
 
+@media (max-width: 767px) {
+  .hero.hero-mobile {
+    min-height: 0;
+    height: auto;
+
+    .hero-slide {
+      display: block;
+      height: 78svh;
+      min-height: 560px;
+      max-height: 760px;
+      padding: 0;
+    }
+
+    .hero-mobile-media {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(0deg,
+            var(--km-green-deep) 0%,
+            rgba(0, 43, 34, 0.9) 30%,
+            rgba(0, 43, 34, 0.45) 55%,
+            rgba(0, 43, 34, 0) 75%),
+          linear-gradient(180deg, rgba(0, 25, 20, 0.55) 0%, rgba(0, 25, 20, 0) 25%);
+      }
+    }
+
+    .hero-mobile-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-content {
+      position: absolute;
+      inset-inline: 0;
+      bottom: 0;
+      max-width: none;
+      margin: 0;
+      padding: 0 16px 64px;
+      text-align: start;
+    }
+
+    .hero-eyebrow {
+      justify-content: flex-start;
+
+      .hero-brand-text {
+        font-size: 13px;
+      }
+    }
+
+    .hero-title {
+      font-size: 28px;
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+
+    .hero-copy {
+      font-size: 14px;
+      line-height: 1.75;
+      max-width: none;
+      margin: 0 0 20px;
+    }
+
+    .hero-actions {
+      justify-content: flex-start;
+    }
+
+    .btn-hero-gold,
+    .btn-hero-video {
+      width: auto;
+      font-size: 14px;
+    }
+
+    .btn-hero-gold {
+      padding: 10px 22px;
+    }
+
+    .btn-hero-video {
+      padding-block: 5px;
+      padding-inline: 18px 6px;
+
+      .btn-video-icon {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    .hero-mobile-nav {
+      display: flex;
+      bottom: 24px;
+      left: auto;
+      inset-inline-start: 16px;
+      transform: none;
+    }
+  }
+}
+
 .about {
   .about-visual {
     height: 470px;
@@ -207,16 +327,7 @@
     height: 220px;
   }
 
-  .social-icon {
-    inset-inline-start: 16px;
-    inset-inline-end: auto;
-    bottom: 100px;
 
-    a {
-      width: 44px;
-      height: 44px;
-    }
-  }
 
   .back-to-top {
     inset-inline-start: 13px;
@@ -508,10 +619,6 @@
     display: none;
   }
 
-  .km-contact-cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .km-contact-item {
     flex-direction: row;
     justify-content: flex-start;
@@ -621,10 +728,6 @@
     border-radius: 18px;
   }
 
-  .km-contact-cards {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
   .km-selector-features {
     row-gap: 22px;
 
@@ -653,7 +756,7 @@
   .km-footer-desc,
   .km-footer-list a,
   .km-footer-contact-data :is(a, p) {
-    font-size: 14px;
+    /* font-size: 16px; */
   }
 
   .km-footer-list {
@@ -686,12 +789,7 @@
   }
 
   .km-footer-top {
-    width: 100%;
-    grid-template-columns: minmax(220px, 1.2fr) repeat(3, minmax(0, 1fr)) minmax(250px, 1.3fr);
-  }
-
-  .km-footer-brand {
-    width: calc(100% - 16px);
+    width: auto;
   }
 
   .km-footer-title {
@@ -704,23 +802,12 @@
 }
 
 @media (max-width: 991px) {
-  .km-footer-top {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-areas:
-      "brand brand brand"
-      "products services info"
-      "contact contact contact";
-    gap: 40px 24px;
-  }
-
   .km-footer-brand {
-    justify-self: center;
-    width: min(420px, 100%);
-  }
+    padding-inline: max(calc(var(--bs-gutter-x) * 0.5), calc((100% - 420px) / 2));
 
-  .km-footer-contact {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px 24px;
+    > * {
+      max-width: none;
+    }
   }
 }
 
@@ -742,27 +829,97 @@
 }
 
 @media (max-width: 575px) {
-  .km-footer-top {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-areas:
-      "brand brand"
-      "products services"
-      "info info"
-      "contact contact";
-    gap: 32px 16px;
+  .km-footer-inner {
+    padding-top: 56px;
+  }
+
+  .km-footer-top-curve {
+    width: 100%;
+    height: 22px;
+  }
+
+  .km-footer-logo img {
+    width: 160px;
+  }
+
+  .km-footer-desc {
+    margin-top: 16px;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  .km-footer-social {
+    margin-top: 18px;
+
+    a {
+      width: 36px;
+      height: 36px;
+      font-size: 14px;
+    }
   }
 
   .km-footer-title {
-    margin-bottom: 22px;
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    font-size: 16px;
+
+    &::after {
+      width: 32px;
+    }
   }
 
   .km-footer-list {
-    gap: 18px;
+    gap: 14px;
+
+    a {
+      gap: 10px;
+      font-size: 14px;
+      line-height: 22px;
+    }
+
+    i {
+      font-size: 10px;
+    }
   }
 
-  .km-footer-contact {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 14px;
+  .km-footer-contact li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .km-footer-contact-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 15px;
+  }
+
+  .km-footer-contact-data :is(a, p) {
+    font-size: 13.5px;
+    line-height: 22px;
+  }
+
+  .km-footer-mid {
+    margin-top: 24px;
+  }
+
+  .km-footer-left-deco {
+    display: block;
+    inset-inline-start: 0;
+    width: 300px;
+  }
+
+  .km-footer-arch {
+    position: relative;
+    bottom: auto;
+    display: block;
+    width: min(200px, 55%);
+    margin-inline-start: auto;
+    margin-bottom: -9px;
+  }
+
+  .km-footer-bottom {
+    font-size: 13px;
   }
 }
 
@@ -796,6 +953,11 @@
 
   .km-shop-filters {
     --bs-offcanvas-width: min(360px, 88vw);
+
+    .offcanvas-body {
+      scrollbar-width: thin;
+      scrollbar-color: color-mix(in srgb, var(--main-color) 45%, transparent) transparent;
+    }
 
     .offcanvas-header {
       justify-content: space-between;
@@ -833,10 +995,6 @@
 
   .km-related {
     padding: 56px 0 72px;
-  }
-
-  .km-news-featured {
-    grid-template-columns: 1fr;
   }
 
   .km-news-featured-media {
@@ -917,62 +1075,33 @@
     height: auto;
   }
 
-  .km-sd-features {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .km-sd-process {
     padding: 36px 24px;
   }
 
   .km-sd-steps {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 28px 18px;
-
     &::before {
       display: none;
     }
-  }
-
-  .km-sd-stats {
-    padding-bottom: 56px;
-  }
-
-  .km-sd-stats-list {
-    grid-template-columns: repeat(2, 1fr);
-    row-gap: 28px;
-
-    li {
-      justify-content: flex-start;
-    }
-
-    li:nth-child(3) {
-      border-inline-start: 0;
-    }
-  }
-
-  .km-sd-cta {
-    padding: 56px 0 64px;
-  }
-
-  .km-sd-cta-box {
-    grid-template-columns: 1fr;
-    padding: 36px 26px;
-  }
-
-  .km-sd-cta-img {
-    display: none;
   }
 }
 
 @media (max-width: 575px) {
   .km-prose {
-    font-size: 15.5px;
+    font-size: 14.5px;
+
+    h2 {
+      font-size: 18px;
+    }
+
+    h3 {
+      font-size: 16px;
+    }
   }
 
   .km-prose blockquote {
     padding: 18px 20px;
-    font-size: 16px;
+    font-size: 15px;
   }
 
   .km-post-content .km-prose blockquote {
@@ -989,9 +1118,9 @@
   }
 
   .km-post-content .km-prose h2::before {
-    width: 40px;
-    height: 40px;
-    font-size: 15px;
+    width: 36px;
+    height: 36px;
+    font-size: 14px;
   }
 
   .km-post-date {
@@ -1025,16 +1154,6 @@
     justify-content: center;
   }
 
-  .km-chips {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .km-chip span {
-    justify-content: center;
-    width: 100%;
-  }
-
   .km-location-actions {
     flex-direction: column;
     align-items: stretch;
@@ -1054,10 +1173,6 @@
     grid-row: span 2;
   }
 
-  .km-pd-facts {
-    grid-template-columns: 1fr 1fr;
-  }
-
   .km-pd-buy .km-qty {
     width: 100%;
     justify-content: space-between;
@@ -1066,11 +1181,18 @@
   .km-pd-tabs-nav {
     flex-wrap: nowrap;
     overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     button {
       flex-shrink: 0;
       padding: 12px 16px;
       font-size: 14px;
+      white-space: nowrap;
     }
   }
 
@@ -1115,33 +1237,103 @@
     font-size: 13px;
   }
 
-  .km-sd-checks,
+  .km-sd-checks {
+    .km-sd-check {
+      gap: 8px;
+      padding: 10px;
+      font-size: 13px;
+    }
+
+    i {
+      width: 24px;
+      height: 24px;
+      font-size: 11px;
+    }
+  }
+
   .km-sd-features {
-    grid-template-columns: 1fr;
+    .km-sd-feature {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      column-gap: 14px;
+      align-items: start;
+      padding: 18px 16px;
+    }
+
+    h3 {
+      padding-inline-end: 44px;
+      font-size: 15px;
+    }
+
+    p {
+      grid-column: 2;
+    }
+  }
+
+  .km-sd-feature-icon {
+    grid-row: span 2;
+    width: 52px;
+    height: 52px;
+    margin: 0;
+    border-radius: 16px;
+    font-size: 21px;
+  }
+
+  .km-sd-feature-num {
+    top: 14px;
+    inset-inline-end: 14px;
+    font-size: 34px;
+  }
+
+  .km-sd-process-head {
+    margin-bottom: 26px;
   }
 
   .km-sd-steps {
-    grid-template-columns: 1fr;
+    li {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      column-gap: 16px;
+      align-items: start;
+      text-align: start;
+
+      &:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        top: 64px;
+        bottom: -20px;
+        inset-inline-start: 27px;
+        border-inline-start: 2px dashed rgba(255, 255, 255, 0.3);
+      }
+    }
+
+    h3 {
+      margin-top: 6px;
+    }
+
+    p {
+      grid-column: 2;
+    }
   }
 
-  .km-sd-stats-list {
-    grid-template-columns: 1fr;
-    padding: 30px 22px;
+  .km-sd-step-icon {
+    grid-row: span 2;
+    width: 56px;
+    height: 56px;
+    margin: 0;
+    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.12);
+    font-size: 21px;
 
-    li + li {
-      padding-top: 22px;
-      border-inline-start: 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.22);
+    small {
+      width: 22px;
+      height: 22px;
+      font-size: 11px;
     }
   }
 
   .km-sd-brands li {
     padding: 12px 18px;
     font-size: 14px;
-  }
-
-  .km-sd-cta-actions .km-btn {
-    width: 100%;
   }
 
   .km-qty {
@@ -1162,11 +1354,6 @@
 }
 
 @media (max-width: 767px) {
-  .km-channels-grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-
   .km-channel + .km-channel {
     padding-top: 32px;
     border-inline-start: 0;
@@ -1254,10 +1441,6 @@
 
   .km-result {
     padding: 48px 0 56px;
-  }
-
-  .km-result-stats {
-    grid-template-columns: 1fr;
   }
 
   .km-result-stat {
