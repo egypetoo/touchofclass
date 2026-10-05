@@ -1108,7 +1108,7 @@ h2 {
   margin-bottom: 16px;
 
   .hero-brand-text {
-    font-family: "Alexandria", "Cairo", sans-serif;
+
     font-size: 15px;
     font-weight: 700;
     color: var(--km-gold);
@@ -1121,7 +1121,7 @@ h2 {
 }
 
 .hero .hero-title {
-  font-family: "Alexandria", "Cairo", sans-serif;
+
   font-size: clamp(38px, 4.6vw, 68px);
   font-weight: 800;
   line-height: 1.18;
@@ -1595,17 +1595,17 @@ h2 {
     }
 
     .about-eyebrow-text {
-      font-family: "Alexandria", sans-serif;
-      font-size: 13px;
+      
+      font-size: 16px;
       font-weight: 700;
-      color: #c5964d;
+      color: var(--main-color);
       letter-spacing: 0.28em;
       text-transform: uppercase;
     }
   }
 
   .about-title {
-    font-family: "Alexandria", sans-serif;
+
     font-size: clamp(38px, 4vw, 56px);
     font-weight: 900;
     line-height: 1.24;
@@ -1628,7 +1628,7 @@ h2 {
   }
 
   .about-desc {
-    font-family: "Alexandria", "Cairo", sans-serif;
+   
     font-size: clamp(14.5px, 1.1vw, 15.5px);
     font-weight: 600;
     line-height: 1.9;
@@ -1835,9 +1835,9 @@ h2 {
 
     .services-km-eyebrow-text {
       font-family: "Alexandria", sans-serif;
-      font-size: 13px;
+      font-size: 16px;
       font-weight: 700;
-      color: #c5964d;
+      color: var(--km-gold);
       letter-spacing: 0.28em;
       text-transform: uppercase;
     }
@@ -1867,7 +1867,7 @@ h2 {
   }
 
   .services-km-desc {
-    font-family: "Alexandria", "Cairo", sans-serif;
+
     font-size: clamp(14px, 1.05vw, 15.5px);
     font-weight: 600;
     line-height: 1.85;
@@ -1949,7 +1949,7 @@ h2 {
       text-align: start;
 
       .service-card-title {
-        font-family: "Alexandria", sans-serif;
+     
         font-size: clamp(24px, 2.8vw, 38px);
         font-weight: 900;
         color: #ffffff;
@@ -1960,7 +1960,7 @@ h2 {
       }
 
       .service-card-desc {
-        font-family: "Alexandria", "Cairo", sans-serif;
+       
         font-size: clamp(13px, 1.1vw, 15px);
         font-weight: 500;
         line-height: 1.75;
@@ -3127,7 +3127,7 @@ h2 {
 }
 
 .km-eyebrow-text {
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 700;
   color: var(--km-gold);
 }
@@ -4327,7 +4327,7 @@ h2 {
   color: var(--white-color);
 
   .text-km-gradient {
-    background: linear-gradient(135deg, #f6d98b 0%, #e2ac3f 55%, #c98f22 100%);
+    background: var(--km-gold);
     -webkit-background-clip: text;
     background-clip: text;
   }
