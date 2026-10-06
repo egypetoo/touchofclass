@@ -8119,7 +8119,7 @@ textarea.km-input {
     translate: 0 0;
   }
   50% {
-    translate: 0 -12px;
+    translate: 0 -18px;
   }
 }
 
@@ -8135,15 +8135,7 @@ textarea.km-input {
 .km-sd {
   position: relative;
   padding: 90px 0 100px;
-  overflow: clip;
-  /* background:
-    radial-gradient(circle at 100% 0%, rgba(74, 139, 67, 0.08), transparent 32%),
-    radial-gradient(circle at 0% 70%, rgba(237, 164, 31, 0.08), transparent 30%),
-    var(--white-color); */
-  
-  
-  
-
+ 
 
 }
 
@@ -8717,10 +8709,34 @@ textarea.km-input {
   }
 }
 
-@media (min-width: 992px) and (min-height: 800px) {
+@media (min-width: 992px) and (min-height: 600px) {
   .km-sd-help {
     position: sticky;
-    top: 110px;
+    top: 113px;
+  }
+}
+
+/* short laptop screens: keep the whole card, button included, inside the viewport while it's stuck */
+@media (min-width: 992px) and (max-height: 719px) {
+  .km-sd-help {
+    padding: 22px;
+
+    h2 {
+      margin-top: 0;
+      font-size: 18px;
+    }
+
+    p {
+      margin-bottom: 14px;
+    }
+  }
+
+  .km-sd-help-form {
+    gap: 10px;
+
+    textarea.km-input {
+      min-height: 64px;
+    }
   }
 }
 
