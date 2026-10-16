@@ -1,2 +1,0 @@
-# king-motors
-New Project
