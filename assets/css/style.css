@@ -3788,7 +3788,7 @@ h2 {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: url("../images/why-bg.webp") center / cover no-repeat;
+  background: url("../images/why-bg.webp?v=2") center / cover no-repeat;
 }
 
 .km-why-title {
@@ -4293,7 +4293,7 @@ h2 {
   background:
     radial-gradient(circle at 12% 90%, rgba(77, 108, 129, 0.35), transparent 42%),
     linear-gradient(rgba(9, 13, 16, 0.3), rgba(9, 13, 16, 0.55)),
-    url("../images/why-bg.webp") center / cover no-repeat;
+    url("../images/why-bg.webp?v=2") center / cover no-repeat;
 }
 
 .km-contact-visual {
