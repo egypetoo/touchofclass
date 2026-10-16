@@ -724,6 +724,8 @@ function initProductsCatalog() {
     };
   });
 
+  if (!panes.length || !search || !sort) return;
+
   function paneOf(el) {
     return panes.find(function (p) { return p.el === el; });
   }

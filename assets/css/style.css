@@ -297,7 +297,7 @@ h2 {
   .navbar-brand {
     padding: 0;
     img {
-      height: 64px;
+      height: 104px;
       width: auto;
       object-fit: contain;
       transition: transform 0.3s ease;
@@ -320,9 +320,10 @@ h2 {
     font-family: "Cairo", "Manrope", sans-serif;
     font-size: 16px;
     font-weight: 600;
-    color: #ffffff;
+    color: #637a8a;
     opacity: 0.9;
     transition: color 0.25s ease, opacity 0.25s ease;
+    
 
     &::after {
       content: "";
@@ -1030,12 +1031,12 @@ h2 {
 }
 
 .header-main {
-  background: rgba(13, 18, 22, 0.82);
+  background: white;
   box-shadow: none;
 }
 
 .header.fixed {
-  background: rgba(10, 14, 17, 0.96);
+  background: rgb(10 14 17 / 37%);
   border-bottom-color: rgba(194, 160, 93, 0.25);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
