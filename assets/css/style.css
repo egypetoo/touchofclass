@@ -1414,7 +1414,7 @@ h2 {
 /* Touch of Class Luxury About Section */
 .about-km {
   position: relative;
-  background: #f2f0ea url('../images/about/about-km-bg.svg') top / cover no-repeat;
+  background: #f2f0ea url('../images/about/about-km-bg.svg?v=2') top / cover no-repeat;
 
   color: #0f161a;
   display: flex;
