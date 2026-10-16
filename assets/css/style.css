@@ -1116,7 +1116,10 @@ h2 {
     letter-spacing: 0.16em;
   }
 
-  .hero-crown-svg {
+  .hero-mark {
+    display: block;
+    width: 46px;
+    height: auto;
     filter: drop-shadow(0 2px 8px rgba(194, 160, 93, 0.4));
   }
 }

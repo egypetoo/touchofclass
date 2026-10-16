@@ -221,12 +221,7 @@ function prepareHeroSlides(hero) {
     line.innerHTML = '<span class="hero-line-inner">' + line.innerHTML + "</span>";
   });
 
-  hero.querySelectorAll(".hero-crown-svg path").forEach(function (path) {
-    const length = path.getTotalLength();
-    gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
-  });
-
-  gsap.set(hero.querySelectorAll(".hero-crown-svg circle"), { scale: 0, transformOrigin: "50% 50%" });
+  gsap.set(hero.querySelectorAll(".hero-mark"), { autoAlpha: 0, scale: 0.72, rotate: -8, transformOrigin: "50% 50%" });
   gsap.set(hero.querySelectorAll(".hero-line-inner"), { yPercent: 110 });
   gsap.set(hero.querySelectorAll(".hero-brand-text, .hero-copy, .hero-actions > *"), { autoAlpha: 0 });
 }
@@ -244,12 +239,11 @@ function animateHeroSlide(slide) {
     .timeline()
     .fromTo(q(".hero-slide-bg, .hero-mobile-img"), { scale: 1.12 }, { scale: 1, duration: 7, ease: "power1.out" }, 0)
     .fromTo(
-      q(".hero-crown-svg path"),
-      { strokeDashoffset: function (i, el) { return el.getTotalLength(); } },
-      { strokeDashoffset: 0, duration: 1.2, ease: "power2.inOut", stagger: 0.15 },
+      q(".hero-mark"),
+      { autoAlpha: 0, scale: 0.72, rotate: -8 },
+      { autoAlpha: 1, scale: 1, rotate: 0, duration: 1.15, ease: "back.out(1.7)", clearProps: "transform" },
       0.1
     )
-    .fromTo(q(".hero-crown-svg circle"), { scale: 0 }, { scale: 1, duration: 0.5, ease: "back.out(3)", stagger: 0.06 }, 0.7)
     .fromTo(q(".hero-brand-text"), { autoAlpha: 0, x: 24 * DIR }, Object.assign({ duration: 0.9 }, fadeIn), 0.3)
     .fromTo(q(".hero-line-inner"), { yPercent: 110 }, { yPercent: 0, duration: 1.1, ease: "power4.out", stagger: 0.12 }, 0.35)
     .fromTo(q(".hero-copy"), { autoAlpha: 0, y: 20 }, Object.assign({ duration: 0.9 }, fadeIn), 0.65)
