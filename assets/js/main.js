@@ -874,7 +874,7 @@ function animateProductCards(cards, delay) {
   if (!motionOn || !cards.length) return null;
 
   const pick = function (sel) {
-    return cards.map(function (c) { return c.querySelector(sel); });
+    return cards.map(function (c) { return c.querySelector(sel); }).filter(Boolean);
   };
   const details = cards.flatMap(function (c) {
     return Array.from(c.querySelectorAll(".km-product-name, .km-product-specs li, .km-product-btn"));
