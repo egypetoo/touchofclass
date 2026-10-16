@@ -1,4 +1,4 @@
-/* Responsive adjustments for King Motors Hero & Header */
+/* Responsive adjustments for Touch of Class Hero & Header */
 @media (max-width: 991px) {
   .header {
     .navbar {
@@ -25,9 +25,9 @@
       background-position: 25% center;
       background:
         linear-gradient(180deg,
-          rgba(57, 107, 53, 0.88) 0%,
-          rgba(57, 107, 53, 0.96) 60%,
-          rgba(50, 94, 46, 0.98) 100%),
+          rgba(61, 84, 99, 0.88) 0%,
+          rgba(61, 84, 99, 0.96) 60%,
+          rgba(53, 73, 87, 0.98) 100%),
         var(--slide-bg, url("../images/hero/hero-1.webp"));
       background-size: cover;
       background-position: center;
@@ -202,10 +202,10 @@
         background:
           linear-gradient(0deg,
             var(--km-green-deep) 0%,
-            rgba(0, 43, 34, 0.9) 30%,
-            rgba(0, 43, 34, 0.45) 55%,
-            rgba(0, 43, 34, 0) 75%),
-          linear-gradient(180deg, rgba(0, 25, 20, 0.55) 0%, rgba(0, 25, 20, 0) 25%);
+            rgba(16, 23, 27, 0.9) 30%,
+            rgba(16, 23, 27, 0.45) 55%,
+            rgba(16, 23, 27, 0) 75%),
+          linear-gradient(180deg, rgba(9, 13, 16, 0.55) 0%, rgba(9, 13, 16, 0) 25%);
       }
     }
 
@@ -502,7 +502,7 @@
 }
 
 
-/* ===== King Motors: products / why / brands / quote / footer ===== */
+/* ===== Touch of Class: products / why / brands / quote / footer ===== */
 @media (max-width: 1199px) {
   .km-tab {
     gap: 12px;
@@ -577,7 +577,7 @@
   }
 
   .km-products-banner-shade {
-    background: linear-gradient(90deg, rgba(0, 25, 20, 0.92) 0%, rgba(0, 25, 20, 0.55) 100%);
+    background: linear-gradient(90deg, rgba(9, 13, 16, 0.92) 0%, rgba(9, 13, 16, 0.55) 100%);
   }
 
   .km-products-tabs {
@@ -639,7 +639,7 @@
 
   .km-selector-bg::after {
     background:
-      linear-gradient(180deg, rgba(0, 43, 34, 0.88) 0%, rgba(0, 43, 34, 0.55) 45%, rgba(0, 25, 20, 0.85) 100%);
+      linear-gradient(180deg, rgba(16, 23, 27, 0.88) 0%, rgba(16, 23, 27, 0.55) 45%, rgba(9, 13, 16, 0.85) 100%);
   }
 
   .km-selector-bg-img {
@@ -754,7 +754,7 @@
   }
 }
 
-/* ===== King Motors: footer ===== */
+/* ===== Touch of Class: footer ===== */
 @media (max-width: 1599px) {
   .km-footer-inner {
     --km-f-pump-w: 27vw;
@@ -932,7 +932,7 @@
   }
 }
 
-/* ===== King Motors: inner pages ===== */
+/* ===== Touch of Class: inner pages ===== */
 @media (max-width: 1199px) {
   .km-about-badge {
     inset-inline-end: 16px;
@@ -1367,7 +1367,7 @@
     padding-top: 32px;
     border-inline-start: 0;
     border-top: 1px solid transparent;
-    border-image: linear-gradient(90deg, transparent, rgba(237, 164, 31, 0.55), transparent) 1;
+    border-image: linear-gradient(90deg, transparent, rgba(190, 153, 78, 0.55), transparent) 1;
   }
 
   .km-shop.is-list {

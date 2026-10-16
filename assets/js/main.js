@@ -489,7 +489,7 @@ function renderSearch() {
   const results = panel.querySelector(".km-search-results");
   const raw = panel.querySelector("#km-search-input").value.trim();
   const term = raw.toLowerCase();
-  const allLink = '<a class="km-search-more" href="./products.html">عرض جميع المنتجات <i class="fa-solid fa-arrow-left"></i></a>';
+  const allLink = '<a class="km-search-more" href="./projects.html">عرض كل المشاريع <i class="fa-solid fa-arrow-left"></i></a>';
 
   if (!term) {
     const chips = kmSearchIndex.cats.map(function (c) {
@@ -497,7 +497,7 @@ function renderSearch() {
     }).join("");
     results.innerHTML =
       '<p class="km-search-label">تصفح الفئات</p><div class="km-search-chips">' + chips + "</div>" +
-      '<p class="km-search-label">منتجات مقترحة</p>' +
+      '<p class="km-search-label">مشاريع مقترحة</p>' +
       kmSearchIndex.products.slice(0, 4).map(function (p) { return searchItemHTML(p, ""); }).join("") +
       allLink;
     return;
@@ -1200,7 +1200,7 @@ function initSectionScenes() {
     }
   );
 
-  // ----- Why King Motors -----
+  // ----- Why Touch of Class -----
   // split in three scenes (head, features, stats) so the lower blocks play when they are actually reached
   const why = document.querySelector(".km-why");
   if (why) {

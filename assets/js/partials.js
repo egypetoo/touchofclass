@@ -12,7 +12,7 @@ function loadPartial(selector, url, done) {
 }
 
 function setActiveLink() {
-  // details pages keep their parent section active (product-details.html -> products.html, news-details.html -> news.html)
+  // details pages keep their parent section active (project-details.html -> projects.html, news-details.html -> news.html)
   const page = window.location.pathname.split("/").pop() || "index.html";
   const parent = page.replace(/-details\.html$/, "");
   const matches = [page, parent + ".html", parent + "s.html"];
