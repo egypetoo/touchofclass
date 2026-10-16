@@ -4866,7 +4866,7 @@ textarea.km-input {
 /* Top columns */
 /* Bootstrap row: the extra gutter keeps the columns clear of the pump arch. */
 .km-footer-top {
-  width: calc(min(1307px, 100% - var(--km-f-pump-w) + (100vw - 100%) / 2 - 24px) + var(--bs-gutter-x));
+  width: 100%;
 }
 
 .km-footer-brand {
