@@ -1879,7 +1879,14 @@ h2 {
   }
 
   .services-swiper .swiper-slide {
+    width: 300px;
     height: auto;
+  }
+
+  .services-swiper .service-card {
+    width: 100%;
+    max-width: none;
+    margin: 0;
   }
 
   .services-km-nav {

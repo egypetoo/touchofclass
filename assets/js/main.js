@@ -653,16 +653,11 @@ function initServicesSlider() {
     speed: 700,
     grabCursor: true,
     watchOverflow: true,
-    slidesPerView: 1.15,
-    spaceBetween: 16,
+    slidesPerView: "auto",
+    spaceBetween: 22,
     navigation: {
       prevEl: wrap.querySelector(".services-km-prev"),
       nextEl: wrap.querySelector(".services-km-next"),
-    },
-    breakpoints: {
-      576: { slidesPerView: 2, spaceBetween: 18 },
-      992: { slidesPerView: 3, spaceBetween: 20 },
-      1200: { slidesPerView: 4, spaceBetween: 22 },
     },
   });
 }
