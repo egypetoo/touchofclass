@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
 :root {
   --main-color: #637a8a;
   --second-color: #2c4250;
@@ -13,14 +13,13 @@
   --km-green-dark: #1a2a34;
   --km-green-deep: #101920;
   --km-border-gold: rgba(198, 166, 100, 0.45);
-  --km-gradient: linear-gradient(135deg, var(--main-color) 0%, var(--km-gold) 100%);
+  --km-gradient: var(--main-color);
 }
 
 .text-km-gradient {
-  background: var(--km-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--km-gold);
+  background: none;
+  -webkit-text-fill-color: var(--km-gold);
 }
 
 /* ##################################################
@@ -68,17 +67,9 @@ html.lenis {
 }
 
 body {
-
   background: var(--fifth-color);
   color: var(--ink-color);
-
-  
-}
-[dir="rtl"] body {
-  font-family: "Noto Naskh Arabic", serif !important;
-}
-[dir="ltr"] body {
-  font-family: "Manrope", sans-serif !important;
+  font-family: "IBM Plex Sans Arabic", sans-serif !important;
 }
 html, body {
   overflow-x: clip;
@@ -104,7 +95,7 @@ a {
 h1 {
   font-size: clamp(52px, 6vw, 92px);
   line-height: 0.98;
-  letter-spacing: -0.055em;
+  letter-spacing: -0.02em;
   margin: 28px 0 26px;
   font-weight: 700;
 
@@ -118,7 +109,7 @@ h1 {
 h2 {
   font-size: clamp(40px, 5vw, 70px);
   line-height: 1.05;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.02em;
   margin: 0;
   font-weight: 650;
 
@@ -317,7 +308,7 @@ h2 {
   .navbar-collapse .nav-link {
     position: relative;
     padding: 10px 4px;
-    font-family: "Cairo", "Manrope", sans-serif;
+    font-family: "IBM Plex Sans Arabic", sans-serif;
     font-size: 16px;
     font-weight: 600;
     color: #637a8a;
@@ -396,13 +387,13 @@ h2 {
     height: 40px;
     padding: 0 16px;
     border-radius: 999px;
-    border: 1px solid var(--km-border-gold);
-    background: rgba(16, 23, 27, 0.4);
+    border: 1px solid var(--main-color);
+    background: var(--main-color);
     color: #ffffff;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-family: "Cairo", sans-serif;
+    font-family: "IBM Plex Sans Arabic", sans-serif;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
@@ -414,9 +405,9 @@ h2 {
     }
 
     &:hover {
-      border-color: var(--km-gold);
-      color: var(--km-gold);
-      background: rgba(194, 160, 93, 0.15);
+      border-color: var(--second-color);
+      color: #ffffff;
+      background: var(--second-color);
     }
   }
 
@@ -448,7 +439,7 @@ h2 {
     .nav-link {
       padding: 14px 0;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      font-family: "Cairo", sans-serif;
+      font-family: "IBM Plex Sans Arabic", sans-serif;
       font-size: 16px;
       font-weight: 600;
       color: #eff2f4;
@@ -473,7 +464,7 @@ h2 {
 
     .list-contact {
       background: rgba(255, 255, 255, 0.04);
-      font-family: "Cairo", sans-serif;
+      font-family: "IBM Plex Sans Arabic", sans-serif;
 
       li {
         border-color: rgba(255, 255, 255, 0.08) !important;
@@ -557,7 +548,7 @@ h2 {
     gap: 12px;
     padding: 9px 10px;
     border-radius: 10px;
-    font-family: "Cairo", sans-serif;
+    font-family: "IBM Plex Sans Arabic", sans-serif;
     font-size: 14.5px;
     font-weight: 700;
     color: var(--km-green-dark);
@@ -634,7 +625,7 @@ h2 {
     display: block;
     padding: 9px 12px;
     border-radius: 8px;
-    font-family: "Cairo", sans-serif;
+    font-family: "IBM Plex Sans Arabic", sans-serif;
     font-size: 14px;
     font-weight: 600;
     color: rgba(13, 18, 22, 0.8);
@@ -656,7 +647,7 @@ h2 {
   margin-top: 6px;
   padding: 11px 10px 5px;
   border-top: 1px solid rgba(13, 18, 22, 0.08);
-  font-family: "Cairo", sans-serif;
+  font-family: "IBM Plex Sans Arabic", sans-serif;
   font-size: 13.5px;
   font-weight: 700;
   color: #8b6e34;
@@ -703,7 +694,7 @@ h2 {
     border: 1px solid rgba(194, 160, 93, 0.35);
     border-radius: 12px;
     background: #f5f6f7;
-    font-family: "Cairo", sans-serif;
+    font-family: "IBM Plex Sans Arabic", sans-serif;
     font-size: 15px;
     color: var(--km-green-dark);
     outline: 0;
@@ -750,7 +741,7 @@ h2 {
   overscroll-behavior: contain;
   scrollbar-width: thin;
   scrollbar-color: rgba(194, 160, 93, 0.5) transparent;
-  font-family: "Cairo", sans-serif;
+  font-family: "IBM Plex Sans Arabic", sans-serif;
 
   &::-webkit-scrollbar {
     width: 4px;
@@ -918,7 +909,7 @@ h2 {
   border-radius: 14px;
   background: var(--main-color);
   color: var(--white-color);
-  font-family: "Cairo", sans-serif;
+  font-family: "IBM Plex Sans Arabic", sans-serif;
   font-size: 14.5px;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
 
@@ -973,7 +964,7 @@ h2 {
   border: 0;
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.04);
-  font-family: "Cairo", sans-serif;
+  font-family: "IBM Plex Sans Arabic", sans-serif;
   font-size: 15px;
   font-weight: 600;
   color: #eff2f4;
@@ -1008,7 +999,7 @@ h2 {
   a {
     display: block;
     padding: 8px 4px;
-    font-family: "Cairo", sans-serif;
+    font-family: "IBM Plex Sans Arabic", sans-serif;
     font-size: 14px;
     color: #d1d8dc;
 
@@ -1024,7 +1015,7 @@ h2 {
   justify-content: space-between;
   margin-top: 10px;
   padding: 11px 12px;
-  font-family: "Cairo", sans-serif;
+  font-family: "IBM Plex Sans Arabic", sans-serif;
   font-size: 14px;
   font-weight: 700;
   color: var(--km-gold);
@@ -1118,9 +1109,9 @@ h2 {
 
   .hero-mark {
     display: block;
-    width: 46px;
+    width: min(240px, 72vw);
     height: auto;
-    filter: drop-shadow(0 2px 8px rgba(194, 160, 93, 0.4));
+    filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.35));
   }
 }
 
@@ -1150,16 +1141,15 @@ h2 {
   /* the intro animation wraps each line in a transformed .hero-line-inner, which a parent's background-clip can't reach */
   .hero-title-gold:not(.hero-line),
   .hero-title-gold .hero-line-inner {
-    background: var(--km-gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    height:90px;
+    color: var(--km-gold);
+    background: none;
+    -webkit-text-fill-color: var(--km-gold);
+    height: 90px;
   }
 }
 
 .hero .hero-copy {
-  font-family: "Cairo", sans-serif;
+  font-family: "IBM Plex Sans Arabic", sans-serif;
   font-size: clamp(15px, 1.25vw, 18px);
   font-weight: 500;
   line-height: 1.85;
@@ -1179,7 +1169,7 @@ h2 {
 .btn-hero-gold {
   background: var(--km-gradient);
   color: #ffffff !important;
-  font-family: "Cairo", sans-serif;
+  font-family: "IBM Plex Sans Arabic", sans-serif;
   font-size: 16px;
   font-weight: 700;
   padding: 13px 34px;
@@ -1215,7 +1205,7 @@ h2 {
   background: rgba(16, 23, 27, 0.5);
   color: #ffffff !important;
   border: 1.5px solid var(--km-border-gold);
-  font-family: "Cairo", sans-serif;
+  font-family: "IBM Plex Sans Arabic", sans-serif;
   font-size: 15px;
   font-weight: 600;
   padding-block: 8px;
@@ -1270,7 +1260,7 @@ h2 {
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  font-family: "Cairo", sans-serif;
+  font-family: "IBM Plex Sans Arabic", sans-serif;
   font-size: 13px;
   font-weight: 700;
   color: #ffffff;
@@ -1414,9 +1404,9 @@ h2 {
 /* Touch of Class Luxury About Section */
 .about-km {
   position: relative;
-  background: #f2f0ea url('../images/about/about-km-bg.svg?v=2') top / cover no-repeat;
+  background: #f2f0ea url('../images/about/about-km-bg.svg?v=3') top / cover no-repeat;
 
-  color: #0f161a;
+  color: #1a2a34;
   display: flex;
   align-items: center;
 
@@ -1545,7 +1535,7 @@ h2 {
       top: 9%;
       bottom: 9%;
       width: 1.5px;
-      background: linear-gradient(180deg, var(--main-color) 0%, var(--km-gold) 100%);
+      background: var(--main-color);
     }
   }
 
@@ -1570,7 +1560,7 @@ h2 {
       bottom: 13%;
       width: 8px;
       border-radius: 4px 0 0 4px;
-      background: linear-gradient(180deg, var(--main-color) 0%, var(--km-gold) 100%);
+      background: var(--main-color);
     }
   }
 
@@ -1617,15 +1607,14 @@ h2 {
     margin: 0 0 22px;
 
     .about-title-dark {
-      color: #0f1519;
+      color: #1a2a34;
       font-weight: 900;
     }
 
     .about-title-gold {
-      background: var(--km-gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--km-gold);
+      background: none;
+      -webkit-text-fill-color: var(--km-gold);
       font-weight: 900;
       white-space: nowrap;
     }
@@ -1838,7 +1827,7 @@ h2 {
     }
 
     .services-km-eyebrow-text {
-      font-family: "Alexandria", sans-serif;
+      font-family: "IBM Plex Sans Arabic", sans-serif;
       font-size: 16px;
       font-weight: 700;
       color: var(--km-gold);
@@ -1848,7 +1837,7 @@ h2 {
   }
 
   .services-km-title {
-    font-family: "Alexandria", sans-serif;
+    font-family: "IBM Plex Sans Arabic", sans-serif;
     font-size: clamp(36px, 4.8vw, 66px);
     font-weight: 900;
     line-height: 1.25;
@@ -1857,15 +1846,14 @@ h2 {
     text-align: center;
 
     .services-km-title-dark {
-      color: #0f161a;
+      color: #1a2a34;
       font-weight: 900;
     }
 
     .services-km-title-gold {
-      background: var(--km-gradient);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--km-gold);
+      background: none;
+      -webkit-text-fill-color: var(--km-gold);
       font-weight: 900;
     }
   }
@@ -3633,8 +3621,8 @@ h2 {
 
   &:hover {
     color: var(--white-color);
-    background-position: 100% 50%;
-    box-shadow: 0 12px 28px rgba(190, 153, 78, 0.35);
+    background: var(--second-color);
+    box-shadow: 0 12px 28px rgba(44, 66, 80, 0.28);
     translate: 0 -2px;
 
     .km-btn-icon {
@@ -3791,7 +3779,7 @@ h2 {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: url("../images/why-bg.webp?v=2") center / cover no-repeat;
+  background: var(--km-green-dark);
 }
 
 .km-why-title {
@@ -3895,7 +3883,7 @@ h2 {
     justify-content: center;
     gap: 2px;
     margin-bottom: 8px;
-    font-family: "Montserrat", "Segoe UI", sans-serif;
+    font-family: "IBM Plex Sans Arabic", sans-serif;
     font-size: clamp(38px, 3.6vw, 54px);
     font-weight: 800;
     line-height: 1;
@@ -3969,7 +3957,7 @@ h2 {
     display: flex;
     align-items: center;
     padding: 34px 48px;
-    font-family: "Montserrat", "Segoe UI", sans-serif;
+    font-family: "IBM Plex Sans Arabic", sans-serif;
     font-size: clamp(22px, 2.2vw, 30px);
     font-weight: 800;
     letter-spacing: 0.02em;
@@ -4037,7 +4025,7 @@ h2 {
 
 .km-articles-title {
   margin: 0 0 14px;
-  font-family: "Alexandria", sans-serif;
+  font-family: "IBM Plex Sans Arabic", sans-serif;
   font-size: clamp(40px, 4.6vw, 64px);
   font-weight: 900;
   line-height: 1.2;
@@ -4293,10 +4281,7 @@ h2 {
   position: absolute;
   inset: 0;
   z-index: -2;
-  background:
-    radial-gradient(circle at 12% 90%, rgba(77, 108, 129, 0.35), transparent 42%),
-    linear-gradient(rgba(9, 13, 16, 0.3), rgba(9, 13, 16, 0.55)),
-    url("../images/why-bg.webp?v=2") center / cover no-repeat;
+  background: var(--km-green-deep);
 }
 
 .km-contact-visual {
@@ -4333,9 +4318,9 @@ h2 {
   color: var(--white-color);
 
   .text-km-gradient {
-    background: var(--km-gold);
-    -webkit-background-clip: text;
-    background-clip: text;
+    color: var(--km-gold);
+    background: none;
+    -webkit-text-fill-color: var(--km-gold);
   }
 }
 
@@ -4482,9 +4467,9 @@ h2 {
   color: var(--km-green-dark);
 
   .text-km-gradient {
-    background: linear-gradient(135deg, #c6a665, #ac883f);
-    -webkit-background-clip: text;
-    background-clip: text;
+    color: var(--km-gold);
+    background: none;
+    -webkit-text-fill-color: var(--km-gold);
   }
 }
 
@@ -5234,7 +5219,7 @@ textarea.km-input {
 }
 
 [dir="ltr"] .km-eyebrow-text {
-  font-family: "Montserrat", "Segoe UI", sans-serif;
+  font-family: "IBM Plex Sans Arabic", sans-serif;
   font-size: 13px;
   letter-spacing: 0.32em;
 }
@@ -5320,7 +5305,7 @@ textarea.km-input {
   position: relative;
   padding: 100px 0;
   background: #f7f6f2;
-  color: #0f161a;
+  color: #1a2a34;
 
   &.is-dark {
     background: linear-gradient(135deg, #161d22 0%, #0f1418 55%, #090d10 100%);
@@ -5364,7 +5349,7 @@ textarea.km-input {
     bottom: 14%;
     width: 8px;
     border-radius: 4px;
-    background: linear-gradient(180deg, var(--main-color) 0%, var(--km-gold) 100%);
+    background: var(--main-color);
   }
 
   &::after {
@@ -5425,10 +5410,9 @@ textarea.km-input {
   box-shadow: 0 18px 40px rgba(9, 13, 16, 0.35);
 
   strong {
-    background: var(--km-gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: var(--km-gold);
+    background: none;
+    -webkit-text-fill-color: var(--km-gold);
     font-size: 42px;
     font-weight: 700;
     line-height: 1;
@@ -5453,7 +5437,7 @@ textarea.km-input {
     font-size: clamp(30px, 3.2vw, 44px);
     font-weight: 700;
     line-height: 1.4;
-    color: #0f1519;
+    color: #1a2a34;
   }
 
   p {
@@ -5880,7 +5864,7 @@ textarea.km-input {
   margin: 0;
   font-size: clamp(24px, 2.4vw, 32px);
   font-weight: 800;
-  color: #0f1519;
+  color: #1a2a34;
 }
 
 .km-result-stats {
@@ -5976,7 +5960,7 @@ textarea.km-input {
     font-size: 20px;
     font-weight: 800;
     line-height: 1.6;
-    color: #0f1519;
+    color: #1a2a34;
 
     i {
       margin-inline-end: 8px;
