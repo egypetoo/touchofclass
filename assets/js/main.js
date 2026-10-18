@@ -644,6 +644,31 @@ function initHeroSlider(hero) {
 
 document.querySelectorAll("section.hero").forEach(initHeroSlider);
 
+function initServicesSlider() {
+  const slider = document.querySelector(".services-swiper");
+  if (!slider || typeof Swiper === "undefined") return;
+
+  const wrap = slider.closest(".services-km-slider");
+  new Swiper(slider, {
+    speed: 700,
+    grabCursor: true,
+    watchOverflow: true,
+    slidesPerView: 1.15,
+    spaceBetween: 16,
+    navigation: {
+      prevEl: wrap.querySelector(".services-km-prev"),
+      nextEl: wrap.querySelector(".services-km-next"),
+    },
+    breakpoints: {
+      576: { slidesPerView: 2, spaceBetween: 18 },
+      992: { slidesPerView: 3, spaceBetween: 20 },
+      1200: { slidesPerView: 4, spaceBetween: 22 },
+    },
+  });
+}
+
+initServicesSlider();
+
 // only the first slide's photo is needed for the first paint; the rest load once the page is in
 function loadHeroBackgrounds() {
   document.querySelectorAll(".hero-slide[data-bg]").forEach(function (slide) {
