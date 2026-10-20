@@ -3830,17 +3830,14 @@ h2 {
 .km-why {
   position: relative;
   padding: 120px 0;
-  background: var(--km-green-dark);
+  background: #1a2a34;
   color: var(--white-color);
   overflow: hidden;
   isolation: isolate;
 }
 
 .km-why-bg {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: var(--km-green-dark);
+  display: none;
 }
 
 .km-why-title {
@@ -3864,10 +3861,9 @@ h2 {
   align-items: flex-start;
   gap: 16px;
   padding: 22px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
+  background: #223642;
   transition: background 0.35s ease, border-color 0.35s ease;
   
   
@@ -3880,11 +3876,11 @@ h2 {
   
 
   &:hover {
-    background: rgba(255, 255, 255, 0.06);
-    border-color: rgba(190, 153, 78, 0.35);
+    background: #2a4452;
+    border-color: rgba(198, 166, 100, 0.45);
 
     .km-feature-icon {
-      background: var(--km-gradient);
+      background: var(--main-color);
       color: var(--white-color);
     }
   }
@@ -3910,11 +3906,9 @@ h2 {
   place-items: center;
   width: 54px;
   height: 54px;
-  border: 1.5px solid transparent;
+  border: 1.5px solid var(--km-gold);
   border-radius: 50%;
-  background:
-    linear-gradient(var(--km-green-dark), var(--km-green-dark)) padding-box,
-    var(--km-gradient) border-box;
+  background: #1a2a34;
   color: var(--km-gold);
   font-size: 20px;
   transition: background 0.35s ease, color 0.35s ease;
@@ -3927,12 +3921,9 @@ h2 {
 
 .km-stat {
   padding: 36px 26px;
-  border: 1px solid transparent;
+  border: 1px solid rgba(198, 166, 100, 0.45);
   border-radius: 20px;
-  background:
-    linear-gradient(rgba(16, 23, 27, 0.72), rgba(9, 13, 16, 0.72)) padding-box,
-    linear-gradient(135deg, rgba(77, 108, 129, 0.7), rgba(190, 153, 78, 0.7)) border-box;
-  backdrop-filter: blur(6px);
+  background: #15232c;
   text-align: center;
 
   .km-stats .col-6:nth-child(even) & {

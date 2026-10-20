@@ -1225,11 +1225,10 @@ function initSectionScenes() {
       function (q, el) {
         el._words = prepWords(q(".km-why-title")[0]);
         prepEyebrow(el);
-        gsap.set(why.querySelector(".km-why-bg"), { autoAlpha: 0.3 });
         gsap.set(q(".km-why-desc"), { autoAlpha: 0, y: 30, filter: "blur(6px)" });
       },
       function (q, el) {
-        const tl = gsap.timeline().to(why.querySelector(".km-why-bg"), { autoAlpha: 1, duration: 2.2, ease: "power2.out", clearProps: "opacity,visibility" }, 0);
+        const tl = gsap.timeline();
         playEyebrow(tl, el, 0.1);
         playWords(tl, el._words, 0.25);
         return tl.to(q(".km-why-desc"), Object.assign({}, SHOW, { filter: "blur(0px)", duration: 1.1, clearProps: "transform,opacity,visibility,filter" }), 0.55);
