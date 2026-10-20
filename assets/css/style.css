@@ -3929,11 +3929,42 @@ h2 {
   padding: 36px 26px;
   border: 1px solid transparent;
   border-radius: 20px;
-  background:
-    linear-gradient(rgba(16, 23, 27, 0.72), rgba(9, 13, 16, 0.72)) padding-box,
-    linear-gradient(135deg, rgba(77, 108, 129, 0.7), rgba(190, 153, 78, 0.7)) border-box;
+  background: linear-gradient(rgba(16, 23, 27, 0.72), rgba(9, 13, 16, 0.72)) padding-box, linear-gradient(135deg, rgba(77, 108, 129, 0.7), rgb(190 153 78 / 24%)) border-box;
   backdrop-filter: blur(6px);
   text-align: center;
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
   .km-stats .col-6:nth-child(even) & {
     translate: 0 36px;
