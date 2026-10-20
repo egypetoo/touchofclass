@@ -1589,10 +1589,14 @@ h2 {
     }
 
     .about-eyebrow-text {
-      
       font-size: 16px;
       font-weight: 700;
       color: var(--main-color);
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    [dir="ltr"] & .about-eyebrow-text {
       letter-spacing: 0.28em;
       text-transform: uppercase;
     }
@@ -1831,6 +1835,11 @@ h2 {
       font-size: 16px;
       font-weight: 700;
       color: var(--km-gold);
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    [dir="ltr"] & .services-km-eyebrow-text {
       letter-spacing: 0.28em;
       text-transform: uppercase;
     }

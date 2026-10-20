@@ -226,11 +226,7 @@
     }
 
     .hero-eyebrow {
-      justify-content: flex-start;
-
-      .hero-brand-text {
-        font-size: 13px;
-      }
+      display: none !important;
     }
 
     .hero-title {
